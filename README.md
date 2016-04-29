@@ -1,4 +1,5 @@
 # NativeScript Azure Mobile Apps plugin
+[![Build Status](https://travis-ci.org/PeterStaev/nativescript-azure-mobile-apps.svg?branch=master)](https://travis-ci.org/PeterStaev/nativescript-azure-mobile-apps)
 
 A NativeScript Azure Mobile Apps plugin. Currently supporting basic CRUD and query functions
 
