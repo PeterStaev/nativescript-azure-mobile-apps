@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"tns-core-modules": "1.7.1",
-		"nativescript-azure-mobile-apps": "file:../bin/dist"
+		"nativescript-azure-mobile-apps": "0.1.0"
 	},
 	"devDependencies": {
 		"babel-traverse": "6.7.6",
