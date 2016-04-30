@@ -3,9 +3,6 @@ env:
     - EMULATOR_API_VER=22
     
 language: android
-
-jdk:
-  - oraclejdk8
   
 android:
   components:
