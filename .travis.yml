@@ -39,4 +39,4 @@ script:
     - grunt build
     - cd sample
     - tns test android --emulator --justlaunch
-    - cd..
+    - cd ..
