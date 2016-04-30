@@ -37,4 +37,6 @@ before_script:
 
 script:
     - grunt build
-    - tns test android --path sample --emulator --justlaunch
+    - cd sample
+    - tns test android --emulator --justlaunch
+    - cd..
