@@ -29,7 +29,10 @@ install:
     - npm install
     - tns usage-reporting disable
     - tns error-reporting disable
-
+    - cd sample
+    - tns platform add android
+    - cd ..
+    
 before_script:
     - echo no | android create avd --force -n test -t android-$EMULATOR_API_VER -b armeabi-v7a
     - emulator -avd test -no-audio -no-window &
