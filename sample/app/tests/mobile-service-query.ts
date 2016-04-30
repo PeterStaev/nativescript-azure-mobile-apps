@@ -2,7 +2,7 @@
 import { MobileServiceClient, MobileServiceTable, MobileServiceQuery } from "nativescript-azure-mobile-apps";
 
 mocha.setup({
-    timeout: 28000
+    timeout: 110000
 });
 
 class TodoItem {

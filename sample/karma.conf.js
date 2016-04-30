@@ -54,9 +54,8 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: [],
 
-    browserDisconnectTimeout: 30000, 
-    browserNoActivityTimeout: 30000, 
-    browserDisconnectTolerance: 5,
+    browserDisconnectTimeout: 120000, 
+    browserNoActivityTimeout: 120000, 
     
     customLaunchers: {
       android: {
