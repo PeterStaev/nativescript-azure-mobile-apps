@@ -1,8 +1,33 @@
-language: node_js
-node_js:
-    4.2.3
-before_script:
+language: android
+
+android:
+  components:
+    - platform-tools
+    - build-tools-23.0.1
+    - android-23
+    - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-22
+
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+    directories:
+        - .nvm
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
+        - node_modules
+
+install:
+    - nvm install 4
     - npm install -g grunt-cli
+    - npm install -g nativescript --ignore-scripts
     - npm install
+
+before_script:
+    - echo no | android create avd --force -n test -t android-22 -b armeabi-v7a
+    - emulator -avd test -no-audio -no-window &
+    - android-wait-for-emulator
+
 script:
-    grunt build
+    - tns test android --path sample --emulator --justlaunch

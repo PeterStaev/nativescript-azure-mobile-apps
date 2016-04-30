@@ -50,7 +50,7 @@ export abstract class MobileServiceQuery implements definition.MobileServiceQuer
         this._msQuery = nativeValue;
     } 
 
-    abstract read(): Promise<any>;
+    abstract read(): Promise<Array<any>>;
     
     abstract field(fieldName: string): MobileServiceQuery;
     abstract eq(value: string|number|boolean|Date): MobileServiceQuery;

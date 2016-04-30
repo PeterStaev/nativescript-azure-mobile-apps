@@ -31,7 +31,7 @@ declare module "nativescript-azure-mobile-apps" {
     }
     
     export class MobileServiceQuery {
-        public read(): Promise<any>;
+        public read(): Promise<Array<any>>;
         
         public field(fieldName: string): MobileServiceQuery;
         public eq(value: string|number|boolean|Date): MobileServiceQuery;

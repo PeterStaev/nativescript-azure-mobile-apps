@@ -16,11 +16,20 @@ limitations under the License.
 
 import * as common from "./azure-mobile-apps-common";
 import * as application from "application";
+import * as types from "utils/types";
  
 export class MobileServiceClient extends common.MobileServiceClient {
     constructor(url: string) {
         super(url);
         this._msClient = new com.microsoft.windowsazure.mobileservices.MobileServiceClient(url, application.android.currentContext);
+        this._msClient.setAndroidHttpClientFactory(new com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory({
+            createOkHttpClient: () => {
+                let client = new com.squareup.okhttp.OkHttpClient();
+                client.setReadTimeout(20, java.util.concurrent.TimeUnit.SECONDS);
+                client.setWriteTimeout(20, java.util.concurrent.TimeUnit.SECONDS);
+                return client;
+            }
+        }));
     }
     
     public getTable(tableName: string): MobileServiceTable {
@@ -95,7 +104,7 @@ export class MobileServiceTable extends common.MobileServiceTable {
 }
 
 export class MobileServiceQuery extends common.MobileServiceQuery {
-    public read(): Promise<any> {
+    public read(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
             try {
                 let futureResult = this._msQuery.execute();
@@ -113,8 +122,24 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
     }
     
     public eq(value: string|number|boolean|Date): MobileServiceQuery{
-        this._msQuery.eq(value);
+        this._msQuery.eq(getNativeValueForComparison(value));
         return this;
+    }
+}
+
+function getNativeValueForComparison(value: string|number|boolean|Date): any {
+    if (types.isNumber(value)) {
+        // To my understanding Azure does not use the types strictly
+        // So always use the "bigger" type
+        if (value.toString().indexOf(".") >= 0) {
+            return new java.lang.Double(<number>value);
+        }
+        else {
+            return new java.lang.Long(<number>value);
+        }
+    }
+    else {
+        return value;
     }
 }
 
@@ -125,7 +150,7 @@ function futureToPromise(future: any /* ListenableFuture */): Promise<any> {
                 resolve(result);
             }
             , onFailure: (t /* Throwable */) => {
-                reject(t.getMessage());
+                reject(new Error(t.getMessage()));
             }
         }));
     });

@@ -1,24 +1,31 @@
 {
-	"description": "Azure Mobile Apps Service application",
-	"license": "Apache-2.0",
-	"readme": "Azure Mobile Apps Service application",
-	"nativescript": {
-		"id": "inc.tangra.azuremobileservicessample",
-		"tns-android": {
-			"version": "1.7.1"
-		}
-	},
-	"dependencies": {
-		"tns-core-modules": "1.7.1",
-		"nativescript-azure-mobile-apps": "0.1.0"
-	},
-	"devDependencies": {
-		"babel-traverse": "6.7.6",
-		"babel-types": "6.7.7",
-		"babylon": "6.7.0",
-		"filewalker": "0.1.2",
-		"lazy": "1.0.11",
-		"nativescript-dev-typescript": "^0.3.2",
-		"typescript": "^1.8.10"
-	}
+  "description": "Azure Mobile Apps Service application",
+  "license": "Apache-2.0",
+  "readme": "Azure Mobile Apps Service application",
+  "nativescript": {
+    "id": "inc.tangra.azuremobileservicessample",
+    "tns-android": {
+      "version": "1.7.1"
+    }
+  },
+  "dependencies": {
+    "nativescript-azure-mobile-apps": "file:../bin/dist",
+    "nativescript-unit-test-runner": "^0.3.3",
+    "tns-core-modules": "1.7.1"
+  },
+  "devDependencies": {
+    "babel-traverse": "6.7.6",
+    "babel-types": "6.7.7",
+    "babylon": "6.7.0",
+    "chai": "^3.5.0",
+    "filewalker": "0.1.2",
+    "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.2",
+    "karma-nativescript-launcher": "^0.4.0",
+    "lazy": "1.0.11",
+    "mocha": "^2.4.5",
+    "nativescript-dev-typescript": "^0.3.2",
+    "typescript": "^1.8.10"
+  }
 }
