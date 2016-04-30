@@ -31,10 +31,10 @@ install:
     - tns error-reporting disable
 
 before_script:
-    - grunt build
     - echo no | android create avd --force -n test -t android-$EMULATOR_API_VER -b armeabi-v7a
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
 
 script:
+    - grunt build
     - tns test android --path sample --emulator --justlaunch
