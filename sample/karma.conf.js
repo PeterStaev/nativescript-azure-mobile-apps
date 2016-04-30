@@ -56,6 +56,7 @@ module.exports = function(config) {
 
     browserDisconnectTimeout: 30000, 
     browserNoActivityTimeout: 30000, 
+    browserDisconnectTolerance: 5,
     
     customLaunchers: {
       android: {
