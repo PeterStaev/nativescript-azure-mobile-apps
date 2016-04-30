@@ -33,7 +33,7 @@ install:
     - tns usage-reporting disable
     - tns error-reporting disable
     - cd sample
-    - tns platform add android
+    - tns platform add android@1.7.1
     - cd ..
     
 before_script:
