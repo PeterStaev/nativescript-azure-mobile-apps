@@ -30,7 +30,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['mocha'],
 
 
     // web server port
@@ -54,8 +54,8 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: [],
 
-    browserDisconnectTimeout: 20000, 
-    browserNoActivityTimeout: 20000, 
+    browserDisconnectTimeout: 30000, 
+    browserNoActivityTimeout: 30000, 
     
     customLaunchers: {
       android: {
