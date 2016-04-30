@@ -1,12 +1,16 @@
+env:
+  global:
+    - EMULATOR_API_VER=22
+    
 language: android
 
 android:
   components:
     - platform-tools
     - build-tools-23.0.1
-    - android-23
+    - android-$EMULATOR_API_VER
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-$EMULATOR_API_VER
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -25,7 +29,7 @@ install:
     - npm install
 
 before_script:
-    - echo no | android create avd --force -n test -t android-22 -b armeabi-v7a
+    - echo no | android create avd --force -n test -t android-$EMULATOR_API_VER -b armeabi-v7a
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
 
