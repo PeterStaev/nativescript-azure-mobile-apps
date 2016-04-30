@@ -67,7 +67,7 @@ describe("MobileServiceQuery", () => {
             table.where().field("myNumber").eq(1).read().then((results) => {
                 assert.isAbove(results.length, 0);
                 done();
-            }, (e: Error) => {console.log(e.message); done(e);});
+            }, done);
         });
 
         it("Should filter by Date", (done) => {
