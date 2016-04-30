@@ -30,4 +30,5 @@ before_script:
     - android-wait-for-emulator
 
 script:
+    - grunt build
     - tns test android --path sample --emulator --justlaunch
