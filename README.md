@@ -16,7 +16,7 @@ This command automatically installs the necessary files, as well as stores nativ
 ### Create a client
 ```typescript
 /// <reference path="../node_modules/nativescript-azure-mobile-apps/azure-mobile-apps.d.ts" />
-import {MobileServiceClient} from "nativescript-azure-mobile-apps";
+import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 var client = new MobileServiceClient("https://<PORTAL_NAME>.azurewebsites.net");
 ```
 ### Get a reference to a table

@@ -1,5 +1,5 @@
-/// <reference path="../../node_modules/nativescript-azure-mobile-apps/azure-mobile-apps.d.ts" />
-import { MobileServiceClient, MobileServiceTable } from "nativescript-azure-mobile-apps";
+import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
+import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 
 describe("MobileServiceClient", () => {
     let client: MobileServiceClient;
