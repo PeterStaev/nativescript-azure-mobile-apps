@@ -49,7 +49,7 @@ module.exports = function (grunt)
                 files: [{ expand: true, src: ["platforms/**"], dest: localConfig.outDir }]
             },
             subPackageConfig: {
-                files: [{ expand: true, src: ["*/package.json"], dest: localConfig.outDir }]
+                files: [{ expand: true, src: ["*/package.json", "!sample/**"], dest: localConfig.outDir }]
             }, 
             packageConfig: {
                 src: "package.json",
