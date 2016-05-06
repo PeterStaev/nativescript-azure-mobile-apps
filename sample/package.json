@@ -6,6 +6,9 @@
 		"id": "inc.tangra.azuremobileservicessample",
 		"tns-android": {
 			"version": "1.7.1"
+		},
+		"tns-ios": {
+			"version": "1.7.0"
 		}
 	},
 	"dependencies": {

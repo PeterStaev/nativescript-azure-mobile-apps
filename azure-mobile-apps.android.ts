@@ -121,7 +121,7 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         return this;
     }
     
-    public eq(value: string|number|boolean|Date): MobileServiceQuery{
+    public eq(value: string|number|boolean|Date): MobileServiceQuery {
         this._msQuery.eq(getNativeValueForComparison(value));
         return this;
     }

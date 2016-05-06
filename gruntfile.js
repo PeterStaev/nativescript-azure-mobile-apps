@@ -3,6 +3,7 @@ module.exports = function (grunt)
     var localConfig = {
         typeScriptSrc: [
             "**/*.ts",
+            "!MicrosoftAzureMobile.d.ts",
             "!node_modules/**/*.*",
             "!sample/**/*.*",
             "!bin/**/*.*"
@@ -26,19 +27,7 @@ module.exports = function (grunt)
         },
         ts: {
             build: {
-                src: localConfig.typeScriptSrc,
-                outDir: localConfig.outDir,
-                options: {
-                    target: "es5",
-                    module: "commonjs",
-                    declaration: false,
-                    noImplicitAny: false,
-                    removeComments: true,
-                    sourceMap: false,
-                    noLib: false,
-                    outDir: "dist",
-                    isolatedModules: true
-                }
+                tsconfig: true
             }
         },
         tslint:
@@ -54,12 +43,10 @@ module.exports = function (grunt)
         },
         copy: {
             declarations: {
-                src: localConfig.typeScriptDeclarations,
-                dest: localConfig.outDir
+                files: [{ expand: true, src: localConfig.typeScriptDeclarations, dest: localConfig.outDir }],
             },
             platforms: {
-                src: "platforms/**/*.*",
-                dest: localConfig.outDir
+                files: [{ expand: true, src: ["platforms/**"], dest: localConfig.outDir }],
             },
             packageConfig: {
                 src: "package.json",

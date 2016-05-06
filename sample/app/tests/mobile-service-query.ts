@@ -47,10 +47,10 @@ describe("MobileServiceQuery", () => {
         }, done);
     });
     
-    describe("#eq()", () => {
+    describe("eq()", () => {
 
         it("Should filter by boolean", (done) => {
-            table.where().field("completed").eq("true").read().then((results) => {
+            table.where().field("completed").eq(true).read().then((results) => {
                 assert.isAbove(results.length, 0);
                 done();
             }, done);
