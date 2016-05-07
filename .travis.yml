@@ -4,6 +4,8 @@ os: osx
 osx_image: xcode7.2
 xcode_sdk: iphonesimulato9.2
 
+before_cache:		
+    - rm -r sample/node_modules/nativescript-azure-mobile-apps
 cache:
     bundler: true
     cocoapods: true
@@ -21,6 +23,7 @@ install:
     - tns usage-reporting disable
     - tns error-reporting disable
     - npm install
+    
 script:
     - grunt build
     - cd sample
