@@ -12,6 +12,7 @@ cache:
     directories:
         - .nvm
         - node_modules
+        - sample/node_modules
 
 install:
     - export LANG=en_US.UTF-8
