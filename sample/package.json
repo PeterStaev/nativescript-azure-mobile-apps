@@ -5,16 +5,16 @@
 	"nativescript": {
 		"id": "inc.tangra.azuremobileservicessample",
 		"tns-ios": {
-			"version": "1.7.0"
+			"version": "2.0.0"
 		},
 		"tns-android": {
-			"version": "1.7.1"
+			"version": "2.0.0"
 		}
 	},
 	"dependencies": {
 		"nativescript-azure-mobile-apps": "file:../bin/dist",
 		"nativescript-unit-test-runner": "^0.3.3",
-		"tns-core-modules": "1.7.1"
+		"tns-core-modules": "2.0.0"
 	},
 	"devDependencies": {
 		"babel-traverse": "6.8.0",

@@ -1,45 +1,28 @@
-env:
-  global:
-    - EMULATOR_API_VER=22
-    
-language: android
-  
-android:
-  components:
-    - platform-tools
-    - build-tools-23.0.1
-    - android-$EMULATOR_API_VER
-    - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-$EMULATOR_API_VER
-
-before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+language: objective-c
+ 
+os: osx 
+osx_image: xcode7.2
+xcode_sdk: iphonesimulato9.2
 
 cache:
     directories:
         - .nvm
-        - $HOME/.gradle/caches/
-        - $HOME/.gradle/wrapper/
         - node_modules
+        - $HOME/.cocoapods
 
 install:
+    - export LANG=en_US.UTF-8
+    - brew update
+    - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "FEF8DD40-74B7-4B97-90CF-6EC43A4F61F3"
     - nvm install 4
     - npm install -g grunt-cli
     - npm install -g nativescript --ignore-scripts
-    - npm install
     - tns usage-reporting disable
     - tns error-reporting disable
-    - cd sample
-    - tns platform add android@1.7.1
-    - cd ..
-    
-before_script:
-    - echo no | android create avd --force -n test -t android-$EMULATOR_API_VER -b armeabi-v7a
-    - emulator -avd test -no-audio -no-window &
-    - android-wait-for-emulator
-
+    - npm install
 script:
     - grunt build
     - cd sample
-    - tns test android --emulator --justlaunch
+    - npm install
+    - tns test ios --emulator --justlaunch
     - cd ..
