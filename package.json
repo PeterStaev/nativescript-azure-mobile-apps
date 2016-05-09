@@ -26,7 +26,7 @@
 
   "devDependencies": {
     "typescript": "1.8.10",
-    "tslint": "3.3.0",
+    "tslint": "3.9.0",
     "tns-core-modules": "git+https://github.com/NativeScript/NativeScript.git#v1.6.0",
 
     "grunt": "0.4.5",
