@@ -15,6 +15,7 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./client-common";
 import * as application from "application";
+import * as utils from "../utils";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 
 global.moduleMerge(common, exports);
@@ -32,14 +33,26 @@ export class MobileServiceClient extends common.MobileServiceClient {
             }
         }));
     }
-    
+
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }
-    
-    public login(provider: string){
+
+    /*public login(provider: string) {
         console.log("login");
-        let user = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Google);
+        let user = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);
         return user;
+    }*/
+
+    public login(provider: string): Promise<Array<any>> {
+        return new Promise((resolve, reject) => {
+            try {
+                let futureResult = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);
+                utils.futureToPromise(futureResult).then((result) => { resolve(utils.getJsObject(result)); }, reject);
+            }
+            catch (e) {
+                reject(e);
+            }
+        });
     }
 }

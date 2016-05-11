@@ -113,5 +113,13 @@ export function onDeleteItemTap(args) {
 
 export function onLoginTap(args){
     console.log("tap");
-    client.login("Google");
+    ai.busy = true;
+    client.login("Facebook").then(() => {
+        ai.busy = false;
+        dialogs.alert("Logged In!");
+    }, (e) => {
+        ai.busy = false;
+
+        console.log("Error Logging in!", e);
+    });
 }
