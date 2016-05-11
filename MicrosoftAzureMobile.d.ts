@@ -592,12 +592,3 @@ declare class MSUser extends NSObject implements NSCopying {
 declare var MicrosoftAzureMobileVersionNumber: number;
 
 declare var MicrosoftAzureMobileVersionString: interop.Reference<number>;
-
-declare class MobileServiceUser extends NSObject {
-	constructor(o: { userId: string; }); 
-	
-	setUserId(userId: string): void;
-	setAuthenticationToken(authenticationToken: string): void;
-	getUserId(): string;
-	getAuthenticationToken(): string;
-}

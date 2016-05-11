@@ -119,7 +119,7 @@ export function onLoginTap(args) {
         ai.busy = false;
         console.log("Logged In!");
         var id: string = user.getUserId();
-        console.log("ID: " + id);
+        console.log("ID: " + id.toString);
     }, (e) => {
         ai.busy = false;
 
