@@ -19,5 +19,6 @@ declare module "nativescript-azure-mobile-apps/client" {
     export class MobileServiceClient {
         constructor (provider: string);
         public getTable (tableName: string): MobileServiceTable;
+        public login (provider: string): any;
     }
 }

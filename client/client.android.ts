@@ -36,4 +36,10 @@ export class MobileServiceClient extends common.MobileServiceClient {
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }
+    
+    public login(provider: string){
+        console.log("login");
+        let user = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Google);
+        return user;
+    }
 }

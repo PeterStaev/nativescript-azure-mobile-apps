@@ -110,3 +110,8 @@ export function onDeleteItemTap(args) {
         console.log("Error deleting item!", e);
     });
 }
+
+export function onLoginTap(args){
+    console.log("tap");
+    client.login("Google");
+}
