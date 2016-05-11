@@ -17,6 +17,7 @@ import * as common from "./client-common";
 import * as application from "application";
 import * as utils from "../utils";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
+import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
 
 global.moduleMerge(common, exports);
 
@@ -37,12 +38,6 @@ export class MobileServiceClient extends common.MobileServiceClient {
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }
-
-    /*public login(provider: string) {
-        console.log("login");
-        let user = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);
-        return user;
-    }*/
 
     public login(provider: string): Promise<MobileServiceUser> {
         return new Promise((resolve, reject) => {
