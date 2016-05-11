@@ -31,14 +31,7 @@ export class MobileServiceClient extends common.MobileServiceClient {
     public login(provider: string): Promise<MobileServiceUser> {
         return new Promise((resolve, reject) => {
             try {
-                /* this._msClient.login((queryResult, error) => {
-                    if (error) {
-                        reject(new Error(error.localizedDescription));
-                        return;
-                    }
-
-                    resolve(utils.getJsObject(queryResult.items));
-                });*/
+                
                 console.log("ios trying");
             }
             catch (e) {
@@ -47,16 +40,3 @@ export class MobileServiceClient extends common.MobileServiceClient {
         });
     }
 }
-
-/*        
-        
-         return new Promise((resolve, reject) => {
-            try {
-                let futureResult = this._msClient; // .login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);
-                // utils.futureToPromise(futureResult).then((result) => { resolve(utils.getJsObject(result)); }, reject);
-            }
-            catch (e) {
-                reject(e);
-            }
-        });
-        */
