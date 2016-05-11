@@ -16,11 +16,19 @@ limitations under the License.
 
 declare module "nativescript-azure-mobile-apps/client" {
     import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-    import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
-    
+        
     export class MobileServiceClient {
         constructor (provider: string);
         public getTable (tableName: string): MobileServiceTable;
-        public login (provider: string): MobileServiceUser;
+        public login (provider: string): any;
+    }
+    
+    export class MobileServiceUser {
+        constructor(o: { userId: string; });
+
+        setUserId(userId: string): void;
+        setAuthenticationToken(authenticationToken: string): void;
+        getUserId(): string;
+        getAuthenticationToken(): string;
     }
 }

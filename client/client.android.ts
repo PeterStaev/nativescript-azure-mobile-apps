@@ -44,7 +44,7 @@ export class MobileServiceClient extends common.MobileServiceClient {
         return user;
     }*/
 
-    public login(provider: string): Promise<Array<any>> {
+    public login(provider: string): Promise<MobileServiceUser> {
         return new Promise((resolve, reject) => {
             try {
                 let futureResult = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);

@@ -25,19 +25,19 @@ export function onNavigatingTo(args: EventData) {
 
 export function onAddItemTap(args) {
     ai.busy = true;
-    
+
     item = new TodoItem();
     item.text = "NativeScript Rocks";
     item.completed = false;
-    
+
     todoItemTable.insert(item).then((updatedItem) => {
         ai.busy = false;
-        
+
         item = updatedItem;
         dialogs.alert("Item added!")
     }, (e) => {
         ai.busy = false;
-        
+
         console.log("Error adding item!", e);
     });
 }
@@ -47,11 +47,11 @@ export function onUpdateItemTap(args) {
         dialogs.alert("There is no item. Use Add first!");
         return;
     }
-    
+
     ai.busy = true;
-    
+
     item.completed = true;
-    
+
     todoItemTable.update(item).then((updatedItem) => {
         ai.busy = false;
 
@@ -66,7 +66,7 @@ export function onUpdateItemTap(args) {
 
 export function onGetAllItemsTap(args) {
     ai.busy = true;
-    
+
     todoItemTable.read().then((results) => {
         ai.busy = false;
 
@@ -80,7 +80,7 @@ export function onGetAllItemsTap(args) {
 
 export function onGetCompletedItemsTap(args) {
     ai.busy = true;
-    
+
     todoItemTable.where().field("completed").eq(true).read().then((results) => {
         ai.busy = false;
 
@@ -97,9 +97,9 @@ export function onDeleteItemTap(args) {
         dialogs.alert("There is no item. Use Add first!");
         return;
     }
-    
+
     ai.busy = true;
-    
+
     todoItemTable.deleteItem(item).then(() => {
         ai.busy = false;
 
@@ -112,12 +112,14 @@ export function onDeleteItemTap(args) {
     });
 }
 
-export function onLoginTap(args){
+export function onLoginTap(args) {
     console.log("tap");
     ai.busy = true;
-    client.login("Facebook").then(() => {
+    client.login("Facebook").then((user) => {
         ai.busy = false;
-        dialogs.alert( + "Logged In!");
+        console.log("Logged In!");
+        var id: string = user.getUserId();
+        console.log("ID: " + id);
     }, (e) => {
         ai.busy = false;
 

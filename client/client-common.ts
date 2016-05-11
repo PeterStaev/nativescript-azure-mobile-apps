@@ -25,5 +25,5 @@ export abstract class MobileServiceClient implements definition.MobileServiceCli
     }
 
     abstract getTable(tableName: string): MobileServiceTable;
-    abstract login(provider: string): any;
+    abstract login(provider: string): Promise<definition.MobileServiceUser>;
 }
