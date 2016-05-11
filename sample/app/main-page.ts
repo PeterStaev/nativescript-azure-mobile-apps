@@ -8,6 +8,7 @@ import { EventData } from "data/observable";
 let client: MobileServiceClient;
 let todoItemTable: MobileServiceTable;
 let item: TodoItem;
+let user: MobileServiceClient
 let ai: ActivityIndicator;
 
 class TodoItem {
@@ -116,7 +117,7 @@ export function onLoginTap(args){
     ai.busy = true;
     client.login("Facebook").then(() => {
         ai.busy = false;
-        dialogs.alert("Logged In!");
+        dialogs.alert( + "Logged In!");
     }, (e) => {
         ai.busy = false;
 

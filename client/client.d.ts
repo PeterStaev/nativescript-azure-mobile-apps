@@ -13,12 +13,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
+
 declare module "nativescript-azure-mobile-apps/client" {
     import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
+    import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
     
     export class MobileServiceClient {
         constructor (provider: string);
         public getTable (tableName: string): MobileServiceTable;
-        public login (provider: string): any;
+        public login (provider: string): MobileServiceUser;
     }
 }
