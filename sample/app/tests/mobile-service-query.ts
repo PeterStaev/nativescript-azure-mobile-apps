@@ -81,6 +81,37 @@ describe("MobileServiceQuery", () => {
         });
     });
     
+    describe("ne()", () => {
+
+        it("Should filter by boolean", (done) => {
+            table.where().field("completed").ne(true).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+
+        it("Should filter by string", (done) => {
+            table.where().field("text").ne("item1").read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+
+        it("Should filter by number", (done) => {
+            table.where().field("myNumber").ne(1).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+
+        it("Should filter by Date", (done) => {
+            table.where().field("myDate").ne(testData[0].myDate).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+    });
+    
     describe("gt()", () => {
 
         it("Should filter by string", (done) => {

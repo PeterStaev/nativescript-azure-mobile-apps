@@ -39,6 +39,11 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         return this;
     }
     
+    public ne(value: string|number|boolean|Date): MobileServiceQuery {
+        this._msQuery.ne(utils.getNativeValueForComparison(value));
+        return this;
+    }
+    
     public gt(value: string|number|Date): MobileServiceQuery {
         this._msQuery.gt(utils.getNativeValueForComparison(value));
         return this;
