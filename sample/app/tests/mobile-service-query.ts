@@ -136,6 +136,30 @@ describe("MobileServiceQuery", () => {
         });
     });
 
+    describe("ge()", () => {
+
+        it("Should filter by string", (done) => {
+            table.where().field("text").ge("item1").read().then((results) => {
+                assert.isAbove(results.length, 1);
+                done();
+            }, done);
+        });
+
+        it("Should filter by number", (done) => {
+            table.where().field("myNumber").ge(1).read().then((results) => {
+                assert.isAbove(results.length, 1);
+                done();
+            }, done);
+        });
+
+        it("Should filter by Date", (done) => {
+            table.where().field("myDate").ge(testData[0].myDate).read().then((results) => {
+                assert.isAbove(results.length, 1);
+                done();
+            }, done);
+        });
+    });
+
     after((done) => {
         let promises: Array<Promise<TodoItem>> = [];
 
