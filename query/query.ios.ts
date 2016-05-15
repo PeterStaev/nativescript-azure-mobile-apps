@@ -74,4 +74,18 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
 
         return this;
     }
+
+    public lt(value: string|number|Date): MobileServiceQuery {
+        this._filterArgs.push(utils.getNativeValueForComparison(value));
+        this._filters.push("(%K < %@)");
+
+        return this;
+    }
+
+    public le(value: string|number|Date): MobileServiceQuery {
+        this._filterArgs.push(utils.getNativeValueForComparison(value));
+        this._filters.push("(%K <= %@)");
+
+        return this;
+    }
 }

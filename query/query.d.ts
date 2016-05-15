@@ -24,5 +24,7 @@ declare module "nativescript-azure-mobile-apps/query" {
         public ne(value: string|number|boolean|Date): MobileServiceQuery;
         public gt(value: string|number|Date): MobileServiceQuery;
         public ge(value: string|number|Date): MobileServiceQuery;
+        public lt(value: string|number|Date): MobileServiceQuery;
+        public le(value: string|number|Date): MobileServiceQuery;
     }
 }

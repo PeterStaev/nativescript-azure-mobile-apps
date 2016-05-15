@@ -53,4 +53,14 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         this._msQuery.ge(utils.getNativeValueForComparison(value));
         return this;
     }
+    
+    public lt(value: number|Date): MobileServiceQuery {
+        this._msQuery.lt(utils.getNativeValueForComparison(value));
+        return this;
+    }
+    
+    public le(value: number|Date): MobileServiceQuery {
+        this._msQuery.le(utils.getNativeValueForComparison(value));
+        return this;
+    }
 }

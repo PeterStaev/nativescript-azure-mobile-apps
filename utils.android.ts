@@ -39,6 +39,9 @@ export function getNativeValueForComparison(value: string|number|boolean|Date): 
             return new java.lang.Long(<number>value);
         }
     }
+    else if (value instanceof Date) {
+        return new java.util.Date(value.getTime());
+    }
     else {
         return value;
     }
@@ -51,5 +54,14 @@ export function getNativeObject(jsObject: any): any  { /* JsonObject */
 
 export function getJsObject(jsonObject: any): any {
     let gson = new com.google.gson.Gson();
-    return JSON.parse(gson.toJson(jsonObject));
+    return JSON.parse(gson.toJson(jsonObject), dateReviver);
+}
+
+function dateReviver(key: string, value: any) {
+    let isoDateMatcher = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
+    
+    if (typeof value === "string" && (<string>value).match(isoDateMatcher)) {
+        return new Date(value);
+    }
+    return value;
 }

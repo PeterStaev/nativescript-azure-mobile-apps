@@ -30,7 +30,7 @@ describe("MobileServiceQuery", () => {
         item.text = "item1";
         item.myNumber = 1
         item.completed = false;
-        item.myDate = new Date(2016, 0, 1)
+        item.myDate = new Date(2016, 0, 1);
         testData.push(item);
         
         item = new TodoItem();
@@ -154,6 +154,40 @@ describe("MobileServiceQuery", () => {
 
         it("Should filter by Date", (done) => {
             table.where().field("myDate").ge(testData[0].myDate).read().then((results) => {
+                assert.isAbove(results.length, 1);
+                done();
+            }, done);
+        });
+    });
+    
+    describe("lt()", () => {
+
+        it("Should filter by number", (done) => {
+            table.where().field("myNumber").lt(2).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+
+        it("Should filter by Date", (done) => {
+            table.where().field("myDate").lt(testData[1].myDate).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+    });
+
+    describe("le()", () => {
+
+        it("Should filter by number", (done) => {
+            table.where().field("myNumber").le(2).read().then((results) => {
+                assert.isAbove(results.length, 1);
+                done();
+            }, done);
+        });
+
+        it("Should filter by Date", (done) => {
+            table.where().field("myDate").le(testData[1].myDate).read().then((results) => {
                 assert.isAbove(results.length, 1);
                 done();
             }, done);
