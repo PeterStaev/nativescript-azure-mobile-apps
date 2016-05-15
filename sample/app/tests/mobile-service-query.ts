@@ -11,7 +11,7 @@ class TodoItem {
     public text: string;
     public myNumber: number;
     public completed: boolean = false;
-    public createdAt: Date
+    public myDate: Date;
 };
 
 describe("MobileServiceQuery", () => {
@@ -30,12 +30,14 @@ describe("MobileServiceQuery", () => {
         item.text = "item1";
         item.myNumber = 1
         item.completed = false;
+        item.myDate = new Date(2016, 0, 1)
         testData.push(item);
         
         item = new TodoItem();
         item.text = "item2";
         item.myNumber = 2
         item.completed = true;
+        item.myDate = new Date(2016, 0, 2);
         testData.push(item);
 
         for (let loop = 0; loop < testData.length; loop++) {
@@ -72,13 +74,37 @@ describe("MobileServiceQuery", () => {
         });
 
         it("Should filter by Date", (done) => {
-            table.where().field("createdAt").eq(testData[0].createdAt).read().then((results) => {
+            table.where().field("myDate").eq(testData[0].myDate).read().then((results) => {
                 assert.isAbove(results.length, 0);
                 done();
             }, done);
         });
     });
     
+    describe("gt()", () => {
+
+        it("Should filter by string", (done) => {
+            table.where().field("text").gt("item1").read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+
+        it("Should filter by number", (done) => {
+            table.where().field("myNumber").gt(1).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+
+        it("Should filter by Date", (done) => {
+            table.where().field("myDate").gt(testData[0].myDate).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+    });
+
     after((done) => {
         let promises: Array<Promise<TodoItem>> = [];
 

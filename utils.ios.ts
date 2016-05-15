@@ -27,7 +27,7 @@ export function getNativeObject(object: any): any {
         return getNSArrayFromJsArray(object);
     }
     
-    if (object !== null && object !== undefined && typeof object === "object") {
+    if (object !== null && object !== undefined && typeof object === "object" && !(object instanceof Date)) {
         return getNSDictionaryFromJsObject(object);
     }
     

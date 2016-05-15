@@ -26,4 +26,5 @@ export abstract class MobileServiceQuery implements definition.MobileServiceQuer
     
     abstract field(fieldName: string): MobileServiceQuery;
     abstract eq(value: string|number|boolean|Date): MobileServiceQuery;
+    abstract gt(value: string|number|Date): MobileServiceQuery;
 }
