@@ -68,3 +68,10 @@ todoItemTable.where().field("completed").eq(true).read().then(function(results) 
     console.log("There are " + results.length.toString() + "completed items");
 });
 ```
+Currently the following filters are supported:
+* **eq()** - Equals
+* **ne()** - Not Equals
+* **gt()** - Greater
+* **ge()** - Greater or Equal
+* **lt()** - Lower
+* **le()** - Lower or Equal
