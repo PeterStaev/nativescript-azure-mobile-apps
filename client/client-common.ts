@@ -15,6 +15,7 @@ limitations under the License.
 ***************************************************************************** */
 import * as definition from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
+import * as appSettings from "application-settings";
 // import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
 
 export abstract class MobileServiceClient implements definition.MobileServiceClient {
@@ -27,4 +28,5 @@ export abstract class MobileServiceClient implements definition.MobileServiceCli
 
     abstract getTable(tableName: string): MobileServiceTable;
     abstract getUser(provider: string): Promise<any>;
+    
 }
