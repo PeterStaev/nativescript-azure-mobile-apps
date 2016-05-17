@@ -115,11 +115,10 @@ export function onDeleteItemTap(args) {
 export function onLoginTap(args) {
     console.log("tap");
     ai.busy = true;
-    client.login("Facebook").then((user) => {
+    client.getUser("Facebook").then((user) => {
         ai.busy = false;
         console.log("Logged In!");
-        var id: string = user.getUserId();
-        console.log("ID: " + id.toString);
+        console.log(user.mUserId);
     }, (e) => {
         ai.busy = false;
 

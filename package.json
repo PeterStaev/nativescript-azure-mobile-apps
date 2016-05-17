@@ -37,7 +37,7 @@
     "grunt-exec": "0.4.6"
   },
   "scripts": {
-		"demo.android": "grunt build && cd sample && tns platform remove android && tns deploy android"
+		"demo.android": "grunt build && cd sample && npm uninstall nativescript-azure-mobile-apps && npm i && tsc && tns deploy android"
 	}
 
 }
