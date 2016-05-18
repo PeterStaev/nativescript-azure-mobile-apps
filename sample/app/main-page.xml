@@ -6,6 +6,7 @@
       <Button text="Get All Items" tap="onGetAllItemsTap" />
       <Button text="Get Complete Items" tap="onGetCompletedItemsTap" />
       <Button text="Delete Item" tap="onDeleteItemTap" />
+      <Button text="Login" tap="onLoginTap" />
     </StackLayout>
     <ActivityIndicator id="ai" />
   </GridLayout>

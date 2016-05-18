@@ -35,6 +35,9 @@
     "grunt-ts": "5.5.0-beta.2", 
     "grunt-tslint": "3.1.0",
     "grunt-exec": "0.4.6"
-  }
+  },
+  "scripts": {
+		"demo.android": "grunt build && cd sample && tns platform remove android && tns deploy android"
+	}
 
 }

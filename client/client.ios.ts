@@ -15,16 +15,28 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./client-common";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
- 
+import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
+
 export class MobileServiceClient extends common.MobileServiceClient {
     protected _msClient: MSClient; // Redeclaration for typing info
-    
+
     constructor(url: string) {
         super(url);
         this._msClient = MSClient.clientWithApplicationURLString(url);
     }
-    
+
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.tableWithName(tableName));
+    }
+    public login(provider: string): Promise<MobileServiceUser> {
+        return new Promise((resolve, reject) => {
+            try {
+                
+                console.log("ios trying");
+            }
+            catch (e) {
+                reject(e);
+            }
+        });
     }
 }

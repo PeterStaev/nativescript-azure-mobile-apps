@@ -8,6 +8,7 @@ import { EventData } from "data/observable";
 let client: MobileServiceClient;
 let todoItemTable: MobileServiceTable;
 let item: TodoItem;
+let user: MobileServiceClient
 let ai: ActivityIndicator;
 
 class TodoItem {
@@ -17,26 +18,26 @@ class TodoItem {
 }
 
 export function onNavigatingTo(args: EventData) {
-    client = new MobileServiceClient("https://<YOUR PORTAL>.azurewebsites.net");
+    client = new MobileServiceClient("https://gas-sense-personal.azurewebsites.net");
     todoItemTable = client.getTable("TodoItem");
     ai = (<Page>args.object).getViewById<ActivityIndicator>("ai");
 }
 
 export function onAddItemTap(args) {
     ai.busy = true;
-    
+
     item = new TodoItem();
     item.text = "NativeScript Rocks";
     item.completed = false;
-    
+
     todoItemTable.insert(item).then((updatedItem) => {
         ai.busy = false;
-        
+
         item = updatedItem;
         dialogs.alert("Item added!")
     }, (e) => {
         ai.busy = false;
-        
+
         console.log("Error adding item!", e);
     });
 }
@@ -46,11 +47,11 @@ export function onUpdateItemTap(args) {
         dialogs.alert("There is no item. Use Add first!");
         return;
     }
-    
+
     ai.busy = true;
-    
+
     item.completed = true;
-    
+
     todoItemTable.update(item).then((updatedItem) => {
         ai.busy = false;
 
@@ -65,7 +66,7 @@ export function onUpdateItemTap(args) {
 
 export function onGetAllItemsTap(args) {
     ai.busy = true;
-    
+
     todoItemTable.read().then((results) => {
         ai.busy = false;
 
@@ -79,7 +80,7 @@ export function onGetAllItemsTap(args) {
 
 export function onGetCompletedItemsTap(args) {
     ai.busy = true;
-    
+
     todoItemTable.where().field("completed").eq(true).read().then((results) => {
         ai.busy = false;
 
@@ -96,9 +97,9 @@ export function onDeleteItemTap(args) {
         dialogs.alert("There is no item. Use Add first!");
         return;
     }
-    
+
     ai.busy = true;
-    
+
     todoItemTable.deleteItem(item).then(() => {
         ai.busy = false;
 
@@ -108,5 +109,20 @@ export function onDeleteItemTap(args) {
         ai.busy = false;
 
         console.log("Error deleting item!", e);
+    });
+}
+
+export function onLoginTap(args) {
+    console.log("tap");
+    ai.busy = true;
+    client.login("Facebook").then((user) => {
+        ai.busy = false;
+        console.log("Logged In!");
+        var id: string = user.getUserId();
+        console.log("ID: " + id.toString);
+    }, (e) => {
+        ai.busy = false;
+
+        console.log("Error Logging in!", e);
     });
 }
