@@ -118,7 +118,7 @@ export function onLoginTap(args) {
     client.login("Facebook").then((user) => {
         ai.busy = false;
         console.log("Logged In!");
-        var id: string = user.getUserId();
+        var id: string = user.mUserId;
         console.log("ID: " + id.toString);
     }, (e) => {
         ai.busy = false;

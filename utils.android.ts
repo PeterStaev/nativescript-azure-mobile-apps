@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
 import * as types from "utils/types";
+import {MobileServiceUser} from "nativescript-azure-mobile-apps/user";
+import * as appSettings from "application-settings";
 
 export function futureToPromise(future: any /* ListenableFuture */): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -52,4 +54,23 @@ export function getNativeObject(jsObject: any): any  { /* JsonObject */
 export function getJsObject(jsonObject: any): any {
     let gson = new com.google.gson.Gson();
     return JSON.parse(gson.toJson(jsonObject));
+}
+
+export function setCache(user: MobileServiceUser){
+    appSettings.setString("mUserId", user.mUserId); // Set User ID as an application setting
+    appSettings.setString("mUserTkn", user.mAuthenticationToken);
+}
+
+export function getCache(): MobileServiceUser {
+    let mUserId = appSettings.getString("mUserId"); // retrieve User ID (if cached)
+    let mUserTkn = appSettings.getString("mUserTkn"); // retrieve Auth token (if cached)
+    if (mUserId === undefined || mUserTkn === undefined) {
+        console.log("No Cached Values");
+        return null; // if there aren't any cached values, return null
+    }
+    let id = {userId: mUserId};
+    let user = new MobileServiceUser(id);
+    user.mAuthenticationToken = mUserTkn;
+    user.mUserId = mUserId;
+    return user;
 }

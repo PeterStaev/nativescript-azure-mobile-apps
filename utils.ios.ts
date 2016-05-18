@@ -13,6 +13,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
+import * as appSettings from "application-settings";
+import {MobileServiceUser} from "nativescript-azure-mobile-apps/user";
+
 export function getNativeValueForComparison(value: string|number|boolean|Date): any {
     if (value instanceof Date) {
         // There is a problem with {N} wrapping NSDate so we just use ISO String to filter
@@ -90,4 +93,23 @@ function getJsObjectFromNSDictionary(dictionary: NSDictionary): Object {
     }
     
     return result;
+}
+
+export function setCache(user: MobileServiceUser){
+    appSettings.setString("mUserId", user.mUserId); // Set User ID as an application setting
+    appSettings.setString("mUserTkn", user.mAuthenticationToken);
+}
+
+export function getCache(): MobileServiceUser {
+    let mUserId = appSettings.getString("mUserId"); // retrieve User ID (if cached)
+    let mUserTkn = appSettings.getString("mUserTkn"); // retrieve Auth token (if cached)
+    if (mUserId === undefined || mUserTkn === undefined) {
+        console.log("No Cached Values");
+        return null; // if there aren't any cached values, return null
+    }
+    let id = {userId: mUserId};
+    let user = new MobileServiceUser(id);
+    user.mAuthenticationToken = mUserTkn;
+    user.mUserId = mUserId;
+    return user;
 }
