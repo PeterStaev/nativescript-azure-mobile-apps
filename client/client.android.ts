@@ -17,7 +17,7 @@ import * as common from "./client-common";
 import * as application from "application";
 import * as utils from "../utils";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-// import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
+import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
 
 global.moduleMerge(common, exports);
 
@@ -39,16 +39,11 @@ export class MobileServiceClient extends common.MobileServiceClient {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }
 
-    public getUser(provider: string): Promise<any> {
+    public login(provider: string): Promise<MobileServiceUser> {
         return new Promise((resolve, reject) => {
             try {
-                if (this._msClient.getCurrentUser() === null || undefined){
-                    let futureResult = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);
-                    utils.futureToPromise(futureResult).then((result) => { resolve(utils.getJsObject(result)); }, reject);
-                } else {
-                    let futureResult = this._msClient.getCurrentUser();
-                    utils.futureToPromise(futureResult).then((result) => { resolve(utils.getJsObject(result)); }, reject);
-                }
+                let futureResult = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);
+                utils.futureToPromise(futureResult).then((result) => { resolve(utils.getJsObject(result)); }, reject);
             }
             catch (e) {
                 reject(e);

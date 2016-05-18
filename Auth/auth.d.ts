@@ -7,6 +7,5 @@ declare module "nativescript-azure-mobile-apps/user" {
         setAuthenticationToken(authenticationToken: string): void;
         getUserId(): string;
         getAuthenticationToken(): string;
-       
     }
 }
