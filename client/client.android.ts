@@ -42,10 +42,10 @@ export class MobileServiceClient extends common.MobileServiceClient {
     public getUser(provider: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
-                if (this._msClient.getCurrentUser() === null || undefined) { // start the login flow
+                if (this._msClient.getCurrentUser() === null || undefined){
                     let futureResult = this._msClient.login(com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider[provider]);
                     utils.futureToPromise(futureResult).then((result) => { resolve(utils.getJsObject(result)); }, reject);
-                } else { // retrieve active logged in user
+                } else {
                     let futureResult = this._msClient.getCurrentUser();
                     utils.futureToPromise(futureResult).then((result) => { resolve(utils.getJsObject(result)); }, reject);
                 }
