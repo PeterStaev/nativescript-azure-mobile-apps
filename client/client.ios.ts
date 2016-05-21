@@ -16,6 +16,8 @@ limitations under the License.
 import * as common from "./client-common";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
  
+global.moduleMerge(common, exports);
+
 export class MobileServiceClient extends common.MobileServiceClient {
     protected _msClient: MSClient; // Redeclaration for typing info
     

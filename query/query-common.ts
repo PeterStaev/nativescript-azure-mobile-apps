@@ -37,4 +37,11 @@ export abstract class MobileServiceQuery implements definition.MobileServiceQuer
     
     abstract and(): MobileServiceQuery;
     abstract or(): MobileServiceQuery;
+    
+    abstract orderBy(field: string, dir: SortDir);
+}
+
+export enum SortDir {
+    Asc = 0, 
+    Desc = 1
 }

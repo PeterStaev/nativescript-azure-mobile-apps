@@ -26,7 +26,9 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
     public read(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
             try {
-                this._msQuery.predicate = NSPredicate.predicateWithFormatArgumentArray(this._filters.join(" "), utils.getNativeObject(this._filterArgs));
+                if (this._filters.length) {
+                    this._msQuery.predicate = NSPredicate.predicateWithFormatArgumentArray(this._filters.join(" "), utils.getNativeObject(this._filterArgs));
+                }
                 this._msQuery.readWithCompletion((queryResult, error) => {
                     if (error) {
                         reject(new Error(error.localizedDescription));
@@ -44,6 +46,7 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
     
     public field(fieldName: string): MobileServiceQuery {
         this._filterArgs.push(fieldName);
+        
         return this;
     }
     
@@ -111,6 +114,17 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
     
     public or(): MobileServiceQuery {
         this._filters.push("||");
+        
+        return this;
+    }
+    
+    public orderBy(field: string, dir: common.SortDir): MobileServiceQuery {
+        if (dir === common.SortDir.Asc) {
+            this._msQuery.orderByAscending(field);
+        }
+        else if (dir === common.SortDir.Desc) {
+            this._msQuery.orderByDescending(field);
+        }
         
         return this;
     }

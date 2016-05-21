@@ -16,6 +16,8 @@ limitations under the License.
 import * as common from "./query-common";
 import * as utils from "../utils";
 
+global.moduleMerge(common, exports);
+
 export class MobileServiceQuery extends common.MobileServiceQuery {
     public read(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
@@ -31,56 +33,77 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
     
     public field(fieldName: string): MobileServiceQuery {
         this._msQuery.field(fieldName);
+        
         return this;
     }
     
     public eq(value: string|number|boolean|Date): MobileServiceQuery {
         this._msQuery.eq(utils.getNativeValueForComparison(value));
+        
         return this;
     }
     
     public ne(value: string|number|boolean|Date): MobileServiceQuery {
         this._msQuery.ne(utils.getNativeValueForComparison(value));
+        
         return this;
     }
     
     public gt(value: string|number|Date): MobileServiceQuery {
         this._msQuery.gt(utils.getNativeValueForComparison(value));
+        
         return this;
     }
     
     public ge(value: string|number|Date): MobileServiceQuery {
         this._msQuery.ge(utils.getNativeValueForComparison(value));
+        
         return this;
     }
     
     public lt(value: number|Date): MobileServiceQuery {
         this._msQuery.lt(utils.getNativeValueForComparison(value));
+        
         return this;
     }
     
     public le(value: number|Date): MobileServiceQuery {
         this._msQuery.le(utils.getNativeValueForComparison(value));
+        
         return this;
     }
     
     public startsWith(field: string, value: string): MobileServiceQuery {
         this._msQuery.startsWith(field, value);
+        
         return this;
     }
     
     public endsWith(field: string, value: string): MobileServiceQuery {
         this._msQuery.endsWith(field, value);
+        
         return this;
     }
     
     public and(): MobileServiceQuery {
         this._msQuery.and();
+        
         return this;
     }
     
     public or(): MobileServiceQuery {
         this._msQuery.or();
+        
+        return this;
+    }
+    
+    public orderBy(field: string, dir: common.SortDir): MobileServiceQuery {
+        let nativeDirection = 
+                dir === common.SortDir.Asc ? 
+                com.microsoft.windowsazure.mobileservices.table.query.QueryOrder.Ascending :
+                com.microsoft.windowsazure.mobileservices.table.query.QueryOrder.Descending;
+        this._msQuery.orderBy(field, nativeDirection);
+        
         return this;
     }
 }

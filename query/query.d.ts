@@ -31,6 +31,13 @@ declare module "nativescript-azure-mobile-apps/query" {
         public endsWith(field: string, value: string): MobileServiceQuery;
         
         public and(): MobileServiceQuery;
-        public or(): MobileServiceQuery
+        public or(): MobileServiceQuery;
+        
+        public orderBy(field: string, dir: SortDir): MobileServiceQuery;
+    }
+    
+    export enum SortDir {
+        Asc,
+        Desc
     }
 }

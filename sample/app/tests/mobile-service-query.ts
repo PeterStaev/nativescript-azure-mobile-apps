@@ -1,6 +1,6 @@
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-import { MobileServiceQuery } from "nativescript-azure-mobile-apps/query";
+import { MobileServiceQuery, SortDir } from "nativescript-azure-mobile-apps/query";
 
 mocha.setup({
     timeout: 110000
@@ -214,6 +214,29 @@ describe("MobileServiceQuery", () => {
         });
     });
     
+    describe("orderBy()", () => {
+
+        it("Ascending", (done) => {
+            table.where().orderBy("myNumber", SortDir.Asc).read().then((results) => {
+                assert.isAbove(results.length, 1);
+                assert.equal(results[0].myNumber, 1);
+                assert.equal(results[results.length - 1].myNumber, 2);
+                
+                done();
+            }, done);
+        });
+
+        it("Descending", (done) => {
+            table.where().orderBy("myNumber", SortDir.Desc).read().then((results) => {
+                assert.isAbove(results.length, 1);
+                assert.equal(results[0].myNumber, 2);
+                assert.equal(results[results.length - 1].myNumber, 1);
+                
+                done();
+            }, done);
+        });
+    });
+
     describe("Complex queries", () => {
 
         it("and()", (done) => {
