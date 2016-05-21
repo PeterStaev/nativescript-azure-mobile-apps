@@ -73,4 +73,14 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         this._msQuery.endsWith(field, value);
         return this;
     }
+    
+    public and(): MobileServiceQuery {
+        this._msQuery.and();
+        return this;
+    }
+    
+    public or(): MobileServiceQuery {
+        this._msQuery.or();
+        return this;
+    }
 }

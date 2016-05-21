@@ -213,6 +213,23 @@ describe("MobileServiceQuery", () => {
             }, done);
         });
     });
+    
+    describe("Complex queries", () => {
+
+        it("and()", (done) => {
+            table.where().field("text").eq("item1").and().field("myNumber").eq(1).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+
+        it("or()", (done) => {
+            table.where().field("text").eq("item1").or().field("myNumber").eq(2).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+    });
 
     after((done) => {
         let promises: Array<Promise<TodoItem>> = [];

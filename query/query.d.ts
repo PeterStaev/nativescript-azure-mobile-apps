@@ -26,7 +26,11 @@ declare module "nativescript-azure-mobile-apps/query" {
         public ge(value: string|number|Date): MobileServiceQuery;
         public lt(value: number|Date): MobileServiceQuery;
         public le(value: number|Date): MobileServiceQuery;
+        
         public startsWith(field: string, value: string): MobileServiceQuery;
         public endsWith(field: string, value: string): MobileServiceQuery;
+        
+        public and(): MobileServiceQuery;
+        public or(): MobileServiceQuery
     }
 }

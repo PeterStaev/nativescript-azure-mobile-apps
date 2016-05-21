@@ -31,6 +31,10 @@ export abstract class MobileServiceQuery implements definition.MobileServiceQuer
     abstract ge(value: string|number|Date): MobileServiceQuery;
     abstract lt(value: number|Date): MobileServiceQuery;
     abstract le(value: number|Date): MobileServiceQuery;
+    
     abstract startsWith(field: string, value: string): MobileServiceQuery;
     abstract endsWith(field: string, value: string): MobileServiceQuery;
+    
+    abstract and(): MobileServiceQuery;
+    abstract or(): MobileServiceQuery;
 }

@@ -26,7 +26,7 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
     public read(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
             try {
-                this._msQuery.predicate = NSPredicate.predicateWithFormatArgumentArray(this._filters.join(" && "), utils.getNativeObject(this._filterArgs));
+                this._msQuery.predicate = NSPredicate.predicateWithFormatArgumentArray(this._filters.join(" "), utils.getNativeObject(this._filterArgs));
                 this._msQuery.readWithCompletion((queryResult, error) => {
                     if (error) {
                         reject(new Error(error.localizedDescription));
@@ -100,6 +100,18 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         this._filterArgs.push(field, value);
         this._filters.push("(%K ENDSWITH %@)");
 
+        return this;
+    }
+    
+    public and(): MobileServiceQuery {
+        this._filters.push("&&");
+        
+        return this;
+    }
+    
+    public or(): MobileServiceQuery {
+        this._filters.push("||");
+        
         return this;
     }
 }
