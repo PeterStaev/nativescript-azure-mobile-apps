@@ -193,6 +193,26 @@ describe("MobileServiceQuery", () => {
             }, done);
         });
     });
+    
+    describe("startsWith()", () => {
+
+        it("Should filter by string", (done) => {
+            table.where().startsWith("text", "item").read().then((results) => {
+                assert.isAbove(results.length, 1);
+                done();
+            }, done);
+        });
+    });
+    
+    describe("endsWith()", () => {
+
+        it("Should filter by string", (done) => {
+            table.where().endsWith("text", "1").read().then((results) => {
+                assert.isAbove(results.length, 0);
+                done();
+            }, done);
+        });
+    });
 
     after((done) => {
         let promises: Array<Promise<TodoItem>> = [];

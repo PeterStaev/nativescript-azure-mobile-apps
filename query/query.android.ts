@@ -63,4 +63,14 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         this._msQuery.le(utils.getNativeValueForComparison(value));
         return this;
     }
+    
+    public startsWith(field: string, value: string): MobileServiceQuery {
+        this._msQuery.startsWith(field, value);
+        return this;
+    }
+    
+    public endsWith(field: string, value: string): MobileServiceQuery {
+        this._msQuery.endsWith(field, value);
+        return this;
+    }
 }

@@ -1,5 +1,7 @@
 # NativeScript Azure Mobile Apps plugin
 [![Build Status](https://travis-ci.org/PeterStaev/nativescript-azure-mobile-apps.svg?branch=master)](https://travis-ci.org/PeterStaev/nativescript-azure-mobile-apps)
+[![npm downloads](https://img.shields.io/npm/dm/nativescript-azure-mobile-apps.svg?maxAge=2592000)](https://www.npmjs.com/package/nativescript-azure-mobile-apps)
+[![npm](https://img.shields.io/npm/v/nativescript-azure-mobile-apps.svg?maxAge=2592000)](https://www.npmjs.com/package/nativescript-azure-mobile-apps)
 
 A NativeScript Azure Mobile Apps plugin. Currently supporting basic CRUD and query functions
 
@@ -69,9 +71,11 @@ todoItemTable.where().field("completed").eq(true).read().then(function(results) 
 });
 ```
 Currently the following filters are supported:
-* **eq()** - Equals
-* **ne()** - Not Equals
-* **gt()** - Greater
-* **ge()** - Greater or Equal
-* **lt()** - Lower
-* **le()** - Lower or Equal
+* **eq(value)** - Equals
+* **ne(value)** - Not Equals
+* **gt(value)** - Greater
+* **ge(value)** - Greater or Equal
+* **lt(value)** - Lower
+* **le(value)** - Lower or Equal
+* **startsWith(field, value)** - String starts with
+* **endsWith(field, value)** - String ends with

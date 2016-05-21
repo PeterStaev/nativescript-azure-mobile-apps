@@ -75,16 +75,30 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         return this;
     }
 
-    public lt(value: string|number|Date): MobileServiceQuery {
+    public lt(value: number|Date): MobileServiceQuery {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K < %@)");
 
         return this;
     }
 
-    public le(value: string|number|Date): MobileServiceQuery {
+    public le(value: number|Date): MobileServiceQuery {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K <= %@)");
+
+        return this;
+    }
+
+    public startsWith(field: string, value: string): MobileServiceQuery {
+        this._filterArgs.push(field, value);
+        this._filters.push("(%K BEGINSWITH %@)");
+
+        return this;
+    }
+
+    public endsWith(field: string, value: string): MobileServiceQuery {
+        this._filterArgs.push(field, value);
+        this._filters.push("(%K ENDSWITH %@)");
 
         return this;
     }
