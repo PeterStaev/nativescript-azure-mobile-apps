@@ -236,6 +236,28 @@ describe("MobileServiceQuery", () => {
             }, done);
         });
     });
+    
+    describe("top()", () => {
+
+        it("Should limit results", (done) => {
+            table.where().orderBy("myNumber", SortDir.Asc).top(1).read().then((results) => {
+                assert.equal(results.length, 1);
+                assert.equal(results[0].myNumber, 1);
+                done();
+            }, done);
+        });
+    });
+    
+    describe("skip()", () => {
+
+        it("Should skip results", (done) => {
+            table.where().orderBy("myNumber", SortDir.Asc).skip(1).read().then((results) => {
+                assert.isAbove(results.length, 0);
+                assert.equal(results[0].myNumber, 2);
+                done();
+            }, done);
+        });
+    });
 
     describe("Complex queries", () => {
 

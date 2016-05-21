@@ -106,4 +106,16 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         
         return this;
     }
+    
+    public skip(count: number): MobileServiceQuery {
+        this._msQuery.skip(count);
+        
+        return this;
+    }
+    
+    public top(count: number): MobileServiceQuery {
+        this._msQuery.top(count);
+        
+        return this;
+    }
 }

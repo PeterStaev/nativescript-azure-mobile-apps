@@ -29,6 +29,7 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
                 if (this._filters.length) {
                     this._msQuery.predicate = NSPredicate.predicateWithFormatArgumentArray(this._filters.join(" "), utils.getNativeObject(this._filterArgs));
                 }
+                
                 this._msQuery.readWithCompletion((queryResult, error) => {
                     if (error) {
                         reject(new Error(error.localizedDescription));
@@ -125,6 +126,18 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         else if (dir === common.SortDir.Desc) {
             this._msQuery.orderByDescending(field);
         }
+        
+        return this;
+    }
+    
+    public skip(count: number): MobileServiceQuery {
+        this._msQuery.fetchOffset = count;
+        
+        return this;
+    }
+    
+    public top(count: number): MobileServiceQuery {
+        this._msQuery.fetchLimit = count;
         
         return this;
     }

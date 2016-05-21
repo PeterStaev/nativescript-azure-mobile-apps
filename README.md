@@ -79,3 +79,21 @@ Currently the following filters are supported:
 * **le(value)** - Lower or Equal
 * **startsWith(field, value)** - String starts with
 * **endsWith(field, value)** - String ends with
+
+If you want to filter the result by more than one condition, you can add additional filters by using `and()` and `or()` methods.
+
+### Sorting
+```typescript
+import { SortDir } from "nativescript-azure-mobile-apps/query";
+todoItemTable.where().field("completed").eq(true).orderBy("createdAt", SortDir.Desc).read().then(function(results) {
+    // ...
+});
+```
+
+### Paging
+```typescript
+import { SortDir } from "nativescript-azure-mobile-apps/query";
+todoItemTable.where().field("completed").eq(true).orderBy("createdAt", SortDir.Asc).skip(2).top(3).read().then(function(results) {
+    // Skips 2 completed tasks and returns the next 3 ordered chronologically by creation. 
+});
+```

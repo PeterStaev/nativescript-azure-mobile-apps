@@ -34,6 +34,9 @@ declare module "nativescript-azure-mobile-apps/query" {
         public or(): MobileServiceQuery;
         
         public orderBy(field: string, dir: SortDir): MobileServiceQuery;
+        
+        public skip(count: number): MobileServiceQuery;
+        public top(count: number): MobileServiceQuery;
     }
     
     export enum SortDir {
