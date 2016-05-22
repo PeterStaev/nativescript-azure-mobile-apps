@@ -107,3 +107,14 @@ client.login(AuthenticationProvider.Google).then((user) => {
     console.log("Error Logging in!", e);
 });
 ```
+
+Once authenticated the userId and token are cached so you can login by simply calling:
+```typescript
+client.loginFromCache(); // Will return true if there are cached credentials and will setup the client accordingly
+```
+
+If you want to remove the cached authentication info you should use:
+```typescript
+import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
+MobileServiceUser.clearCachedAuthenticationInfo();
+```
