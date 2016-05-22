@@ -1,4 +1,4 @@
-import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
+import { MobileServiceClient, AuthenticationProvider } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import dialogs = require("ui/dialogs");
 import { ActivityIndicator } from "ui/activity-indicator";
@@ -109,4 +109,25 @@ export function onDeleteItemTap(args) {
 
         console.log("Error deleting item!", e);
     });
+}
+
+export function onLoginTap(args) {
+    ai.busy = true;
+    
+    if (client.loginFromCache()) {
+        console.log(`Logged in via cached credentials! UserID: ${client.user.userId}`);
+
+        ai.busy = false;
+    }
+    else {
+        client.login(AuthenticationProvider.Google).then((user) => {
+            ai.busy = false;
+            
+            console.log(`Logged In! UserID:${user.userId}`);
+        }, (e) => {
+            ai.busy = false;
+
+            console.log("Error Logging in!", e);
+        });
+    }
 }

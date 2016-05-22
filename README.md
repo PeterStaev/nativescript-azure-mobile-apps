@@ -97,3 +97,13 @@ todoItemTable.where().field("completed").eq(true).orderBy("createdAt", SortDir.A
     // Skips 2 completed tasks and returns the next 3 ordered chronologically by creation. 
 });
 ```
+
+### User Authentication (Social Sign In)
+```typescript
+import { AuthenticationProvider } from "nativescript-azure-mobile-apps/client";
+client.login(AuthenticationProvider.Google).then((user) => {  
+    console.log(`Logged In! UserID:${user.userId}`);
+}, (e) => {
+    console.log("Error Logging in!", e);
+});
+```

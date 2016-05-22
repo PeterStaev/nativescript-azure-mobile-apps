@@ -15,9 +15,19 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./client-common";
 import * as application from "application";
+import * as utils from "../utils";
+import * as definition from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
+import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
 
 global.moduleMerge(common, exports);
+
+let nativeAuthenticationProviders = [];
+nativeAuthenticationProviders[definition.AuthenticationProvider.AzureActiveDirectory] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory;
+nativeAuthenticationProviders[definition.AuthenticationProvider.Google] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Google;
+nativeAuthenticationProviders[definition.AuthenticationProvider.Facebook] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Facebook;
+nativeAuthenticationProviders[definition.AuthenticationProvider.Twitter] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Twitter;
+nativeAuthenticationProviders[definition.AuthenticationProvider.Microsoft] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.MicrosoftAccount;
 
 export class MobileServiceClient extends common.MobileServiceClient {
     constructor(url: string) {
@@ -35,5 +45,33 @@ export class MobileServiceClient extends common.MobileServiceClient {
     
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.getTable(tableName));
+    }
+    
+    public login(provider: definition.AuthenticationProvider): Promise<MobileServiceUser> {
+        return new Promise((resolve, reject) => {
+            try {
+                let futureResult = this._msClient.login(nativeAuthenticationProviders[provider]);
+                utils.futureToPromise(futureResult).then((result) => {
+                    this.user = new MobileServiceUser(result, this._url);
+                    resolve(this.user); 
+                }, reject);
+            }
+            catch (e) {
+                reject(e);
+            }
+        });
+    }
+    
+    public loginFromCache(): boolean {
+        let user = MobileServiceUser.getFromCache();
+        
+        if (!user) {
+            return false;
+        }
+        
+        this.user = user;
+        this._msClient.setCurrentUser(this.user.nativeValue);
+        
+        return true;
     }
 }

@@ -19,9 +19,13 @@
     "NativeScript",
     "Azure",
     "Mobile Apps",
+    "Social Sign In",
     "tangra"
   ],
   "author": "Peter Staev <peter@tangrasoft.com>",
+  "contributors": [
+    "George Edwards (https://github.com/georgeedwards)"
+  ],
   "license": "Apache-2.0",
 
   "devDependencies": {

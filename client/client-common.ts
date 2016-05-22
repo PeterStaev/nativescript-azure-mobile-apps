@@ -15,14 +15,27 @@ limitations under the License.
 ***************************************************************************** */
 import * as definition from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
+import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
 
 export abstract class MobileServiceClient implements definition.MobileServiceClient {
     protected _msClient;
     protected _url;
+    
+    public user: MobileServiceUser;
     
     constructor(url: string) {
         this._url = url;
     }
 
     abstract getTable(tableName: string): MobileServiceTable;
+    abstract login(provider: definition.AuthenticationProvider): Promise<MobileServiceUser>;
+    abstract loginFromCache(): boolean;
+}
+
+export enum AuthenticationProvider {
+    AzureActiveDirectory = 0, 
+    Google = 1, 
+    Facebook = 2, 
+    Twitter = 3, 
+    Microsoft = 4
 }
