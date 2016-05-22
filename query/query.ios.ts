@@ -15,6 +15,7 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./query-common";
 import * as utils from "../utils";
+import * as definition from "nativescript-azure-mobile-apps/query";
 
 global.moduleMerge(common, exports);
 
@@ -119,11 +120,11 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         return this;
     }
     
-    public orderBy(field: string, dir: common.SortDir): MobileServiceQuery {
-        if (dir === common.SortDir.Asc) {
+    public orderBy(field: string, dir: definition.SortDir): MobileServiceQuery {
+        if (dir === definition.SortDir.Asc) {
             this._msQuery.orderByAscending(field);
         }
-        else if (dir === common.SortDir.Desc) {
+        else if (dir === definition.SortDir.Desc) {
             this._msQuery.orderByDescending(field);
         }
         

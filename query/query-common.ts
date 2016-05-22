@@ -38,7 +38,7 @@ export abstract class MobileServiceQuery implements definition.MobileServiceQuer
     abstract and(): MobileServiceQuery;
     abstract or(): MobileServiceQuery;
     
-    abstract orderBy(field: string, dir: SortDir);
+    abstract orderBy(field: string, dir: definition.SortDir);
     
     abstract skip(count: number): MobileServiceQuery;
     abstract top(count: number): MobileServiceQuery;
