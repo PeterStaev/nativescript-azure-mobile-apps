@@ -100,7 +100,7 @@ todoItemTable.where().field("completed").eq(true).orderBy("createdAt", SortDir.A
 
 ### User Authentication (Social Sign In)
 ```typescript
-import { AuthenticationProvider } from "nativescript-azure-mobile-apps/client";
+import { AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
 client.login(AuthenticationProvider.Google).then((user) => {  
     console.log(`Logged In! UserID:${user.userId}`);
 }, (e) => {
@@ -112,6 +112,18 @@ Once authenticated the userId and token are cached so you can login by simply ca
 ```typescript
 client.loginFromCache(); // Will return true if there are cached credentials and will setup the client accordingly
 ```
+
+If you want to get additional information about the user (like  provider token, name, email, profile photo etc.) you can do this by calling `getProviderCredentials()`:
+```typescript
+client.user.getProviderCredentials().then((result) => {
+    console.log(`Surname: ${result.surname}`);
+    console.log(`Given Name: ${result.givenName}`);
+    console.log(`Name: ${result.name}`);
+});
+```
+Note: Since each provider provides different amount of details (also depends on what you have authorized in the Azure portal), 
+if you are looking for some specific information, you should check the `claims` property of the result. 
+It is a dictionary containing all the information that is returned from Azure. 
 
 If you want to remove the cached authentication info you should use:
 ```typescript

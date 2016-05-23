@@ -16,18 +16,17 @@ limitations under the License.
 import * as common from "./client-common";
 import * as application from "application";
 import * as utils from "../utils";
-import * as definition from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
+import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
 
 global.moduleMerge(common, exports);
 
 let nativeAuthenticationProviders = [];
-nativeAuthenticationProviders[definition.AuthenticationProvider.AzureActiveDirectory] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory;
-nativeAuthenticationProviders[definition.AuthenticationProvider.Google] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Google;
-nativeAuthenticationProviders[definition.AuthenticationProvider.Facebook] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Facebook;
-nativeAuthenticationProviders[definition.AuthenticationProvider.Twitter] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Twitter;
-nativeAuthenticationProviders[definition.AuthenticationProvider.Microsoft] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.MicrosoftAccount;
+nativeAuthenticationProviders[AuthenticationProvider.AzureActiveDirectory] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory;
+nativeAuthenticationProviders[AuthenticationProvider.Google] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Google;
+nativeAuthenticationProviders[AuthenticationProvider.Facebook] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Facebook;
+nativeAuthenticationProviders[AuthenticationProvider.Twitter] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Twitter;
+nativeAuthenticationProviders[AuthenticationProvider.MicrosoftAccount] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.MicrosoftAccount;
 
 export class MobileServiceClient extends common.MobileServiceClient {
     constructor(url: string) {
@@ -47,7 +46,7 @@ export class MobileServiceClient extends common.MobileServiceClient {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }
     
-    public login(provider: definition.AuthenticationProvider): Promise<MobileServiceUser> {
+    public login(provider: AuthenticationProvider): Promise<MobileServiceUser> {
         return new Promise((resolve, reject) => {
             try {
                 let futureResult = this._msClient.login(nativeAuthenticationProviders[provider]);

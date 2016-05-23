@@ -1,5 +1,6 @@
-import { MobileServiceClient, AuthenticationProvider } from "nativescript-azure-mobile-apps/client";
+import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
+import { AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
 import dialogs = require("ui/dialogs");
 import { ActivityIndicator } from "ui/activity-indicator";
 import { Page } from "ui/page";
@@ -116,14 +117,20 @@ export function onLoginTap(args) {
     
     if (client.loginFromCache()) {
         console.log(`Logged in via cached credentials! UserID: ${client.user.userId}`);
-
+        
         ai.busy = false;
     }
     else {
-        client.login(AuthenticationProvider.Google).then((user) => {
-            ai.busy = false;
+        client.login(AuthenticationProvider.Google).then((user) => {           
+            console.log(`Logged In! UserID: ${user.userId}`);
             
-            console.log(`Logged In! UserID:${user.userId}`);
+            user.getProviderCredentials().then((result) => {
+                console.log(`Surname: ${result.surname}`);
+                console.log(`Given Name: ${result.givenName}`);
+                console.log(`Name: ${result.name}`);
+            
+                ai.busy = false;
+            });
         }, (e) => {
             ai.busy = false;
 
