@@ -13,28 +13,33 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-declare module "nativescript-azure-mobile-apps/user" {        
+
+
+declare module "nativescript-azure-mobile-apps/user" {
+    import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
     export enum AuthenticationProvider {
-        AzureActiveDirectory, 
-        Google, 
-        Facebook, 
-        Twitter, 
+        AzureActiveDirectory,
+        Google,
+        Facebook,
+        Twitter,
         MicrosoftAccount
     }
 
-    export class MobileServiceUser {             
+    export class MobileServiceUser {
         public userId: string;
         public authenticationToken: string;
         public nativeValue: any; /* readonly */
-        
-        public static clearCachedAuthenticationInfo(): void;    
+
+        public static clearCachedAuthenticationInfo(): void;
         public static getFromCache(): MobileServiceUser;
-        
-        constructor(nativeValue: any, portalUrl: string);    
-        
-        public getProviderCredentials(): Promise<ProviderCredentials>;    
-    }   
-    
+
+        public static newUser(UserId: string, client: MobileServiceClient);
+
+        constructor(nativeValue: any, portalUrl: string);
+
+        public getProviderCredentials(): Promise<ProviderCredentials>;
+    }
+
     export class ProviderCredentials {
         public userId: string;
         public claims: { [type: string]: string };
@@ -45,7 +50,7 @@ declare module "nativescript-azure-mobile-apps/user" {
         public idToken: string;
         public authenticationToken: string;
         public provider: AuthenticationProvider;
-        
+
         public givenName: string; /* readonly */
         public surname: string; /* readonly */
         public name: string; /* readonly */
