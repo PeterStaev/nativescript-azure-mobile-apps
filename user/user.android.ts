@@ -36,7 +36,7 @@ export class MobileServiceUser extends common.MobileServiceUser {
     }
     
     public static newUser(userId: string, client: MobileServiceClient) {
-        var userObject = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser(userId);
+        let userObject = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser(userId);
         client.setCurrentUser(userObject);
     }
 
