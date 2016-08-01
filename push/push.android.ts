@@ -1,5 +1,4 @@
 import * as common from "./push-common";
-import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 import * as application from "application";
 
 export class MobileServicePush extends common.MobileServicePush {

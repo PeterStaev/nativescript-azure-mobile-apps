@@ -1,5 +1,4 @@
 import * as definition from "nativescript-azure-mobile-apps/push";
-import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 
 export abstract class MobileServicePush extends java.lang.Object implements definition.MobileServicePush {
     protected _msPush;
