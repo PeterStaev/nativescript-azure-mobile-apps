@@ -1,6 +1,6 @@
 
 import * as common from "./push-common";
-import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
+//import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 
 export class MobileServicePush extends common.MobileServicePush {
     protected _msPush: MSPush;
