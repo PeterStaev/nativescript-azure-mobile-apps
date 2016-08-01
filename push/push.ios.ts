@@ -14,25 +14,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
 import * as common from "./push-common";
-import * as utils from "../utils";
-import * as definition from "nativescript-azure-mobile-apps/push";
-
+import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 
 export class MobileServicePush extends common.MobileServicePush {
+    protected _msPush: MSPush;
+
     constructor(client: MobileServiceClient) {
         super(client);
-        this._msPush = new com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush(client, application.android.currentContext)
+        this._msPush = new MSPush({client});
     }
 
     public register(pnsHandle: string, templates?: Object) {
-
+        return null;
     }
 
     public registerTemplate(pnsHandle: string, templateName: string, templateBody: string) {
-
+        return null;
     }
 
     public unregister() {
-
+        return null;
     }
 }

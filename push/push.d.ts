@@ -1,5 +1,5 @@
 declare module "nativescript-azure-mobile-apps/push" {
-    import {MobileServiceClient} from "nativescript-azure-mobile-apps/client"
+    import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
     export class MobileServicePush extends  java.lang.Object {
         constructor(client: MobileServiceClient);
 
