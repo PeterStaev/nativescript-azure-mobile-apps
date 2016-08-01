@@ -5,12 +5,10 @@ import {MobileServiceClient} from "nativescript-azure-mobile-apps/client"
 export abstract class MobileServicePush extends java.lang.Object implements definition.MobileServicePush {
     protected _msPush;
     protected _msClient;
-    protected _context;
 
-    constructor(client: MobileServiceClient, context: android.content.Context) {
+    constructor(client: MobileServiceClient) {
         super();
         this._msClient = client;
-        this._context = context;
     }
 
     abstract register(pnsHandle: string, templates?: Object): void;

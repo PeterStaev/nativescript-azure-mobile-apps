@@ -19,29 +19,20 @@ import * as definition from "nativescript-azure-mobile-apps/push";
 
 
 export class MobileServicePush extends common.MobileServicePush {
-    protected _msQuery: MSQuery; // Redeclaration for typing info
-    private _filters: Array<string> = [];
-    private _filterArgs: Array<any> = [];
-    
-    /*public read(): Promise<Array<any>> {
-        return new Promise((resolve, reject) => {
-            try {
-                if (this._filters.length) {
-                    this._msQuery.predicate = NSPredicate.predicateWithFormatArgumentArray(this._filters.join(" "), utils.getNativeObject(this._filterArgs));
-                }
-                
-                this._msQuery.readWithCompletion((queryResult, error) => {
-                    if (error) {
-                        reject(new Error(error.localizedDescription));
-                        return;
-                    }
-                    
-                    resolve(utils.getJsObject(queryResult.items));
-                });
-            }
-            catch (e) {
-                reject(e);
-            }
-        });
-    }*/
+    constructor(client: MobileServiceClient) {
+        super(client);
+        this._msPush = new com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush(client, application.android.currentContext)
+    }
+
+    public register(pnsHandle: string, templates?: Object) {
+
+    }
+
+    public registerTemplate(pnsHandle: string, templateName: string, templateBody: string) {
+
+    }
+
+    public unregister() {
+
+    }
 }
