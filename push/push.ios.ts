@@ -1,13 +1,11 @@
-
 import * as common from "./push-common";
-//import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 
 export class MobileServicePush extends common.MobileServicePush {
     protected _msPush: MSPush;
 
-    constructor(client) {
-        super(client);
-        this._msPush = new MSPush({client});
+    constructor(nativeValue) {
+        super(nativeValue);
+        this._msPush = new MSPush({client: nativeValue});
     }
 
     public register(pnsHandle: string, templates?: Object) {

@@ -1,4 +1,3 @@
-
 import * as definition from "nativescript-azure-mobile-apps/push";
 import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 
@@ -6,9 +5,13 @@ export abstract class MobileServicePush extends java.lang.Object implements defi
     protected _msPush;
     protected _msClient;
 
-    constructor(client: MobileServiceClient) {
+    constructor(nativeValue: any) {
         super();
-        this._msClient = client;
+        this._msClient = nativeValue;
+    }
+
+    get nativeValue(): any {
+        return this._msClient;
     }
 
     abstract register(pnsHandle: string, templates?: Object): void;

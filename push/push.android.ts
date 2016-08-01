@@ -3,9 +3,9 @@ import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 import * as application from "application";
 
 export class MobileServicePush extends common.MobileServicePush {
-    constructor(client: MobileServiceClient) {
-        super(client);
-        this._msPush = new com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush(client, application.android.currentContext);
+    constructor(nativeValue) {
+        super(nativeValue);
+        this._msPush = new com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush(nativeValue, application.android.currentContext);
     }
 
     public register(pnsHandle: string, templates?: Object) {
