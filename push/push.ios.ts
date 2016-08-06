@@ -5,7 +5,7 @@ export class MobileServicePush extends common.MobileServicePush {
 
     constructor(nativeValue) {
         super(nativeValue);
-        this._msPush = new MSPush({client: nativeValue});
+        this._msPush = new MSPush({ client: nativeValue });
     }
 
     public register(pnsHandle: string, templates?: Object) {
@@ -13,10 +13,19 @@ export class MobileServicePush extends common.MobileServicePush {
     }
 
     public registerTemplate(pnsHandle: string, templateName: string, templateBody: string) {
-        return null;
+        /*var template = new iOSTemplate;
+        template = { templateName: { "body": templateBody } }
+        // NSData should contain device Token? http://azure.github.io/azure-mobile-services/iOS/v3/Classes/MSPush.html#//api/name/registerDeviceToken:template:completion:
+        this._msClient.push.registerDeviceToken(new NSData(), template, function (error) {
+            if (error) {
+                console.log("ERROR " + error);
+            }
+        })*/
     }
 
     public unregister() {
         return null;
     }
 }
+
+class iOSTemplate { "templateName": { "body": { "aps": { "alert": "$(message)" } } } }

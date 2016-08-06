@@ -12,7 +12,7 @@ export class MobileServicePush extends common.MobileServicePush {
             return this._msPush.register(pnsHandle, templates);
         } else {
             return this._msPush.register(pnsHandle);
-        }        
+        }
     }
 
     public registerTemplate(pnsHandle: string, templateName: string, templateBody: string) {
@@ -22,4 +22,23 @@ export class MobileServicePush extends common.MobileServicePush {
     public unregister() {
         return this._msPush.unregister();
     }
+
 }
+
+/*export class MyHandler extends com.microsoft.windowsazure.notifications.NotificationsHandler {
+    public static NOTIFICATION_ID: number = 1;
+
+    public onRegistered(gcmRegistrationId: string) {
+
+        //super(application.android.currentContext, gcmRegistrationId);
+        return new Promise((resolve, reject) => {
+            try {
+                this._msClient.getPush().register(gcmRegistrationId);
+                return null;
+            }
+            catch (e) {
+                reject(e);
+            }
+        });
+    }
+}*/

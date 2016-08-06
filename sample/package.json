@@ -8,12 +8,13 @@
 			"version": "2.0.0"
 		},
 		"tns-android": {
-			"version": "2.0.0"
+			"version": "2.1.1"
 		}
 	},
 	"scripts": {
-		"test.android": "npm uninstall nativescript-azure-mobile-apps && tns test android --justlaunch", 
-		"test.ios": "npm uninstall nativescript-azure-mobile-apps && tns test ios --emulator --justlaunch"
+		"test.android": "npm uninstall nativescript-azure-mobile-apps && tns test android --justlaunch",
+		"test.ios": "npm uninstall nativescript-azure-mobile-apps && tns test ios --emulator --justlaunch",
+		"demo.android": "npm uninstall nativescript-azure-mobile-apps && tns run android"
 	},
 	"dependencies": {
 		"nativescript-azure-mobile-apps": "file:../bin/dist",

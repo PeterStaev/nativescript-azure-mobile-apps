@@ -18,7 +18,7 @@ class TodoItem {
 }
 
 export function onNavigatingTo(args: EventData) {
-    client = new MobileServiceClient("https://<YOUR PORTAL>.azurewebsites.net");
+    client = new MobileServiceClient("https://gas-sense-personal.azurewebsites.net/");
     todoItemTable = client.getTable("TodoItem");
     ai = (<Page>args.object).getViewById<ActivityIndicator>("ai");
 }
