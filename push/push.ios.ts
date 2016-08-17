@@ -28,4 +28,4 @@ export class MobileServicePush extends common.MobileServicePush {
     }
 }
 
-class iOSTemplate { "templateName": { "body": { "aps": { "alert": "$(message)" } } } }
+class IosTemplate { "templateName": { "body": { "aps": { "alert": "$(message)" } } }; }
