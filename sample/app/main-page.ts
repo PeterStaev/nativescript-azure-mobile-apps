@@ -1,7 +1,7 @@
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
-import { register } from "nativescript-azure-mobile-apps/push";
+
 import dialogs = require("ui/dialogs");
 import { ActivityIndicator } from "ui/activity-indicator";
 import { Page } from "ui/page";
@@ -141,5 +141,5 @@ export function onLoginTap(args) {
 }
 
 export function pushReg(args) {
-    register();
+//register();
 }
