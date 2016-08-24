@@ -1,10 +1,11 @@
 import * as common from "./push-common";
-import * as application from "application";
 
 export class MobileServicePush extends common.MobileServicePush {
+    public SENDER_ID: string = "<PROJECT_NUMBER>";
+
     constructor(nativeValue) {
         super(nativeValue);
-        this._msPush = new com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush(nativeValue, application.android.currentContext);
+        this._msPush = new com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush(nativeValue, app.android.current);
     }
 
     public register(pnsHandle: string, templates?: Object) {
@@ -25,12 +26,19 @@ export class MobileServicePush extends common.MobileServicePush {
 
 }
 
-/*export class MyHandler extends com.microsoft.windowsazure.notifications.NotificationsHandler {
-    public static NOTIFICATION_ID: number = 1;
+
+class MyHandler extends com.microsoft.windowsazure.notifications.NotificationsHandler {
+    public NOTIFICATION_ID: number = 1;
+    public _msClient;
+
+    constructor(msClient: MSClient) {
+        super();
+        this._msClient = msClient;
+    }
 
     public onRegistered(gcmRegistrationId: string) {
+        super.onRegistered(this, gcmRegistrationId);
 
-        //super(application.android.currentContext, gcmRegistrationId);
         return new Promise((resolve, reject) => {
             try {
                 this._msClient.getPush().register(gcmRegistrationId);
@@ -41,4 +49,24 @@ export class MobileServicePush extends common.MobileServicePush {
             }
         });
     }
-}*/
+    public onReceive(bundle: any) {
+        let msg: string = bundle.getString("message");
+
+        let contentIntent = android.app.PendingIntent.getActivity(app.android.context,
+            0, // requestCode
+            new android.content.Intent(app.android.context, ToDoActivity.class),
+            0); // flags
+
+        let notification: android.app.Notification = new android.support.v4.app.NotificationCompat.Builder(app.android.context)
+            .setSmallIcon(R.drawable.ic_launcher)
+            .setContentTitle("Notification Hub Demo")
+            .setStyle(new android.support.v4.app.NotificationCompat.BigTextStyle().bigText(msg))
+            .setContentText(msg)
+            .setContentIntent(contentIntent)
+            .build();
+
+        let notificationManager: android.app.NotificationManager = new android.app.NotificationManager;
+        app.android.context.getSystemService(app.android.context.NOTIFICATION_SERVICE);
+        notificationManager.notify(this.NOTIFICATION_ID, notification);
+    }
+}
