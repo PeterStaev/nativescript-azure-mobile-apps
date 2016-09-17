@@ -1,7 +1,8 @@
 # NativeScript Azure Mobile Apps plugin
 [![Build Status](https://travis-ci.org/PeterStaev/nativescript-azure-mobile-apps.svg?branch=master)](https://travis-ci.org/PeterStaev/nativescript-azure-mobile-apps)
-[![npm downloads](https://img.shields.io/npm/dm/nativescript-azure-mobile-apps.svg?maxAge=2592000)](https://www.npmjs.com/package/nativescript-azure-mobile-apps)
-[![npm](https://img.shields.io/npm/v/nativescript-azure-mobile-apps.svg?maxAge=2592000)](https://www.npmjs.com/package/nativescript-azure-mobile-apps)
+[![npm downloads](https://img.shields.io/npm/dm/nativescript-azure-mobile-apps.svg)](https://www.npmjs.com/package/nativescript-azure-mobile-apps)
+[![npm downloads](https://img.shields.io/npm/dt/nativescript-azure-mobile-apps.svg)](https://www.npmjs.com/package/nativescript-azure-mobile-apps)
+[![npm](https://img.shields.io/npm/v/nativescript-azure-mobile-apps.svg)](https://www.npmjs.com/package/nativescript-azure-mobile-apps)
 
 A NativeScript Azure Mobile Apps plugin.
 
