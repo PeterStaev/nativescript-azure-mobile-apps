@@ -1,17 +1,17 @@
 language: objective-c
  
 os: osx 
-osx_image: xcode8
-xcode_sdk: iphonesimulator10.0
+osx_image: xcode7.2
+xcode_sdk: iphonesimulator9.2
 
 install:
     - export LANG=en_US.UTF-8
     - brew update
-    - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "2FF98FA6-99CC-4DE4-950B-A31BA28C6274"
+    - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "FEF8DD40-74B7-4B97-90CF-6EC43A4F61F3"
     - nvm install 4
     - gem install cocoapods
     - npm install -g grunt-cli
-    - npm install -g nativescript --ignore-scripts
+    - npm install -g nativescript@2.0.1 --ignore-scripts
     - tns usage-reporting disable
     - tns error-reporting disable
     - npm install
