@@ -1,6 +1,7 @@
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
+
 import dialogs = require("ui/dialogs");
 import { ActivityIndicator } from "ui/activity-indicator";
 import { Page } from "ui/page";
@@ -18,7 +19,7 @@ class TodoItem {
 }
 
 export function onNavigatingTo(args: EventData) {
-    client = new MobileServiceClient("https://<YOUR PORTAL>.azurewebsites.net");
+    client = new MobileServiceClient("https://gas-sense-personal.azurewebsites.net/");
     todoItemTable = client.getTable("TodoItem");
     ai = (<Page>args.object).getViewById<ActivityIndicator>("ai");
 }
@@ -137,4 +138,8 @@ export function onLoginTap(args) {
             console.log("Error Logging in!", e);
         });
     }
+}
+
+export function pushReg(args) {
+//register();
 }
