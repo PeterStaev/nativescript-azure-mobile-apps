@@ -1,4 +1,4 @@
 { 
     "name": "user",
-    "main": "user.js" 
+    "main": "user" 
 }

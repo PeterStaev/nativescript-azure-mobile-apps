@@ -1,4 +1,4 @@
 { 
     "name": "query",
-    "main": "query.js" 
+    "main": "query" 
 }

@@ -1,4 +1,4 @@
 { 
     "name": "client",
-    "main": "client.js" 
+    "main": "client" 
 }
