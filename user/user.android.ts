@@ -15,6 +15,7 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./user-common";
 import * as applicationSettings from "application-settings";
+import {MobileServiceClient} from "nativescript-azure-mobile-apps/client";
 
 global.moduleMerge(common, exports);
 
@@ -34,6 +35,11 @@ export class MobileServiceUser extends common.MobileServiceUser {
         return new MobileServiceUser(nativeValue, portalUrl);
     }
     
+    public static newUser(userId: string, client: MobileServiceClient) {
+        let userObject = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser(userId);
+        client.setCurrentUser(userObject);
+    }
+
     constructor(nativeValue: any, portalUrl: string) {
         super(nativeValue, portalUrl);
         

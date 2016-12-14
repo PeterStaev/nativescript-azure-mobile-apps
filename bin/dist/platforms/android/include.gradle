@@ -1,0 +1,10 @@
+android {
+  productFlavors {
+    "nativescript-azure-mobile-apps" {
+      dimension "nativescript-azure-mobile-apps"
+    }
+  }
+}
+dependencies {
+    compile 'com.microsoft.azure:azure-mobile-android:3.1.0'
+}

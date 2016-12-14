@@ -64,4 +64,7 @@ export class MobileServiceClient extends common.MobileServiceClient {
         
         return true;
     }
+     public setCurrentUser(user: MobileServiceUser) {
+        // this._msClient.setCurrentUser(user);
+    }
 }

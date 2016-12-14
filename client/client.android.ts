@@ -45,7 +45,9 @@ export class MobileServiceClient extends common.MobileServiceClient {
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }
-    
+    public setCurrentUser(user: MobileServiceUser) {
+        this._msClient.setCurrentUser(user);
+    }
     public login(provider: AuthenticationProvider): Promise<MobileServiceUser> {
         return new Promise((resolve, reject) => {
             try {
