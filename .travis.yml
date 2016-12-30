@@ -7,7 +7,7 @@ xcode_sdk: iphonesimulator9.3
 install:
     - export LANG=en_US.UTF-8
     - brew update
-    - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "A6634386-4B46-4477-A315-5B9BB9C05B43"
+    - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "808A0798-21A1-4579-B15E-DA3CC5782582"
     - nvm install 4
     - gem install cocoapods
     - npm install -g grunt-cli
