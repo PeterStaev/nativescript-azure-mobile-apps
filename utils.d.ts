@@ -19,3 +19,6 @@ export function getNativeValueForComparison(value: string|number|boolean|Date): 
 
 /* Android Only */
 export function futureToPromise(future: any /* ListenableFuture */): Promise<any>;
+
+/* iOS ONLY */
+export function deviceTokenToNsData(token: string): NSData;
