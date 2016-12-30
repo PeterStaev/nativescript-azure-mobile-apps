@@ -5,4 +5,6 @@
         "**/.DS_Store": true, 
         "sample/**": true
     }
+,
+"typescript.tsdk": "./node_modules/typescript/lib"
 }

@@ -8,17 +8,18 @@
 			"version": "2.0.0"
 		},
 		"tns-android": {
-			"version": "2.0.0"
+			"version": "2.4.1"
 		}
 	},
 	"scripts": {
-		"test.android": "npm uninstall nativescript-azure-mobile-apps && tns test android --justlaunch", 
+		"test.android": "npm uninstall nativescript-azure-mobile-apps && tns test android --justlaunch",
 		"test.ios": "npm uninstall nativescript-azure-mobile-apps && tns test ios --emulator --justlaunch"
 	},
 	"dependencies": {
 		"nativescript-azure-mobile-apps": "file:../bin/dist",
-		"nativescript-unit-test-runner": "^0.3.3",
-		"tns-core-modules": "2.0.0"
+		"nativescript-unit-test-runner": "0.3.4",
+		"tns-core-modules": "2.4.4",
+		"nativescript-push-notifications": "0.0.19"
 	},
 	"devDependencies": {
 		"babel-traverse": "6.8.0",

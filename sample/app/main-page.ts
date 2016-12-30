@@ -5,6 +5,8 @@ import dialogs = require("ui/dialogs");
 import { ActivityIndicator } from "ui/activity-indicator";
 import { Page } from "ui/page";
 import { EventData } from "data/observable";
+import * as application from "application";
+let pushPlugin = require("nativescript-push-notifications");
 
 let client: MobileServiceClient;
 let todoItemTable: MobileServiceTable;
@@ -17,8 +19,10 @@ class TodoItem {
     public completed: boolean;
 }
 
+const FCM_SENDER_ID: string = "271351633466";
+
 export function onNavigatingTo(args: EventData) {
-    client = new MobileServiceClient("https://<YOUR PORTAL>.azurewebsites.net");
+    client = new MobileServiceClient("https://tangrainctest.azurewebsites.net");
     todoItemTable = client.getTable("TodoItem");
     ai = (<Page>args.object).getViewById<ActivityIndicator>("ai");
 }
@@ -136,5 +140,50 @@ export function onLoginTap(args) {
 
             console.log("Error Logging in!", e);
         });
+    }
+}
+
+export function onPushRegisterTap() {
+    if (application.android) {
+        pushPlugin.register({ senderID: FCM_SENDER_ID }, (data) => {
+            console.log(data);
+            client.push.register(data)
+                .then(() => console.log("Azure Register OK!"))
+                .catch((e) => console.log(e));
+        }, (e) => { console.log(e); });
+
+        pushPlugin.onMessageReceived((data, data1) => {
+            console.log("onMessageReceived");
+            console.log(data);
+            console.log(data1);
+        });
+    }
+}
+
+export function onPushTemplateRegisterTap() {
+    if (application.android) {
+        pushPlugin.register({ senderID: FCM_SENDER_ID }, (data) => {
+            console.log(data);
+            client.push.registerWithTemplate(data, "MyTemplate", "{\"data\":{\"message\":\"$(param)\"}}")
+                .then(() => console.log("Azure Register OK!"))
+                .catch((e) => console.log(e));
+        }, (e) => { console.log(e); });
+
+        pushPlugin.onMessageReceived((data, data1) => {
+            console.log("onMessageReceived");
+            console.log(data);
+            console.log(data1);
+        });
+    }
+}
+
+export function onPushUnregisterTap() {
+    if (application.android) {
+        pushPlugin.unregister(() => {
+            console.log("Device Unregister OK!");
+            client.push.unregister()
+                .then(() => console.log("Azure Unregister OK!"))
+                .catch((e) => console.log(e));
+        }, (e) => console.log(e), { senderID: FCM_SENDER_ID });
     }
 }

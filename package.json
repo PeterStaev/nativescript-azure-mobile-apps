@@ -1,6 +1,6 @@
 {
   "name": "nativescript-azure-mobile-apps",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "description": "A NativeScript plugin for working with Azure Mobile Apps",
   "main": "azure-mobile-apps",
   "nativescript": {
@@ -20,6 +20,7 @@
     "Azure",
     "Mobile Apps",
     "Social Sign In",
+    "Push Notifications",
     "tangra"
   ],
   "author": "Peter Staev <peter@tangrasoft.com>",

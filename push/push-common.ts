@@ -13,19 +13,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-declare module "nativescript-azure-mobile-apps/client" {
-    import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-    import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
-    import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
+import * as definition from "nativescript-azure-mobile-apps/push";
 
-    export class MobileServiceClient {
-        public user: MobileServiceUser;
-        public push: MobileServicePush;
-        
-        constructor (url: string);
-                
-        public getTable (tableName: string): MobileServiceTable;
-        public login(provider: AuthenticationProvider): Promise<MobileServiceUser>;
-        public loginFromCache(): boolean;
-    }
+export abstract class MobileServicePush implements definition.MobileServicePush {
+    protected _msPush;
+
+    constructor(nativeValue: any) {
+        this._msPush = nativeValue;
+    }     
+    
+    abstract register(registrationId: string): Promise<any>;
+    abstract registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any>;    
+    abstract unregister(): Promise<any>;
 }

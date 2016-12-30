@@ -18,6 +18,7 @@ import * as application from "application";
 import * as utils from "../utils";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
+import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
 
 global.moduleMerge(common, exports);
 
@@ -40,6 +41,8 @@ export class MobileServiceClient extends common.MobileServiceClient {
                 return client;
             }
         }));
+
+        this.push = new MobileServicePush(this._msClient.getPush());
     }
     
     public getTable(tableName: string): MobileServiceTable {

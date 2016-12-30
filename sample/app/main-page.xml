@@ -7,6 +7,9 @@
       <Button text="Get Complete Items" tap="onGetCompletedItemsTap" />
       <Button text="Delete Item" tap="onDeleteItemTap" />
       <Button text="Login" tap="onLoginTap" />
+      <Button text="Push Register" tap="onPushRegisterTap" />
+      <Button text="Push Template Register" tap="onPushTemplateRegisterTap" />
+      <Button text="Push Unregister" tap="onPushUnregisterTap" />
     </StackLayout>
     <ActivityIndicator id="ai" />
   </GridLayout>

@@ -16,12 +16,14 @@ limitations under the License.
 import * as definition from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
+import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
 
 export abstract class MobileServiceClient implements definition.MobileServiceClient {
     protected _msClient;
     protected _url;
     
     public user: MobileServiceUser;
+    public push: MobileServicePush;
     
     constructor(url: string) {
         this._url = url;
