@@ -11,7 +11,7 @@ module.exports = function (grunt)
         typeScriptDeclarations: [
             "**/*.d.ts",
             "!misc.d.ts",
-            "!_references.d.ts",
+            "!references.d.ts",
             "!node_modules/**/*.*",
             "!sample/**/*.*",
             "!bin/**/*.*"

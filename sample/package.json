@@ -4,11 +4,11 @@
 	"readme": "Azure Mobile Apps Service application",
 	"nativescript": {
 		"id": "inc.tangra.azuremobileservicessample",
-		"tns-ios": {
-			"version": "2.0.0"
-		},
 		"tns-android": {
 			"version": "2.4.1"
+		},
+		"tns-ios": {
+			"version": "2.4.0"
 		}
 	},
 	"scripts": {
@@ -34,7 +34,7 @@
 		"karma-nativescript-launcher": "^0.4.0",
 		"lazy": "1.0.11",
 		"mocha": "^2.4.5",
-		"nativescript-dev-typescript": "^0.3.2",
-		"typescript": "^1.8.10"
+		"nativescript-dev-typescript": "0.3.5",
+		"typescript": "2.1.4"
 	}
 }

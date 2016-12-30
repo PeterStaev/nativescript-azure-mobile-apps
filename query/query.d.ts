@@ -19,24 +19,24 @@ declare module "nativescript-azure-mobile-apps/query" {
         
         public read(): Promise<Array<any>>;
         
-        public field(fieldName: string): MobileServiceQuery;
-        public eq(value: string|number|boolean|Date): MobileServiceQuery;
-        public ne(value: string|number|boolean|Date): MobileServiceQuery;
-        public gt(value: string|number|Date): MobileServiceQuery;
-        public ge(value: string|number|Date): MobileServiceQuery;
-        public lt(value: number|Date): MobileServiceQuery;
-        public le(value: number|Date): MobileServiceQuery;
+        public field(fieldName: string): this;
+        public eq(value: string|number|boolean|Date): this;
+        public ne(value: string|number|boolean|Date): this;
+        public gt(value: string|number|Date): this;
+        public ge(value: string|number|Date): this;
+        public lt(value: number|Date): this;
+        public le(value: number|Date): this;
         
-        public startsWith(field: string, value: string): MobileServiceQuery;
-        public endsWith(field: string, value: string): MobileServiceQuery;
+        public startsWith(field: string, value: string): this;
+        public endsWith(field: string, value: string): this;
         
-        public and(): MobileServiceQuery;
-        public or(): MobileServiceQuery;
+        public and(): this;
+        public or(): this;
         
-        public orderBy(field: string, dir: SortDir): MobileServiceQuery;
+        public orderBy(field: string, dir: SortDir): this;
         
-        public skip(count: number): MobileServiceQuery;
-        public top(count: number): MobileServiceQuery;
+        public skip(count: number): this;
+        public top(count: number): this;
     }
     
     export enum SortDir {

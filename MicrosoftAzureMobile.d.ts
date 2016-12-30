@@ -9,47 +9,45 @@ declare class MSClient extends NSObject implements NSCopying {
 
 	static new(): MSClient; // inherited from NSObject
 
-	/* readonly */ applicationKey: string;
+	readonly applicationKey: string;
 
-	/* readonly */ applicationURL: NSURL;
+	readonly applicationURL: NSURL;
 
 	connectionDelegateQueue: NSOperationQueue;
 
 	currentUser: MSUser;
 
-	/* readonly */ filters: NSArray;
+	readonly filters: NSArray<MSFilter>;
 
 	loginHost: NSURL;
 
 	loginPrefix: string;
 
-	/* readonly */ push: MSPush;
+	readonly push: MSPush;
 
 	syncContext: MSSyncContext;
-
-	constructor(); // inherited from NSObject
 
 	constructor(o: { applicationURL: NSURL; });
 
 	clientWithFilter(filter: MSFilter): MSClient;
 
-	copyWithZone(zone: interop.Pointer): any; // inherited from NSCopying
+	copyWithZone(zone: interop.Pointer | interop.Reference<any>): any;
 
-	invokeAPIBodyHTTPMethodParametersHeadersCompletion(APIName: string, body: any, method: string, parameters: NSDictionary, headers: NSDictionary, completion: (p1: any, p2: NSHTTPURLResponse, p3: NSError) => void): void;
+	initWithApplicationURL(url: NSURL): this;
 
-	invokeAPIDataHTTPMethodParametersHeadersCompletion(APIName: string, data: NSData, method: string, parameters: NSDictionary, headers: NSDictionary, completion: (p1: NSData, p2: NSHTTPURLResponse, p3: NSError) => void): void;
+	invokeAPIBodyHTTPMethodParametersHeadersCompletion(APIName: string, body: any, method: string, parameters: NSDictionary<any, any>, headers: NSDictionary<any, any>, completion: (p1: any, p2: NSHTTPURLResponse, p3: NSError) => void): void;
+
+	invokeAPIDataHTTPMethodParametersHeadersCompletion(APIName: string, data: NSData, method: string, parameters: NSDictionary<any, any>, headers: NSDictionary<any, any>, completion: (p1: NSData, p2: NSHTTPURLResponse, p3: NSError) => void): void;
 
 	loginViewControllerWithProviderCompletion(provider: string, completion: (p1: MSUser, p2: NSError) => void): MSLoginController;
 
 	loginWithProviderControllerAnimatedCompletion(provider: string, controller: UIViewController, animated: boolean, completion: (p1: MSUser, p2: NSError) => void): void;
 
-	loginWithProviderParametersControllerAnimatedCompletion(provider: string, parameters: NSDictionary, controller: UIViewController, animated: boolean, completion: (p1: MSUser, p2: NSError) => void): void;
+	loginWithProviderParametersControllerAnimatedCompletion(provider: string, parameters: NSDictionary<any, any>, controller: UIViewController, animated: boolean, completion: (p1: MSUser, p2: NSError) => void): void;
 
-	loginWithProviderTokenCompletion(provider: string, token: NSDictionary, completion: (p1: MSUser, p2: NSError) => void): void;
+	loginWithProviderTokenCompletion(provider: string, token: NSDictionary<any, any>, completion: (p1: MSUser, p2: NSError) => void): void;
 
 	logoutWithCompletion(completion: (p1: NSError) => void): void;
-
-	self(): MSClient; // inherited from NSObjectProtocol
 
 	syncTableWithName(tableName: string): MSSyncTable;
 
@@ -68,13 +66,9 @@ declare class MSConnectionConfiguration extends NSObject {
 
 	tableEndpoint: string;
 
-	constructor(); // inherited from NSObject
-
 	revertToDefaultApiEndpoint(): void;
 
 	revertToDefaultTableEndpoint(): void;
-
-	self(): MSConnectionConfiguration; // inherited from NSObjectProtocol
 }
 
 declare class MSCoreDataStore extends NSObject implements MSSyncContextDataSource {
@@ -83,35 +77,67 @@ declare class MSCoreDataStore extends NSObject implements MSSyncContextDataSourc
 
 	static new(): MSCoreDataStore; // inherited from NSObject
 
-	/* readonly */ context: NSManagedObjectContext;
+	readonly context: NSManagedObjectContext;
+
+	readonly debugDescription: string; // inherited from NSObjectProtocol
+
+	readonly description: string; // inherited from NSObjectProtocol
 
 	handlesSyncTableOperations: boolean; // inherited from MSSyncContextDataSource
 
-	constructor(); // inherited from NSObject
+	readonly hash: number; // inherited from NSObjectProtocol
+
+	readonly isProxy: boolean; // inherited from NSObjectProtocol
+
+	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
+
+	readonly  // inherited from NSObjectProtocol
 
 	constructor(o: { managedObjectContext: NSManagedObjectContext; });
 
-	configTableName(): string; // inherited from MSSyncContextDataSource
+	class(): typeof NSObject;
 
-	deleteItemsWithIdsTableOrError(items: NSArray, table: string): boolean; // inherited from MSSyncContextDataSource
+	configTableName(): string;
 
-	deleteUsingQueryOrError(query: MSQuery): boolean; // inherited from MSSyncContextDataSource
+	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
 
-	errorTableName(): string; // inherited from MSSyncContextDataSource
+	deleteItemsWithIdsTableOrError(items: NSArray<string>, table: string): boolean;
 
-	operationTableName(): string; // inherited from MSSyncContextDataSource
+	deleteUsingQueryOrError(query: MSQuery): boolean;
 
-	readTableWithItemIdOrError(table: string, itemId: string): NSDictionary; // inherited from MSSyncContextDataSource
+	errorTableName(): string;
 
-	readWithQueryOrError(query: MSQuery): MSSyncContextReadResult; // inherited from MSSyncContextDataSource
+	initWithManagedObjectContext(context: NSManagedObjectContext): this;
 
-	self(): MSCoreDataStore; // inherited from NSObjectProtocol
+	isEqual(object: any): boolean;
 
-	systemPropertiesForTable(table: string): number; // inherited from MSSyncContextDataSource
+	isKindOfClass(aClass: typeof NSObject): boolean;
 
-	tableItemFromManagedObject(object: NSObject): NSDictionary;
+	isMemberOfClass(aClass: typeof NSObject): boolean;
 
-	upsertItemsTableOrError(items: NSArray, table: string): boolean; // inherited from MSSyncContextDataSource
+	operationTableName(): string;
+
+	performSelector(aSelector: string): any;
+
+	performSelectorWithObject(aSelector: string, object: any): any;
+
+	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
+
+	readTableWithItemIdOrError(table: string, itemId: string): NSDictionary<any, any>;
+
+	readWithQueryOrError(query: MSQuery): MSSyncContextReadResult;
+
+	respondsToSelector(aSelector: string): boolean;
+
+	retainCount(): number;
+
+	self(): this;
+
+	systemPropertiesForTable(table: string): number;
+
+	tableItemFromManagedObject(object: NSManagedObject): NSDictionary<any, any>;
+
+	upsertItemsTableOrError(items: NSArray<NSDictionary<any, any>>, table: string): boolean;
 }
 
 declare class MSDateOffset extends NSObject {
@@ -124,11 +150,9 @@ declare class MSDateOffset extends NSObject {
 
 	date: Date;
 
-	constructor(); // inherited from NSObject
-
 	constructor(o: { date: Date; });
 
-	self(): MSDateOffset; // inherited from NSObjectProtocol
+	initWithDate(date: Date): this;
 }
 
 declare var MSErrorDomain: string;
@@ -152,27 +176,29 @@ declare var MSFilter: {
 
 declare class MSLoginController extends UIViewController {
 
-	/* readonly */ activityIndicator: UIActivityIndicatorView;
+	static alloc(): MSLoginController; // inherited from NSObject
 
-	/* readonly */ client: MSClient;
+	static new(): MSLoginController; // inherited from NSObject
 
-	/* readonly */ provider: string;
+	readonly activityIndicator: UIActivityIndicatorView;
+
+	readonly client: MSClient;
+
+	readonly provider: string;
 
 	showToolbar: boolean;
 
-	/* readonly */ toolbar: UIToolbar;
+	readonly toolbar: UIToolbar;
 
 	toolbarPosition: UIBarPosition;
 
 	constructor(o: { client: MSClient; provider: string; completion: (p1: MSUser, p2: NSError) => void; });
 
-	constructor(o: { client: MSClient; provider: string; parameters: NSDictionary; completion: (p1: MSUser, p2: NSError) => void; });
+	constructor(o: { client: MSClient; provider: string; parameters: NSDictionary<any, any>; completion: (p1: MSUser, p2: NSError) => void; });
 
-	constructor(o: { coder: NSCoder; }); // inherited from NSCoding
+	initWithClientProviderCompletion(client: MSClient, provider: string, completion: (p1: MSUser, p2: NSError) => void): this;
 
-	constructor(o: { nibName: string; bundle: NSBundle; }); // inherited from UIViewController
-
-	self(): MSLoginController; // inherited from NSObjectProtocol
+	initWithClientProviderParametersCompletion(client: MSClient, provider: string, parameters: NSDictionary<any, any>, completion: (p1: MSUser, p2: NSError) => void): this;
 }
 
 declare class MSManagedObjectObserver extends NSObject {
@@ -181,13 +207,11 @@ declare class MSManagedObjectObserver extends NSObject {
 
 	static new(): MSManagedObjectObserver; // inherited from NSObject
 
-	observerActionCompleted: (p1: MSTableOperationTypes, p2: NSDictionary, p3: NSError) => void;
-
-	constructor(); // inherited from NSObject
+	observerActionCompleted: (p1: MSTableOperationTypes, p2: NSDictionary<any, any>, p3: NSError) => void;
 
 	constructor(o: { client: MSClient; context: NSManagedObjectContext; });
 
-	self(): MSManagedObjectObserver; // inherited from NSObjectProtocol
+	initWithClientContext(client: MSClient, context: NSManagedObjectContext): this;
 }
 
 declare class MSPullSettings extends NSObject {
@@ -198,11 +222,9 @@ declare class MSPullSettings extends NSObject {
 
 	pageSize: number;
 
-	constructor(); // inherited from NSObject
-
 	constructor(o: { pageSize: number; });
 
-	self(): MSPullSettings; // inherited from NSObjectProtocol
+	initWithPageSize(pageSize: number): this;
 }
 
 declare class MSPush extends NSObject {
@@ -211,19 +233,17 @@ declare class MSPush extends NSObject {
 
 	static new(): MSPush; // inherited from NSObject
 
-	/* readonly */ client: MSClient;
+	readonly client: MSClient;
 
-	/* readonly */ installationId: string;
-
-	constructor(); // inherited from NSObject
+	readonly installationId: string;
 
 	constructor(o: { client: MSClient; });
 
+	initWithClient(client: MSClient): this;
+
 	registerDeviceTokenCompletion(deviceToken: NSData, completion: (p1: NSError) => void): void;
 
-	registerDeviceTokenTemplateCompletion(deviceToken: NSData, template: NSDictionary, completion: (p1: NSError) => void): void;
-
-	self(): MSPush; // inherited from NSObjectProtocol
+	registerDeviceTokenTemplateCompletion(deviceToken: NSData, template: NSDictionary<any, any>, completion: (p1: NSError) => void): void;
 
 	unregisterWithCompletion(completion: (p1: NSError) => void): void;
 }
@@ -240,19 +260,17 @@ declare class MSQuery extends NSObject implements NSCopying {
 
 	includeTotalCount: boolean;
 
-	orderBy: NSArray;
+	orderBy: NSArray<NSSortDescriptor>;
 
-	parameters: NSDictionary;
+	parameters: NSDictionary<any, any>;
 
 	predicate: NSPredicate;
 
-	selectFields: NSArray;
+	selectFields: NSArray<string>;
 
 	syncTable: MSSyncTable;
 
 	table: MSTable;
-
-	constructor(); // inherited from NSObject
 
 	constructor(o: { syncTable: MSSyncTable; });
 
@@ -262,7 +280,15 @@ declare class MSQuery extends NSObject implements NSCopying {
 
 	constructor(o: { table: MSTable; predicate: NSPredicate; });
 
-	copyWithZone(zone: interop.Pointer): any; // inherited from NSCopying
+	copyWithZone(zone: interop.Pointer | interop.Reference<any>): any;
+
+	initWithSyncTable(table: MSSyncTable): this;
+
+	initWithSyncTablePredicate(table: MSSyncTable, predicate: NSPredicate): this;
+
+	initWithTable(table: MSTable): this;
+
+	initWithTablePredicate(table: MSTable, predicate: NSPredicate): this;
 
 	orderByAscending(field: string): void;
 
@@ -271,8 +297,6 @@ declare class MSQuery extends NSObject implements NSCopying {
 	queryStringOrError(): string;
 
 	readWithCompletion(completion: (p1: MSQueryResult, p2: NSError) => void): void;
-
-	self(): MSQuery; // inherited from NSObjectProtocol
 }
 
 declare class MSQueryResult extends NSObject {
@@ -281,17 +305,15 @@ declare class MSQueryResult extends NSObject {
 
 	static new(): MSQueryResult; // inherited from NSObject
 
-	/* readonly */ items: NSArray;
+	readonly items: NSArray<NSDictionary<any, any>>;
 
-	/* readonly */ nextLink: string;
+	readonly nextLink: string;
 
-	/* readonly */ totalCount: number;
+	readonly totalCount: number;
 
-	constructor(); // inherited from NSObject
+	constructor(o: { items: NSArray<NSDictionary<any, any>>; totalCount: number; nextLink: string; });
 
-	constructor(o: { items: NSArray; totalCount: number; nextLink: string; });
-
-	self(): MSQueryResult; // inherited from NSObjectProtocol
+	initWithItemsTotalCountNextLink(items: NSArray<NSDictionary<any, any>>, totalCount: number, nextLink: string): this;
 }
 
 declare class MSSyncContext extends NSObject {
@@ -304,15 +326,13 @@ declare class MSSyncContext extends NSObject {
 
 	delegate: MSSyncContextDelegate;
 
-	/* readonly */ pendingOperationsCount: number;
-
-	constructor(); // inherited from NSObject
+	readonly pendingOperationsCount: number;
 
 	constructor(o: { delegate: MSSyncContextDelegate; dataSource: MSSyncContextDataSource; callback: NSOperationQueue; });
 
-	pushWithCompletion(completion: (p1: NSError) => void): NSOperation;
+	initWithDelegateDataSourceCallback(delegate: MSSyncContextDelegate, dataSource: MSSyncContextDataSource, callbackQueue: NSOperationQueue): this;
 
-	self(): MSSyncContext; // inherited from NSObjectProtocol
+	pushWithCompletion(completion: (p1: NSError) => void): NSOperation;
 }
 
 interface MSSyncContextDataSource extends NSObjectProtocol {
@@ -321,7 +341,7 @@ interface MSSyncContextDataSource extends NSObjectProtocol {
 
 	configTableName(): string;
 
-	deleteItemsWithIdsTableOrError(items: NSArray, table: string): boolean;
+	deleteItemsWithIdsTableOrError(items: NSArray<string>, table: string): boolean;
 
 	deleteUsingQueryOrError(query: MSQuery): boolean;
 
@@ -329,13 +349,13 @@ interface MSSyncContextDataSource extends NSObjectProtocol {
 
 	operationTableName(): string;
 
-	readTableWithItemIdOrError(table: string, itemId: string): NSDictionary;
+	readTableWithItemIdOrError(table: string, itemId: string): NSDictionary<any, any>;
 
 	readWithQueryOrError(query: MSQuery): MSSyncContextReadResult;
 
 	systemPropertiesForTable?(table: string): number;
 
-	upsertItemsTableOrError(items: NSArray, table: string): boolean;
+	upsertItemsTableOrError(items: NSArray<NSDictionary<any, any>>, table: string): boolean;
 }
 declare var MSSyncContextDataSource: {
 
@@ -346,7 +366,7 @@ interface MSSyncContextDelegate extends NSObjectProtocol {
 
 	syncContextOnPushCompleteWithErrorCompletion?(context: MSSyncContext, error: NSError, completion: () => void): void;
 
-	tableOperationOnComplete?(operation: MSTableOperation, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	tableOperationOnComplete?(operation: MSTableOperation, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 }
 declare var MSSyncContextDelegate: {
 
@@ -359,15 +379,13 @@ declare class MSSyncContextReadResult extends NSObject {
 
 	static new(): MSSyncContextReadResult; // inherited from NSObject
 
-	/* readonly */ items: NSArray;
+	readonly items: NSArray<NSDictionary<any, any>>;
 
-	/* readonly */ totalCount: number;
+	readonly totalCount: number;
 
-	constructor(); // inherited from NSObject
+	constructor(o: { count: number; items: NSArray<NSDictionary<any, any>>; });
 
-	constructor(o: { count: number; items: NSArray; });
-
-	self(): MSSyncContextReadResult; // inherited from NSObjectProtocol
+	initWithCountItems(count: number, items: NSArray<NSDictionary<any, any>>): this;
 }
 
 declare class MSSyncTable extends NSObject {
@@ -376,19 +394,19 @@ declare class MSSyncTable extends NSObject {
 
 	static new(): MSSyncTable; // inherited from NSObject
 
-	/* readonly */ client: MSClient;
+	readonly client: MSClient;
 
-	/* readonly */ name: string;
-
-	constructor(); // inherited from NSObject
+	readonly name: string;
 
 	constructor(o: { name: string; client: MSClient; });
 
-	deleteCompletion(item: NSDictionary, completion: (p1: NSError) => void): void;
+	deleteCompletion(item: NSDictionary<any, any>, completion: (p1: NSError) => void): void;
 
 	forcePurgeWithCompletion(completion: (p1: NSError) => void): NSOperation;
 
-	insertCompletion(item: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	initWithNameClient(tableName: string, client: MSClient): this;
+
+	insertCompletion(item: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
 	pullWithQueryQueryIdCompletion(query: MSQuery, queryId: string, completion: (p1: NSError) => void): NSOperation;
 
@@ -402,13 +420,11 @@ declare class MSSyncTable extends NSObject {
 
 	readWithCompletion(completion: (p1: MSQueryResult, p2: NSError) => void): void;
 
-	readWithIdCompletion(itemId: string, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	readWithIdCompletion(itemId: string, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
 	readWithPredicateCompletion(predicate: NSPredicate, completion: (p1: MSQueryResult, p2: NSError) => void): void;
 
-	self(): MSSyncTable; // inherited from NSObjectProtocol
-
-	updateCompletion(item: NSDictionary, completion: (p1: NSError) => void): void;
+	updateCompletion(item: NSDictionary<any, any>, completion: (p1: NSError) => void): void;
 }
 
 declare var MSSystemColumnCreatedAt: string;
@@ -442,25 +458,25 @@ declare class MSTable extends NSObject {
 
 	static new(): MSTable; // inherited from NSObject
 
-	/* readonly */ client: MSClient;
+	readonly client: MSClient;
 
-	/* readonly */ name: string;
-
-	constructor(); // inherited from NSObject
+	readonly name: string;
 
 	constructor(o: { name: string; client: MSClient; });
 
-	deleteCompletion(item: NSDictionary, completion: (p1: any, p2: NSError) => void): void;
+	deleteCompletion(item: NSDictionary<any, any>, completion: (p1: any, p2: NSError) => void): void;
 
-	deleteParametersCompletion(item: NSDictionary, parameters: NSDictionary, completion: (p1: any, p2: NSError) => void): void;
+	deleteParametersCompletion(item: NSDictionary<any, any>, parameters: NSDictionary<any, any>, completion: (p1: any, p2: NSError) => void): void;
 
 	deleteWithIdCompletion(itemId: any, completion: (p1: any, p2: NSError) => void): void;
 
-	deleteWithIdParametersCompletion(itemId: any, parameters: NSDictionary, completion: (p1: any, p2: NSError) => void): void;
+	deleteWithIdParametersCompletion(itemId: any, parameters: NSDictionary<any, any>, completion: (p1: any, p2: NSError) => void): void;
 
-	insertCompletion(item: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	initWithNameClient(tableName: string, client: MSClient): this;
 
-	insertParametersCompletion(item: NSDictionary, parameters: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	insertCompletion(item: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
+
+	insertParametersCompletion(item: NSDictionary<any, any>, parameters: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
 	query(): MSQuery;
 
@@ -468,23 +484,21 @@ declare class MSTable extends NSObject {
 
 	readWithCompletion(completion: (p1: MSQueryResult, p2: NSError) => void): void;
 
-	readWithIdCompletion(itemId: any, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	readWithIdCompletion(itemId: any, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
-	readWithIdParametersCompletion(itemId: any, parameters: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	readWithIdParametersCompletion(itemId: any, parameters: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
 	readWithPredicateCompletion(predicate: NSPredicate, completion: (p1: MSQueryResult, p2: NSError) => void): void;
 
 	readWithQueryStringCompletion(queryString: string, completion: (p1: MSQueryResult, p2: NSError) => void): void;
 
-	self(): MSTable; // inherited from NSObjectProtocol
+	undeleteCompletion(item: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
-	undeleteCompletion(item: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	undeleteParametersCompletion(item: NSDictionary<any, any>, parameters: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
-	undeleteParametersCompletion(item: NSDictionary, parameters: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	updateCompletion(item: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 
-	updateCompletion(item: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
-
-	updateParametersCompletion(item: NSDictionary, parameters: NSDictionary, completion: (p1: NSDictionary, p2: NSError) => void): void;
+	updateParametersCompletion(item: NSDictionary<any, any>, parameters: NSDictionary<any, any>, completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 }
 
 declare class MSTableOperation extends NSObject {
@@ -493,21 +507,17 @@ declare class MSTableOperation extends NSObject {
 
 	static new(): MSTableOperation; // inherited from NSObject
 
-	item: NSDictionary;
+	item: NSDictionary<any, any>;
 
-	/* readonly */ itemId: string;
+	readonly itemId: string;
 
-	/* readonly */ tableName: string;
+	readonly tableName: string;
 
-	/* readonly */ type: MSTableOperationTypes;
-
-	constructor(); // inherited from NSObject
+	readonly type: MSTableOperationTypes;
 
 	cancelPush(): void;
 
-	executeWithCompletion(completion: (p1: NSDictionary, p2: NSError) => void): void;
-
-	self(): MSTableOperation; // inherited from NSObjectProtocol
+	executeWithCompletion(completion: (p1: NSDictionary<any, any>, p2: NSError) => void): void;
 }
 
 declare class MSTableOperationError extends NSObject {
@@ -516,49 +526,53 @@ declare class MSTableOperationError extends NSObject {
 
 	static new(): MSTableOperationError; // inherited from NSObject
 
-	/* readonly */ code: number;
+	readonly code: number;
 
-	/* readonly */ domain: string;
+	readonly domain: string;
 
-	/* readonly */ guid: string;
+	readonly guid: string;
 
 	handled: boolean;
 
-	/* readonly */ item: NSDictionary;
+	readonly item: NSDictionary<any, any>;
 
-	/* readonly */ itemId: string;
+	readonly itemId: string;
 
-	/* readonly */ operation: MSTableOperationTypes;
+	readonly operation: MSTableOperationTypes;
 
-	/* readonly */ serverItem: NSDictionary;
+	readonly serverItem: NSDictionary<any, any>;
 
-	/* readonly */ statusCode: number;
+	readonly statusCode: number;
 
-	/* readonly */ table: string;
+	readonly table: string;
 
-	constructor(); // inherited from NSObject
+	constructor(o: { operation: MSTableOperation; item: NSDictionary<any, any>; context: MSSyncContext; error: NSError; });
 
-	constructor(o: { operation: MSTableOperation; item: NSDictionary; context: MSSyncContext; error: NSError; });
+	constructor(o: { operation: MSTableOperation; item: NSDictionary<any, any>; error: NSError; });
 
-	constructor(o: { operation: MSTableOperation; item: NSDictionary; error: NSError; });
+	constructor(o: { serializedItem: NSDictionary<any, any>; });
 
-	constructor(o: { serializedItem: NSDictionary; });
-
-	constructor(o: { serializedItem: NSDictionary; context: MSSyncContext; });
+	constructor(o: { serializedItem: NSDictionary<any, any>; context: MSSyncContext; });
 
 	cancelOperationAndDiscardItemWithCompletion(completion: (p1: NSError) => void): void;
 
-	cancelOperationAndUpdateItemCompletion(item: NSDictionary, completion: (p1: NSError) => void): void;
+	cancelOperationAndUpdateItemCompletion(item: NSDictionary<any, any>, completion: (p1: NSError) => void): void;
 
-	keepOperationAndUpdateItemCompletion(item: NSDictionary, completion: (p1: NSError) => void): void;
+	initWithOperationItemContextError(operation: MSTableOperation, item: NSDictionary<any, any>, context: MSSyncContext, error: NSError): this;
 
-	modifyOperationTypeAndUpdateItemCompletion(type: MSTableOperationTypes, item: NSDictionary, completion: (p1: NSError) => void): void;
+	initWithOperationItemError(operation: MSTableOperation, item: NSDictionary<any, any>, error: NSError): this;
+
+	initWithSerializedItem(item: NSDictionary<any, any>): this;
+
+	initWithSerializedItemContext(item: NSDictionary<any, any>, context: MSSyncContext): this;
+
+	keepOperationAndUpdateItemCompletion(item: NSDictionary<any, any>, completion: (p1: NSError) => void): void;
+
+	modifyOperationTypeAndUpdateItemCompletion(type: MSTableOperationTypes, item: NSDictionary<any, any>, completion: (p1: NSError) => void): void;
 
 	modifyOperationTypeCompletion(type: MSTableOperationTypes, completion: (p1: NSError) => void): void;
 
-	self(): MSTableOperationError; // inherited from NSObjectProtocol
-
-	serialize(): NSDictionary;
+	serialize(): NSDictionary<any, any>;
 }
 
 declare const enum MSTableOperationTypes {
@@ -578,15 +592,13 @@ declare class MSUser extends NSObject implements NSCopying {
 
 	mobileServiceAuthenticationToken: string;
 
-	/* readonly */ userId: string;
-
-	constructor(); // inherited from NSObject
+	readonly userId: string;
 
 	constructor(o: { userId: string; });
 
-	copyWithZone(zone: interop.Pointer): any; // inherited from NSCopying
+	copyWithZone(zone: interop.Pointer | interop.Reference<any>): any;
 
-	self(): MSUser; // inherited from NSObjectProtocol
+	initWithUserId(userId: string): this;
 }
 
 declare var MicrosoftAzureMobileVersionNumber: number;

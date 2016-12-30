@@ -30,15 +30,16 @@
   "license": "Apache-2.0",
 
   "devDependencies": {
-    "typescript": "1.8.10",
-    "tslint": "3.9.0",
-    "tns-core-modules": "git+https://github.com/NativeScript/NativeScript.git#v1.6.0",
+    "typescript": "2.1.4",
+    "tslint": "4.2.0",
+    "tns-core-modules-declarations": "2.3.1",
+    "tns-platform-declarations": "2.3.0",
 
     "grunt": "0.4.5",
     "grunt-contrib-copy": "0.8.1",
     "grunt-contrib-clean": "0.6.0",
-    "grunt-ts": "5.5.0-beta.2", 
-    "grunt-tslint": "3.1.0",
+    "grunt-ts": "6.0.0-beta.3", 
+    "grunt-tslint": "4.0.0",
     "grunt-exec": "0.4.6"
   }
 

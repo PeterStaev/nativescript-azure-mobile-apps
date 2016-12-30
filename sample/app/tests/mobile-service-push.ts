@@ -5,6 +5,10 @@ let pushPlugin = require("nativescript-push-notifications");
 
 const FCM_SENDER_ID: string = "271351633466";
 
+mocha.setup({
+    timeout: 110000
+});
+
 describe("MobileServicePush", () => {
     let client: MobileServiceClient;
     

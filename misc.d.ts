@@ -1,5 +1,5 @@
 declare namespace com {
-    export var google: any;
-    export var microsoft: any;
-    export var squareup: any;
+    export let google: any;
+    export let microsoft: any;
+    export let squareup: any;
 }
