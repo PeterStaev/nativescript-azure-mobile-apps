@@ -9,6 +9,7 @@ install:
     - brew update
     - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "808A0798-21A1-4579-B15E-DA3CC5782582"
     - nvm install 6
+    - gem install xcodeproj 
     - gem install cocoapods
     - npm install -g grunt-cli
     - npm install -g nativescript@2.4.2 --ignore-scripts
