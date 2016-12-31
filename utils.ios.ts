@@ -93,22 +93,18 @@ function getJsObjectFromNSDictionary(dictionary: NSDictionary<any, any>): Object
 }
 
 export function deviceTokenToNsData(token: string): NSData {
-    /*
-    deviceTokenNSString *command = @"72ff63cea198b3edba8f7e0c23acc345050187a0cde5a9872cbab091ab73e553";
-
-command = [command stringByReplacingOccurrencesOfString:@" " withString:@""];
-NSMutableData *commandToSend= [[NSMutableData alloc] init];
-unsigned char whole_byte;
-char byte_chars[3] = {'\0','\0','\0'};
-int i;
-for (i=0; i < [command length]/2; i++) {
-    byte_chars[0] = [command characterAtIndex:i*2];
-    byte_chars[1] = [command characterAtIndex:i*2+1];
-    whole_byte = strtol(byte_chars, NULL, 16);
-    [commandToSend appendBytes:&whole_byte length:1]; 
-}
-*/
     let result = NSMutableData.alloc().init();
-    
+
+    for (let loop = 0; loop < token.length / 2; loop++) {
+        let byteChars = "";
+        let byte: number;
+
+        byteChars = `${token[loop * 2]}${token[loop * 2 + 1]}\0`;
+        byte = strtol(byteChars, null, 16);
+        
+        let pointer = new interop.Reference(interop.types.unichar, String.fromCharCode(byte));
+        result.appendBytesLength(pointer, 1);
+    }
+
     return result;
 }

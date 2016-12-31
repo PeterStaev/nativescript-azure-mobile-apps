@@ -42,7 +42,17 @@ export class MobileServicePush extends common.MobileServicePush {
     public registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
-                // TODO
+                let template = NSMutableDictionary.alloc().init();
+                template.setObjectForKey(templateBody, templateName);
+                
+                this._msPush.registerDeviceTokenTemplateCompletion(utils.deviceTokenToNsData(registrationId), template, (error) => {
+                    if (error) {
+                        reject(new Error(error.localizedDescription));
+                        return;
+                    }
+
+                    resolve();
+                });
             }
             catch (e) {
                 reject(e);

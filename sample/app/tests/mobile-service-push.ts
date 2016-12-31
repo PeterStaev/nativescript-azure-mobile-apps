@@ -3,7 +3,7 @@ import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
 let pushPlugin = require("nativescript-push-notifications");
 
-const FCM_SENDER_ID: string = "271351633466";
+let androidPushSettings = { senderID: "271351633466" };
 
 mocha.setup({
     timeout: 110000
@@ -18,24 +18,24 @@ describe("MobileServicePush", () => {
 
     it("Should register", (done) => {
         if (application.android) {
-            pushPlugin.register({ senderID: FCM_SENDER_ID }, (data) => {
+            pushPlugin.register(androidPushSettings, (data) => {
                 client.push.register(data).then(done, done);
             }, done);
         }
         else if (application.ios) {
-            // TODO
+            // iOS Push Notifications do not work on Simulator!
             done();
         }
     });
 
     it("Should registerWithTemplate", (done) => {
         if (application.android) {
-            pushPlugin.register({ senderID: FCM_SENDER_ID }, (data) => {
+            pushPlugin.register(androidPushSettings, (data) => {
                 client.push.registerWithTemplate(data, "TestTemplate", "{\"data\":{\"message\":\"$(param)\"}}").then(done, done);
             }, done);
         }
         else if (application.ios) {
-            // TODO
+            // iOS Push Notifications do not work on Simulator!
             done();
         }
     });
@@ -44,10 +44,10 @@ describe("MobileServicePush", () => {
         if (application.android) {
             pushPlugin.unregister(() => {
                 client.push.unregister().then(done, done);
-            }, done, { senderID: FCM_SENDER_ID });
+            }, done, androidPushSettings);
         }
         else if (application.ios) {
-            // TODO
+            // iOS Push Notifications do not work on Simulator!
             done();
         }
     });

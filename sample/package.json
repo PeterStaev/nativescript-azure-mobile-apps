@@ -13,7 +13,9 @@
 	},
 	"scripts": {
 		"test.android": "npm uninstall nativescript-azure-mobile-apps && tns test android --justlaunch",
-		"test.ios": "npm uninstall nativescript-azure-mobile-apps && tns test ios --emulator --justlaunch"
+		"test.ios": "npm uninstall nativescript-azure-mobile-apps && tns test ios --emulator --justlaunch",
+		"ios": "npm uninstall nativescript-azure-mobile-apps && tns deploy ios",
+		"android": "npm uninstall nativescript-azure-mobile-apps && tns deploy android"
 	},
 	"dependencies": {
 		"nativescript-azure-mobile-apps": "file:../bin/dist",

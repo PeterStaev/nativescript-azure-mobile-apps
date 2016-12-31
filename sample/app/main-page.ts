@@ -19,7 +19,17 @@ class TodoItem {
     public completed: boolean;
 }
 
-const FCM_SENDER_ID: string = "271351633466";
+let androidPushSettings = { senderID: "271351633466" };
+let iosPushSettings = {
+    badge: true, // Enable setting badge through Push Notification
+    sound: true, // Enable playing a sound
+    alert: true, // Enable creating a alert
+
+    // Callback to invoke, when a push is received on iOS
+    notificationCallbackIOS: function (message) {
+        console.log(JSON.stringify(message));
+    }
+};
 
 export function onNavigatingTo(args: EventData) {
     client = new MobileServiceClient("https://tangrainctest.azurewebsites.net");
@@ -145,7 +155,7 @@ export function onLoginTap(args) {
 
 export function onPushRegisterTap() {
     if (application.android) {
-        pushPlugin.register({ senderID: FCM_SENDER_ID }, (data) => {
+        pushPlugin.register(androidPushSettings, (data) => {
             console.log(data);
             client.push.register(data)
                 .then(() => console.log("Azure Register OK!"))
@@ -158,11 +168,19 @@ export function onPushRegisterTap() {
             console.log(data1);
         });
     }
+    else if (application.ios) {
+        pushPlugin.register(iosPushSettings, (data) => {
+            console.log(data);
+            client.push.register(data)
+                .then(() => console.log("Azure Register OK!"))
+                .catch((e) => console.log(e));
+        }, (e) => { console.log(e); });
+    }
 }
 
 export function onPushTemplateRegisterTap() {
     if (application.android) {
-        pushPlugin.register({ senderID: FCM_SENDER_ID }, (data) => {
+        pushPlugin.register(androidPushSettings, (data) => {
             console.log(data);
             client.push.registerWithTemplate(data, "MyTemplate", "{\"data\":{\"message\":\"$(param)\"}}")
                 .then(() => console.log("Azure Register OK!"))
@@ -184,6 +202,6 @@ export function onPushUnregisterTap() {
             client.push.unregister()
                 .then(() => console.log("Azure Unregister OK!"))
                 .catch((e) => console.log(e));
-        }, (e) => console.log(e), { senderID: FCM_SENDER_ID });
+        }, (e) => console.log(e), androidPushSettings);
     }
 }
