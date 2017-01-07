@@ -5,13 +5,8 @@ import dialogs = require("ui/dialogs");
 import { ActivityIndicator } from "ui/activity-indicator";
 import { Page } from "ui/page";
 import { EventData } from "data/observable";
-import * as application from "application";
+import * as platform from "platform";
 let pushPlugin = require("nativescript-push-notifications");
-
-let client: MobileServiceClient;
-let todoItemTable: MobileServiceTable;
-let item: TodoItem;
-let ai: ActivityIndicator;
 
 class TodoItem {
     public id: string;
@@ -19,17 +14,30 @@ class TodoItem {
     public completed: boolean;
 }
 
-let androidPushSettings = { senderID: "271351633466" };
-let iosPushSettings = {
+let client: MobileServiceClient;
+let todoItemTable: MobileServiceTable;
+let item: TodoItem;
+let ai: ActivityIndicator;
+
+let pushSettings = {
+    senderID: "271351633466",
+    // Android: Callback to invoke when a new push is received.    
+    notificationCallbackAndroid(message) { 
+        console.log(message);
+    }, 
+    
     badge: true, // Enable setting badge through Push Notification
     sound: true, // Enable playing a sound
     alert: true, // Enable creating a alert
-
     // Callback to invoke, when a push is received on iOS
-    notificationCallbackIOS: function (message) {
-        console.log(JSON.stringify(message));
+    notificationCallbackIOS(message) {
+        console.log(message);
     }
 };
+
+let pushTemplates = {};
+pushTemplates[platform.platformNames.android] = "{\"data\":{\"message\":\"$(param)\"}}";
+pushTemplates[platform.platformNames.ios] = "{\"aps\":{\"alert\":\"$(param)\"}}";
 
 export function onNavigatingTo(args: EventData) {
     client = new MobileServiceClient("https://tangrainctest.azurewebsites.net");
@@ -154,54 +162,32 @@ export function onLoginTap(args) {
 }
 
 export function onPushRegisterTap() {
-    if (application.android) {
-        pushPlugin.register(androidPushSettings, (data) => {
-            console.log(data);
-            client.push.register(data)
-                .then(() => console.log("Azure Register OK!"))
-                .catch((e) => console.log(e));
-        }, (e) => { console.log(e); });
-
-        pushPlugin.onMessageReceived((data, data1) => {
-            console.log("onMessageReceived");
-            console.log(data);
-            console.log(data1);
-        });
-    }
-    else if (application.ios) {
-        pushPlugin.register(iosPushSettings, (data) => {
-            console.log(data);
-            client.push.register(data)
-                .then(() => console.log("Azure Register OK!"))
-                .catch((e) => console.log(e));
-        }, (e) => { console.log(e); });
-    }
+    pushPlugin.register(pushSettings, (data) => {
+        if (pushPlugin.onMessageReceived) {
+            pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+        }
+        client.push.register(data)
+            .then(() => console.log("Azure Register OK!"))
+            .catch((e) => console.log(e));
+    }, (e) => { console.log(e); });
 }
 
 export function onPushTemplateRegisterTap() {
-    if (application.android) {
-        pushPlugin.register(androidPushSettings, (data) => {
-            console.log(data);
-            client.push.registerWithTemplate(data, "MyTemplate", "{\"data\":{\"message\":\"$(param)\"}}")
-                .then(() => console.log("Azure Register OK!"))
-                .catch((e) => console.log(e));
-        }, (e) => { console.log(e); });
-
-        pushPlugin.onMessageReceived((data, data1) => {
-            console.log("onMessageReceived");
-            console.log(data);
-            console.log(data1);
-        });
-    }
+    pushPlugin.register(pushSettings, (data) => {
+        if (pushPlugin.onMessageReceived) {
+            pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+        }
+        client.push.registerWithTemplate(data, "MyTemplate", pushTemplates[platform.device.os])
+            .then(() => console.log("Azure Register OK!"))
+            .catch((e) => console.log(e));
+    }, (e) => { console.log(e); });
 }
 
 export function onPushUnregisterTap() {
-    if (application.android) {
-        pushPlugin.unregister(() => {
-            console.log("Device Unregister OK!");
-            client.push.unregister()
-                .then(() => console.log("Azure Unregister OK!"))
-                .catch((e) => console.log(e));
-        }, (e) => console.log(e), androidPushSettings);
-    }
+    pushPlugin.unregister(() => {
+        console.log("Device Unregister OK!");
+        client.push.unregister()
+            .then(() => console.log("Azure Unregister OK!"))
+            .catch((e) => console.log(e));
+    }, (e) => console.log(e), pushSettings);
 }

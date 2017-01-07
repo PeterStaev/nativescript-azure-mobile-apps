@@ -110,11 +110,13 @@ client.login(AuthenticationProvider.Google).then((user) => {
 ```
 
 Once authenticated the userId and token are cached so you can login by simply calling:
+
 ```typescript
 client.loginFromCache(); // Will return true if there are cached credentials and will setup the client accordingly
 ```
 
 If you want to get additional information about the user (like  provider token, name, email, profile photo etc.) you can do this by calling `getProviderCredentials()`:
+
 ```typescript
 client.user.getProviderCredentials().then((result) => {
     console.log(`Surname: ${result.surname}`);
@@ -127,7 +129,60 @@ if you are looking for some specific information, you should check the `claims` 
 It is a dictionary containing all the information that is returned from Azure. 
 
 If you want to remove the cached authentication info you should use:
+
 ```typescript
 import { MobileServiceUser } from "nativescript-azure-mobile-apps/user";
 MobileServiceUser.clearCachedAuthenticationInfo();
+```
+
+### Push Notifications
+**NOTE:** In order to work with push notifications you also need to install the `nativescript-pusn-notifications` plugin. 
+You can do this by running the following command:
+```
+tns install nativescript-push-notifications
+```
+You can read more on how to use the push plugin [here](https://github.com/NativeScript/push-plugin/).
+
+#### Register
+You need to call the push register with Azure in the success callback of the push plugin by passing the registration token 
+returned by the push plugin. 
+
+```typescript
+pushPlugin.register(pushSettings, (data) => {
+    if (pushPlugin.onMessageReceived) {
+        pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+    }
+    client.push.register(data)
+        .then(() => console.log("Azure Register OK!"))
+        .catch((e) => console.log(e));
+}, (e) => { console.log(e); });
+```
+
+#### Register with a template
+If you want to use a custom template for the notifications, you can use the `registerWithTemplate` method to pass 
+your template name and body.
+
+```typescript
+let pushTemplates = {};
+pushTemplates[platform.platformNames.android] = "{\"data\":{\"message\":\"$(param)\"}}";
+pushTemplates[platform.platformNames.ios] = "{\"aps\":{\"alert\":\"$(param)\"}}";
+
+pushPlugin.register(pushSettings, (data) => {
+    if (pushPlugin.onMessageReceived) {
+        pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+    }
+    client.push.registerWithTemplate(data, "MyTemplate", pushTemplates[platform.device.os])
+        .then(() => console.log("Azure Register OK!"))
+        .catch((e) => console.log(e));
+}, (e) => { console.log(e); });
+```
+
+#### Unregister
+```typescript
+pushPlugin.unregister(() => {
+    console.log("Device Unregister OK!");
+    client.push.unregister()
+        .then(() => console.log("Azure Unregister OK!"))
+        .catch((e) => console.log(e));
+}, (e) => console.log(e), pushSettings);
 ```
