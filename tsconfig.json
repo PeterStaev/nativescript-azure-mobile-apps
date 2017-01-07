@@ -2,13 +2,18 @@
     "compilerOptions": {
         "noEmitOnError": true,
         "noEmitHelpers": true,
-        "noLib": false,
+        "noUnusedLocals": true,
         "sourceMap": false,
+        "noLib": true,
+        "removeComments": true,
+        "declaration": false,
+        "experimentalDecorators": true,
         "target": "es5",
         "module": "commonjs",
         "outDir": "bin/dist",
-        "rootDir": "./", 
-        "removeComments": false
+        "lib": [
+            "es2016"
+        ]
     }, 
     "exclude": [
         "node_modules", 

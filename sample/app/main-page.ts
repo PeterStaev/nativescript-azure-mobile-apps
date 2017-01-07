@@ -5,11 +5,8 @@ import dialogs = require("ui/dialogs");
 import { ActivityIndicator } from "ui/activity-indicator";
 import { Page } from "ui/page";
 import { EventData } from "data/observable";
-
-let client: MobileServiceClient;
-let todoItemTable: MobileServiceTable;
-let item: TodoItem;
-let ai: ActivityIndicator;
+import * as platform from "platform";
+let pushPlugin = require("nativescript-push-notifications");
 
 class TodoItem {
     public id: string;
@@ -17,8 +14,33 @@ class TodoItem {
     public completed: boolean;
 }
 
+let client: MobileServiceClient;
+let todoItemTable: MobileServiceTable;
+let item: TodoItem;
+let ai: ActivityIndicator;
+
+let pushSettings = {
+    senderID: "271351633466",
+    // Android: Callback to invoke when a new push is received.    
+    notificationCallbackAndroid(message) { 
+        console.log(message);
+    }, 
+    
+    badge: true, // Enable setting badge through Push Notification
+    sound: true, // Enable playing a sound
+    alert: true, // Enable creating a alert
+    // Callback to invoke, when a push is received on iOS
+    notificationCallbackIOS(message) {
+        console.log(message);
+    }
+};
+
+let pushTemplates = {};
+pushTemplates[platform.platformNames.android] = "{\"data\":{\"message\":\"$(param)\"}}";
+pushTemplates[platform.platformNames.ios] = "{\"aps\":{\"alert\":\"$(param)\"}}";
+
 export function onNavigatingTo(args: EventData) {
-    client = new MobileServiceClient("https://<YOUR PORTAL>.azurewebsites.net");
+    client = new MobileServiceClient("https://tangrainctest.azurewebsites.net");
     todoItemTable = client.getTable("TodoItem");
     ai = (<Page>args.object).getViewById<ActivityIndicator>("ai");
 }
@@ -137,4 +159,35 @@ export function onLoginTap(args) {
             console.log("Error Logging in!", e);
         });
     }
+}
+
+export function onPushRegisterTap() {
+    pushPlugin.register(pushSettings, (data) => {
+        if (pushPlugin.onMessageReceived) {
+            pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+        }
+        client.push.register(data)
+            .then(() => console.log("Azure Register OK!"))
+            .catch((e) => console.log(e));
+    }, (e) => { console.log(e); });
+}
+
+export function onPushTemplateRegisterTap() {
+    pushPlugin.register(pushSettings, (data) => {
+        if (pushPlugin.onMessageReceived) {
+            pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+        }
+        client.push.registerWithTemplate(data, "MyTemplate", pushTemplates[platform.device.os])
+            .then(() => console.log("Azure Register OK!"))
+            .catch((e) => console.log(e));
+    }, (e) => { console.log(e); });
+}
+
+export function onPushUnregisterTap() {
+    pushPlugin.unregister(() => {
+        console.log("Device Unregister OK!");
+        client.push.unregister()
+            .then(() => console.log("Azure Unregister OK!"))
+            .catch((e) => console.log(e));
+    }, (e) => console.log(e), pushSettings);
 }

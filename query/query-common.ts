@@ -24,24 +24,24 @@ export abstract class MobileServiceQuery implements definition.MobileServiceQuer
 
     abstract read(): Promise<Array<any>>;
     
-    abstract field(fieldName: string): MobileServiceQuery;
-    abstract eq(value: string|number|boolean|Date): MobileServiceQuery;
-    abstract ne(value: string|number|boolean|Date): MobileServiceQuery;
-    abstract gt(value: string|number|Date): MobileServiceQuery;
-    abstract ge(value: string|number|Date): MobileServiceQuery;
-    abstract lt(value: number|Date): MobileServiceQuery;
-    abstract le(value: number|Date): MobileServiceQuery;
+    abstract field(fieldName: string): this;
+    abstract eq(value: string|number|boolean|Date): this;
+    abstract ne(value: string|number|boolean|Date): this;
+    abstract gt(value: string|number|Date): this;
+    abstract ge(value: string|number|Date): this;
+    abstract lt(value: number|Date): this;
+    abstract le(value: number|Date): this;
     
-    abstract startsWith(field: string, value: string): MobileServiceQuery;
-    abstract endsWith(field: string, value: string): MobileServiceQuery;
+    abstract startsWith(field: string, value: string): this;
+    abstract endsWith(field: string, value: string): this;
     
-    abstract and(): MobileServiceQuery;
-    abstract or(): MobileServiceQuery;
+    abstract and(): this;
+    abstract or(): this;
     
-    abstract orderBy(field: string, dir: definition.SortDir);
+    abstract orderBy(field: string, dir: definition.SortDir): this;
     
-    abstract skip(count: number): MobileServiceQuery;
-    abstract top(count: number): MobileServiceQuery;
+    abstract skip(count: number): this;
+    abstract top(count: number): this;
 }
 
 export enum SortDir {

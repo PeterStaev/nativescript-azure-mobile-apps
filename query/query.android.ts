@@ -15,6 +15,7 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./query-common";
 import * as utils from "../utils";
+import * as definition from "nativescript-azure-mobile-apps/query";
 
 global.moduleMerge(common, exports);
 
@@ -31,75 +32,75 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         });
     }
     
-    public field(fieldName: string): MobileServiceQuery {
+    public field(fieldName: string): this {
         this._msQuery.field(fieldName);
         
         return this;
     }
     
-    public eq(value: string|number|boolean|Date): MobileServiceQuery {
+    public eq(value: string|number|boolean|Date): this {
         this._msQuery.eq(utils.getNativeValueForComparison(value));
         
         return this;
     }
     
-    public ne(value: string|number|boolean|Date): MobileServiceQuery {
+    public ne(value: string|number|boolean|Date): this {
         this._msQuery.ne(utils.getNativeValueForComparison(value));
         
         return this;
     }
     
-    public gt(value: string|number|Date): MobileServiceQuery {
+    public gt(value: string|number|Date): this {
         this._msQuery.gt(utils.getNativeValueForComparison(value));
         
         return this;
     }
     
-    public ge(value: string|number|Date): MobileServiceQuery {
+    public ge(value: string|number|Date): this {
         this._msQuery.ge(utils.getNativeValueForComparison(value));
         
         return this;
     }
     
-    public lt(value: number|Date): MobileServiceQuery {
+    public lt(value: number|Date): this {
         this._msQuery.lt(utils.getNativeValueForComparison(value));
         
         return this;
     }
     
-    public le(value: number|Date): MobileServiceQuery {
+    public le(value: number|Date): this {
         this._msQuery.le(utils.getNativeValueForComparison(value));
         
         return this;
     }
     
-    public startsWith(field: string, value: string): MobileServiceQuery {
+    public startsWith(field: string, value: string): this {
         this._msQuery.startsWith(field, value);
         
         return this;
     }
     
-    public endsWith(field: string, value: string): MobileServiceQuery {
+    public endsWith(field: string, value: string): this {
         this._msQuery.endsWith(field, value);
         
         return this;
     }
     
-    public and(): MobileServiceQuery {
+    public and(): this {
         this._msQuery.and();
         
         return this;
     }
     
-    public or(): MobileServiceQuery {
+    public or(): this {
         this._msQuery.or();
         
         return this;
     }
     
-    public orderBy(field: string, dir: common.SortDir): MobileServiceQuery {
+    public orderBy(field: string, dir: definition.SortDir): this {
         let nativeDirection = 
-                dir === common.SortDir.Asc ? 
+                dir === definition.SortDir.Asc ? 
                 com.microsoft.windowsazure.mobileservices.table.query.QueryOrder.Ascending :
                 com.microsoft.windowsazure.mobileservices.table.query.QueryOrder.Descending;
         this._msQuery.orderBy(field, nativeDirection);
@@ -107,13 +108,13 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         return this;
     }
     
-    public skip(count: number): MobileServiceQuery {
+    public skip(count: number): this {
         this._msQuery.skip(count);
         
         return this;
     }
     
-    public top(count: number): MobileServiceQuery {
+    public top(count: number): this {
         this._msQuery.top(count);
         
         return this;

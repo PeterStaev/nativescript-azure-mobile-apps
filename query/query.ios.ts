@@ -46,81 +46,81 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         });
     }
     
-    public field(fieldName: string): MobileServiceQuery {
+    public field(fieldName: string): this {
         this._filterArgs.push(fieldName);
         
         return this;
     }
     
-    public eq(value: string|number|boolean|Date): MobileServiceQuery {
+    public eq(value: string|number|boolean|Date): this {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K == %@)");
 
         return this;
     }
         
-    public ne(value: string|number|boolean|Date): MobileServiceQuery {
+    public ne(value: string|number|boolean|Date): this {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K != %@)");
 
         return this;
     }
 
-    public gt(value: string|number|Date): MobileServiceQuery {
+    public gt(value: string|number|Date): this {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K > %@)");
 
         return this;
     }
 
-    public ge(value: string|number|Date): MobileServiceQuery {
+    public ge(value: string|number|Date): this {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K >= %@)");
 
         return this;
     }
 
-    public lt(value: number|Date): MobileServiceQuery {
+    public lt(value: number|Date): this {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K < %@)");
 
         return this;
     }
 
-    public le(value: number|Date): MobileServiceQuery {
+    public le(value: number|Date): this {
         this._filterArgs.push(utils.getNativeValueForComparison(value));
         this._filters.push("(%K <= %@)");
 
         return this;
     }
 
-    public startsWith(field: string, value: string): MobileServiceQuery {
+    public startsWith(field: string, value: string): this {
         this._filterArgs.push(field, value);
         this._filters.push("(%K BEGINSWITH %@)");
 
         return this;
     }
 
-    public endsWith(field: string, value: string): MobileServiceQuery {
+    public endsWith(field: string, value: string): this {
         this._filterArgs.push(field, value);
         this._filters.push("(%K ENDSWITH %@)");
 
         return this;
     }
     
-    public and(): MobileServiceQuery {
+    public and(): this {
         this._filters.push("&&");
         
         return this;
     }
     
-    public or(): MobileServiceQuery {
+    public or(): this {
         this._filters.push("||");
         
         return this;
     }
     
-    public orderBy(field: string, dir: definition.SortDir): MobileServiceQuery {
+    public orderBy(field: string, dir: definition.SortDir): this {
         if (dir === definition.SortDir.Asc) {
             this._msQuery.orderByAscending(field);
         }
@@ -131,13 +131,13 @@ export class MobileServiceQuery extends common.MobileServiceQuery {
         return this;
     }
     
-    public skip(count: number): MobileServiceQuery {
+    public skip(count: number): this {
         this._msQuery.fetchOffset = count;
         
         return this;
     }
     
-    public top(count: number): MobileServiceQuery {
+    public top(count: number): this {
         this._msQuery.fetchLimit = count;
         
         return this;

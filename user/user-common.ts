@@ -86,7 +86,7 @@ providerMap[AuthenticationProvider.Facebook] = "facebook";
 providerMap[AuthenticationProvider.MicrosoftAccount] = "microsoftaccount";
 providerMap[AuthenticationProvider.Twitter] = "twitter";
 
-export class ProviderCredentials {
+export class ProviderCredentials implements definition.ProviderCredentials {
     public userId: string;
     public claims: { [type: string]: string } = {};
     public accessToken: string;
@@ -95,7 +95,7 @@ export class ProviderCredentials {
     public refreshToken: string = null;
     public idToken: string = null;
     public authenticationToken: string = null;
-    public provider: AuthenticationProvider;
+    public provider: definition.AuthenticationProvider;
     
     get givenName(): string {
         return this.claims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"];

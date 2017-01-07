@@ -34,8 +34,8 @@ export function getNativeObject(object: any): any {
     return object;
 }
 
-function getNSArrayFromJsArray(array: Array<any>): NSArray {
-    let result = new NSMutableArray();
+function getNSArrayFromJsArray(array: Array<any>): NSArray<any> {
+    let result = NSMutableArray.alloc().init();
     
     for (let loop = 0; loop < array.length; loop++) {
         result.addObject(getNativeObject(array[loop]));
@@ -44,8 +44,8 @@ function getNSArrayFromJsArray(array: Array<any>): NSArray {
     return result;
 }
 
-function getNSDictionaryFromJsObject(object: Object): NSDictionary {
-    let result = new NSMutableDictionary();
+function getNSDictionaryFromJsObject(object: Object): NSDictionary<any, any> {
+    let result = NSMutableDictionary.alloc().init();
     
     for (let key in object) {
         if (object.hasOwnProperty(key)) {
@@ -68,7 +68,7 @@ export function getJsObject(object: any): any {
     return object;
 }
 
-function getJsArrayFromNSArray(array: NSArray): Array<Object> {
+function getJsArrayFromNSArray(array: NSArray<any>): Array<Object> {
     let result = [];
     
     for (let loop = 0; loop < array.count; loop ++) {
@@ -78,7 +78,7 @@ function getJsArrayFromNSArray(array: NSArray): Array<Object> {
     return result;
 }
 
-function getJsObjectFromNSDictionary(dictionary: NSDictionary): Object {
+function getJsObjectFromNSDictionary(dictionary: NSDictionary<any, any>): Object {
     let keys = dictionary.allKeys;
     let result = {};
     
@@ -89,5 +89,22 @@ function getJsObjectFromNSDictionary(dictionary: NSDictionary): Object {
         result[key] = getJsObject(item);
     }
     
+    return result;
+}
+
+export function deviceTokenToNsData(token: string): NSData {
+    let result = NSMutableData.alloc().init();
+
+    for (let loop = 0; loop < token.length / 2; loop++) {
+        let byteChars = "";
+        let byte: number;
+
+        byteChars = `${token[loop * 2]}${token[loop * 2 + 1]}\0`;
+        byte = strtol(byteChars, null, 16);
+        
+        let pointer = new interop.Reference(interop.types.unichar, String.fromCharCode(byte));
+        result.appendBytesLength(pointer, 1);
+    }
+
     return result;
 }
