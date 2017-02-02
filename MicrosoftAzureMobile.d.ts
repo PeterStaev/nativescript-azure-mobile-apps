@@ -9,8 +9,6 @@ declare class MSClient extends NSObject implements NSCopying {
 
 	static new(): MSClient; // inherited from NSObject
 
-	readonly applicationKey: string;
-
 	readonly applicationURL: NSURL;
 
 	connectionDelegateQueue: NSOperationQueue;
@@ -47,7 +45,15 @@ declare class MSClient extends NSObject implements NSCopying {
 
 	loginWithProviderTokenCompletion(provider: string, token: NSDictionary<any, any>, completion: (p1: MSUser, p2: NSError) => void): void;
 
+	loginWithProviderUrlSchemeControllerAnimatedCompletion(provider: string, urlScheme: string, controller: UIViewController, animated: boolean, completion: (p1: MSUser, p2: NSError) => void): void;
+
+	loginWithProviderUrlSchemeParametersControllerAnimatedCompletion(provider: string, urlScheme: string, parameters: NSDictionary<any, any>, controller: UIViewController, animated: boolean, completion: (p1: MSUser, p2: NSError) => void): void;
+
 	logoutWithCompletion(completion: (p1: NSError) => void): void;
+
+	refreshUserWithCompletion(completion: (p1: MSUser, p2: NSError) => void): void;
+
+	resumeWithURL(URL: NSURL): boolean;
 
 	syncTableWithName(tableName: string): MSSyncTable;
 

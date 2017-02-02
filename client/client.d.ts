@@ -25,7 +25,7 @@ declare module "nativescript-azure-mobile-apps/client" {
         constructor (url: string);
                 
         public getTable (tableName: string): MobileServiceTable;
-        public login(provider: AuthenticationProvider): Promise<MobileServiceUser>;
+        public login(provider: AuthenticationProvider, urlScheme?: string): Promise<MobileServiceUser>;
         public loginFromCache(): boolean;
     }
 }

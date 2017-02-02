@@ -10,7 +10,7 @@ let pushPlugin = require("nativescript-push-notifications");
 
 class TodoItem {
     public id: string;
-    public text: string
+    public text: string;
     public completed: boolean;
 }
 
@@ -143,7 +143,7 @@ export function onLoginTap(args) {
         ai.busy = false;
     }
     else {
-        client.login(AuthenticationProvider.Google).then((user) => {           
+        client.login(AuthenticationProvider.Google, "x-msauth-tns-azure-sample").then((user) => {
             console.log(`Logged In! UserID: ${user.userId}`);
             
             user.getProviderCredentials().then((result) => {

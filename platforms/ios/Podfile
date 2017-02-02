@@ -1,1 +1,1 @@
-pod 'MicrosoftAzureMobile'
+pod 'MicrosoftAzureMobile', '~> 3.3.0'

@@ -56,3 +56,7 @@ node_modules
 sample/platforms
 sample/lib
 !karma.conf.js
+
+# IDE's
+.vscode
+.idea

@@ -49,7 +49,7 @@ export class MobileServiceClient extends common.MobileServiceClient {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }
     
-    public login(provider: AuthenticationProvider): Promise<MobileServiceUser> {
+    public login(provider: AuthenticationProvider, urlScheme?: string): Promise<MobileServiceUser> {
         return new Promise((resolve, reject) => {
             try {
                 let futureResult = this._msClient.login(nativeAuthenticationProviders[provider]);

@@ -10,7 +10,7 @@ class TodoItem {
     public id: string;
     public text: string;
     public completed: boolean = false;
-};
+}
 
 describe("MobileServiceTable", () => {
     let client: MobileServiceClient;
