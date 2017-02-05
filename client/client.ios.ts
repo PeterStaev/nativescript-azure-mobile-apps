@@ -32,13 +32,17 @@ nativeAuthenticationProviders[AuthenticationProvider.MicrosoftAccount] = "micros
 
 export class MobileServiceClient extends common.MobileServiceClient {
     protected _msClient: MSClient; // Redeclaration for typing info
-    
+
+    public static configureClientAuthAppDelegate(): void {
+        application.ios.delegate = ClientAuthAppDelegate;
+    }
+
     constructor(url: string) {
         super(url);
         this._msClient = MSClient.clientWithApplicationURLString(url);
         this.push = new MobileServicePush(this._msClient.push);
     }
-    
+
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.tableWithName(tableName));
     }

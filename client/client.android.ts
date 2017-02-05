@@ -44,7 +44,7 @@ export class MobileServiceClient extends common.MobileServiceClient {
 
         this.push = new MobileServicePush(this._msClient.getPush());
     }
-    
+
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.getTable(tableName));
     }

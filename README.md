@@ -6,6 +6,7 @@
 
 A NativeScript Azure Mobile Apps plugin.
 
+TODO document new iOS login strategy
 
 ## Installation
 Run the following command from the root of your project:
