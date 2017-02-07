@@ -1,6 +1,6 @@
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-import { MobileServiceQuery, SortDir } from "nativescript-azure-mobile-apps/query";
+import { SortDir } from "nativescript-azure-mobile-apps/query";
 
 mocha.setup({
     timeout: 110000
@@ -12,7 +12,7 @@ class TodoItem {
     public myNumber: number;
     public completed: boolean = false;
     public myDate: Date;
-};
+}
 
 describe("MobileServiceQuery", () => {
     let client: MobileServiceClient;
@@ -28,14 +28,14 @@ describe("MobileServiceQuery", () => {
         
         item = new TodoItem();
         item.text = "item1";
-        item.myNumber = 1
+        item.myNumber = 1;
         item.completed = false;
         item.myDate = new Date(2016, 0, 1);
         testData.push(item);
         
         item = new TodoItem();
         item.text = "item2";
-        item.myNumber = 2
+        item.myNumber = 2;
         item.completed = true;
         item.myDate = new Date(2016, 0, 2);
         testData.push(item);

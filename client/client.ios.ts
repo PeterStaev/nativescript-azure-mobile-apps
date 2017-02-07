@@ -18,6 +18,8 @@ import * as frame from "ui/frame";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
 import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
+import { ClientAuthAppDelegate } from "./clientauth-app-delegate";
+import * as application from "application";
 
 global.moduleMerge(common, exports);
 
@@ -30,27 +32,49 @@ nativeAuthenticationProviders[AuthenticationProvider.MicrosoftAccount] = "micros
 
 export class MobileServiceClient extends common.MobileServiceClient {
     protected _msClient: MSClient; // Redeclaration for typing info
-    
+
+    public static configureClientAuthAppDelegate(): void {
+        application.ios.delegate = ClientAuthAppDelegate;
+    }
+
     constructor(url: string) {
         super(url);
         this._msClient = MSClient.clientWithApplicationURLString(url);
         this.push = new MobileServicePush(this._msClient.push);
     }
-    
+
     public getTable(tableName: string): MobileServiceTable {
         return new MobileServiceTable(this._msClient.tableWithName(tableName));
     }
     
-    public login(provider: AuthenticationProvider): Promise<MobileServiceUser> {
+    public login(provider: AuthenticationProvider, urlScheme?: string): Promise<MobileServiceUser> {
         return new Promise<MobileServiceUser>((resolve, reject) => {
-            this._msClient.loginWithProviderControllerAnimatedCompletion(nativeAuthenticationProviders[provider], frame.topmost().ios.controller, true, (user, error) => {
-                if (error) {
-                    reject(new Error(error.localizedDescription));
+            if (urlScheme) {
+                if (!application.ios.delegate || typeof application.ios.delegate.setAzureConfig !== "function") {
+                    reject("Please import ClientAuthAppDelegate in app.ts / app.js, see the Azure plugin readme for details.");
                     return;
                 }
-                    
-                resolve(new MobileServiceUser(user, this._url));   
-            });
+                ClientAuthAppDelegate.setAzureConfig(this._msClient, urlScheme);
+                console.log("IMPORTANT: For the redirect back to your app to work you'll need to add '" + urlScheme + "://easyauth.callback' to 'ALLOWED EXTERNAL REDIRECT URLS' in your Azure app. See https://github.com/Azure/azure-mobile-apps-ios-client/issues/123#issuecomment-272941108 for details.");
+                this._msClient.loginWithProviderUrlSchemeControllerAnimatedCompletion(nativeAuthenticationProviders[provider], urlScheme, frame.topmost().ios.controller, true, (user, error) => {
+                    if (error) {
+                        reject(new Error(error.localizedDescription));
+                        return;
+                    }
+
+                    resolve(new MobileServiceUser(user, this._url));
+                });
+            } else {
+                console.log("IMPORTANT: To make login work with SafariViewController (as this method will break soon), add an URL scheme to app/App_Resources/iOS/Info.plist");
+                this._msClient.loginWithProviderControllerAnimatedCompletion(nativeAuthenticationProviders[provider], frame.topmost().ios.controller, true, (user, error) => {
+                    if (error) {
+                        reject(new Error(error.localizedDescription));
+                        return;
+                    }
+
+                    resolve(new MobileServiceUser(user, this._url));
+                });
+            }
         });
     }
     

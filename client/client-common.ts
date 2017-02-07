@@ -21,15 +21,19 @@ import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
 export abstract class MobileServiceClient implements definition.MobileServiceClient {
     protected _msClient;
     protected _url;
-    
+
     public user: MobileServiceUser;
     public push: MobileServicePush;
-    
+
+    public static configureClientAuthAppDelegate(): void {
+        // nothing to do by default
+    }
+
     constructor(url: string) {
         this._url = url;
     }
 
     abstract getTable(tableName: string): MobileServiceTable;
-    abstract login(provider: AuthenticationProvider): Promise<MobileServiceUser>;
+    abstract login(provider: AuthenticationProvider, urlScheme?: string): Promise<MobileServiceUser>;
     abstract loginFromCache(): boolean;
 }

@@ -17,7 +17,7 @@ module.exports = function (grunt)
             "!bin/**/*.*"
         ],
         outDir: "bin/dist/"
-    }
+    };
 
     grunt.initConfig({
         clean: {

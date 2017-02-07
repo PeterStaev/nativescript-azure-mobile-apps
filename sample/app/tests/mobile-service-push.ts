@@ -1,6 +1,5 @@
 import * as application from "application";
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
-import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
 let pushPlugin = require("nativescript-push-notifications");
 
 let androidPushSettings = { senderID: "271351633466" };

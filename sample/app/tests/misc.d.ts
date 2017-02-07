@@ -1,1 +1,1 @@
-declare var assert: Chai.AssertStatic; 
+declare const assert: Chai.AssertStatic;
