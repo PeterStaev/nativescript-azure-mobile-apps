@@ -14,7 +14,7 @@ install:
     - gem install cocoapods
     - pod repo update
     - npm install -g grunt-cli
-    - npm install -g nativescript@2.4.2 --ignore-scripts
+    - npm install -g nativescript@2.5.0 --ignore-scripts
     - tns usage-reporting disable
     - tns error-reporting disable
     - npm install
@@ -23,6 +23,8 @@ script:
     - grunt build
     - cd sample
     - npm install
+    - tns platform add ios@2.5.0
+    - tns info
     - tns deploy ios --justlaunch
     - tns test ios --justlaunch
     - cd ..
