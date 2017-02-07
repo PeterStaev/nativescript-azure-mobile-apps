@@ -12,6 +12,7 @@ install:
     - brew install xcproj
     - gem install xcodeproj 
     - gem install cocoapods
+    - pod repo update
     - npm install -g grunt-cli
     - npm install -g nativescript@2.4.2 --ignore-scripts
     - tns usage-reporting disable
