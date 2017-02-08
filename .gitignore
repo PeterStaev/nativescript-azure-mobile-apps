@@ -58,5 +58,4 @@ sample/lib
 !karma.conf.js
 
 # IDE's
-.vscode
 .idea
