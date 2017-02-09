@@ -5,7 +5,7 @@ module.exports = function (grunt)
             "**/*.ts",
             "!MicrosoftAzureMobile.d.ts",
             "!node_modules/**/*.*",
-            "!sample/**/*.*",
+            "!demo/**/*.*",
             "!bin/**/*.*"
         ],
         typeScriptDeclarations: [
@@ -13,7 +13,7 @@ module.exports = function (grunt)
             "!misc.d.ts",
             "!references.d.ts",
             "!node_modules/**/*.*",
-            "!sample/**/*.*",
+            "!demo/**/*.*",
             "!bin/**/*.*"
         ],
         outDir: "bin/dist/"
