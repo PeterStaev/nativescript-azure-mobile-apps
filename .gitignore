@@ -53,8 +53,8 @@ obj
 node_modules
 *.tmp.*
 *.log
-sample/platforms
-sample/lib
+demo/platforms
+demo/lib
 !karma.conf.js
 
 # IDE's

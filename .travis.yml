@@ -21,7 +21,7 @@ install:
     
 script:
     - grunt build
-    - cd sample
+    - cd demo
     - npm install
     - tns platform add ios@2.5.0
     - tns info
