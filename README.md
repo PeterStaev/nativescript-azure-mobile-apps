@@ -193,7 +193,7 @@ MobileServiceUser.clearCachedAuthenticationInfo();
 ```
 
 ### Push Notifications
-**NOTE:** In order to work with push notifications you also need to install the `nativescript-pusn-notifications` plugin. 
+**NOTE:** In order to work with push notifications you also need to install the `nativescript-push-notifications` plugin. 
 You can do this by running the following command:
 ```
 tns install nativescript-push-notifications
