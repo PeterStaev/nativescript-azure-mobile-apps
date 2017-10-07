@@ -1,42 +1,60 @@
 {
-	"description": "Azure Mobile Apps Service application",
-	"license": "Apache-2.0",
-	"readme": "Azure Mobile Apps Service application",
-	"nativescript": {
-		"id": "inc.tangra.azuremobileservicessample",
-		"tns-android": {
-            "version": "2.5.0"
-		},
-		"tns-ios": {
-            "version": "2.5.0"
-		}
-	},
-	"scripts": {
-		"test.android": "npm uninstall nativescript-azure-mobile-apps && tns test android --justlaunch",
-		"test.ios": "npm uninstall nativescript-azure-mobile-apps && tns test ios --emulator --justlaunch",
-		"ios": "npm uninstall nativescript-azure-mobile-apps && tns deploy ios",
-		"android": "npm uninstall nativescript-azure-mobile-apps && tns deploy android"
-	},
-	"dependencies": {
-		"nativescript-azure-mobile-apps": "file:../bin/dist",
-		"nativescript-unit-test-runner": "0.3.4",
-		"tns-core-modules": "2.5.0",
-		"nativescript-push-notifications": "0.0.19"
-	},
-	"devDependencies": {
-		"babel-traverse": "6.8.0",
-		"babel-types": "6.8.1",
-		"babylon": "6.8.0",
-		"chai": "3.5.0",
-		"filewalker": "0.1.2",
-		"karma": "1.3.0",
-		"karma-chai": "0.1.0",
-		"karma-mocha": "1.3.0",
-		"karma-mocha-reporter": "2.2.1",
-		"karma-nativescript-launcher": "^0.4.0",
-		"lazy": "1.0.11",
-		"mocha": "3.2.0",
-		"nativescript-dev-typescript": "0.3.5",
-		"typescript": "2.1.4"
-	}
+  "description": "Azure Mobile Apps Service application",
+  "license": "Apache-2.0",
+  "readme": "Azure Mobile Apps Service application",
+  "nativescript": {
+    "id": "inc.tangra.azuremobileservicessample",
+    "tns-android": {
+      "version": "3.2.0"
+    },
+    "tns-ios": {
+      "version": "3.2.0"
+    }
+  },
+  "scripts": {
+    "test.android": "npm uninstall nativescript-azure-mobile-apps && tns test android --justlaunch",
+    "test.ios": "npm uninstall nativescript-azure-mobile-apps && tns test ios --emulator --justlaunch",
+    "ios": "npm uninstall nativescript-azure-mobile-apps && tns deploy ios",
+    "android": "npm uninstall nativescript-azure-mobile-apps && tns deploy android",
+    "ns-bundle": "ns-bundle",
+    "start-android-bundle": "npm run ns-bundle --android --run-app",
+    "start-ios-bundle": "npm run ns-bundle --ios --run-app",
+    "build-android-bundle": "npm run ns-bundle --android --build-app",
+    "build-ios-bundle": "npm run ns-bundle --ios --build-app",
+    "publish-ios-bundle": "npm run ns-bundle --ios --publish-app",
+    "generate-android-snapshot": "generate-android-snapshot --targetArchs arm,arm64,ia32 --install"
+  },
+  "dependencies": {
+    "nativescript-azure-mobile-apps": "file:../bin/dist",
+    "nativescript-push-notifications": "0.1.4",
+    "nativescript-unit-test-runner": "0.3.4",
+    "tns-core-modules": "3.2.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "~3.1.3",
+    "babel-traverse": "6.8.0",
+    "babel-types": "6.8.1",
+    "babylon": "6.8.0",
+    "chai": "3.5.0",
+    "copy-webpack-plugin": "~4.0.1",
+    "extract-text-webpack-plugin": "~3.0.0",
+    "filewalker": "0.1.2",
+    "karma": "1.3.0",
+    "karma-chai": "0.1.0",
+    "karma-mocha": "1.3.0",
+    "karma-mocha-reporter": "2.2.1",
+    "karma-nativescript-launcher": "^0.4.0",
+    "lazy": "1.0.11",
+    "mocha": "3.2.0",
+    "nativescript-css-loader": "~0.26.0",
+    "nativescript-dev-typescript": "0.5.1",
+    "nativescript-dev-webpack": "^0.8.0",
+    "nativescript-worker-loader": "~0.8.1",
+    "raw-loader": "~0.5.1",
+    "resolve-url-loader": "~2.1.0",
+    "typescript": "2.2.2",
+    "webpack": "~3.2.0",
+    "webpack-bundle-analyzer": "^2.8.2",
+    "webpack-sources": "~1.0.1"
+  }
 }

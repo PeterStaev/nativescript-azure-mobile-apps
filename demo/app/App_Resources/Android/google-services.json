@@ -1,0 +1,42 @@
+{
+    "project_info": {
+      "project_number": "271351633466",
+      "firebase_url": "https://azuremobileservicessample.firebaseio.com",
+      "project_id": "azuremobileservicessample",
+      "storage_bucket": "azuremobileservicessample.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:271351633466:android:5c4403fe7b0fa5cb",
+          "android_client_info": {
+            "package_name": "inc.tangra.azuremobileservicessample"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "271351633466-mv2jm3skv1u71ea7jjkot2crs6aof7l1.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyAngm0hDeaaKLOToHhA9tr8zfGZhymsG2M"
+          }
+        ],
+        "services": {
+          "analytics_service": {
+            "status": 1
+          },
+          "appinvite_service": {
+            "status": 1,
+            "other_platform_oauth_client": []
+          },
+          "ads_service": {
+            "status": 2
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

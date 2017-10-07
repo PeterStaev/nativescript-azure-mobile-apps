@@ -3,21 +3,17 @@
         "noEmitOnError": true,
         "noEmitHelpers": true,
         "noUnusedLocals": true,
-        "sourceMap": false,
-        "noLib": true,
-        "removeComments": true,
-        "declaration": false,
         "experimentalDecorators": true,
+        "noLib": false,
+        "sourceMap": false,
         "target": "es5",
         "module": "commonjs",
         "outDir": "bin/dist",
-        "lib": [
-            "es2016"
-        ]
-    },
+        "rootDir": "./"
+    }, 
     "exclude": [
-        "node_modules", 
-        "demo", 
-        "bin"
+        "node_modules/**/*.*", 
+        "demo/**/*.*", 
+        "bin/**/*.*"
     ]
 }

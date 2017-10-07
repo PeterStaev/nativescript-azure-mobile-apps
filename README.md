@@ -13,7 +13,141 @@ Run the following command from the root of your project:
 
 This command automatically installs the necessary files, as well as stores nativescript-azure-mobile-apps as a dependency in your project's package.json file.
 
+## Configuration
+For most of the functions the plugin you only need to know the name of your Azure mobile apps portal. The only thing that requires additional configuration is the social sign-in under iOS. For that please follow the steps explained [below](#ios-login-requirements)
+
+## API
+
+### `MobileServiceClient`
+
+#### Static Methods
+* **configureClientAuthAppDelegate(): void**  
+Configures the iOS authentication delegate. You are required to call this before your applications starts in case you will be using social sign in under iOS!
+
+#### Methods 
+* **onstructor(string)**  
+Initialize a new client with the given Azure portal url. 
+
+* **getTable(string): MobileServiceTable**  
+Gets a reference to the table with the given name.
+
+* **login(AuthenticationProvider, string?): Promise<MobileServiceUser>**  
+Performs a social sign in with the given provider and url scheme. 
+
+* **loginFromCache(): boolean**  
+Tries to login the user from a previously cached authentication. Returns `true` if successful. 
+
+#### Properties 
+* **user** - *MobileServiceUser*  
+Returns the currently social signed in user.
+
+* **push** - *MobileServicePush*
+Returns a `MobileServicePush` object which you can use to work with push notifications. 
+
+### `MobileServicePush`
+
+#### Methods
+* **register(string): Promise**  
+Registers the given native push token for push notifications with Azure. 
+
+* **registerWithTemplate(string, string, string): Promise**  
+Registers the given native push token, template name and template for push notifications with Azure. For more information about templates see the usage [below](#register-with-a-template). 
+
+* **unregister(): Promise**  
+Unregisters the device from Azure push notifications. 
+
+### `MobileServiceUser`
+
+#### Static Methods
+* **clearCachedAuthenticationInfo(): void**  
+Clears the previously cached authentication info. 
+
+* **getFromCache():MobileServiceUser**  
+Returns the previously cached user. 
+
+#### Methods
+* **getProviderCredentials(): Promise<ProviderCredentials>**  
+Returns various details about the current user (for example surname, given name, user id, claims, etc.).
+
+#### Properties
+* **userId** - *string*  
+Gets the user id for this user. 
+
+* **authenticationToken** - *string*  
+Gets the OAuth token for this user. 
+
+### `MobileServiceTable`
+
+#### Methods
+* **read(): Promise<Array<T>>**  
+Returns all records in the table. 
+
+* **insert(T): Promise<T>**  
+Adds the given item to the table. Returns thie updated item (for example with id assigned).
+
+* **update(T): Promise<T>**  
+Updates a given item in the table. Returns the updated item. 
+
+* **deleteById(number|string): Promise**  
+Deletes the item with the given id from the table. 
+
+* **deleteItem(T): Promise**  
+Deletes the given item from the table. 
+
+* **where(): MobileServiceQuery**  
+Returns a query object which you can use to filter, order and page through the data in the table. 
+
+### `MobileServiceQuery`
+The query object provies a very easy to use chainable interface to filter, order and page through the data inside a table. 
+
+#### Methods
+* **field(string): this**  
+Specifies that we will be filtering by the given field. After this you can apply one of the filtering operations. 
+
+* **eq(string|number|boolean|Date): this**  
+Filters the table by a previously specified `field` so that its value equals the given value.
+
+* **ne(string|number|boolean|Date): this**  
+Filters the table by a previously specified `field` so that its value is different than the given value.
+
+* **gt(string|number||Date): this**  
+Filters the table by a previously specified `field` so that its value is greater than the given value.
+
+* **ge(string|number||Date): this**  
+Filters the table by a previously specified `field` so that its value is greater than or equal to the given value.
+
+* **lt(number||Date): this**  
+Filters the table by a previously specified `field` so that its value is lower than the given value.
+
+* **le(number||Date): this**  
+Filters the table by a previously specified `field` so that its value is lower than or equal to the given value.
+
+* **startsWith(string, string): this**  
+Filter the table by the given field so that the values start with the given value. 
+
+* **endsWith(string, string): this**  
+Filter the table by the given field so that the values end with the given value. 
+
+* **and(): this**  
+Applies a logcal `AND` operator after which you can start another filter condition. 
+
+* **or(): this**  
+Applies a logcal `OR` operator after which you can start another filter condition. 
+
+* **orderBy(string, SortDir): this**  
+Orders the resultset by thegive field and direction. This should be applied after specifying your filters!
+
+* **skip(number): this**  
+Skips the given number of records from the current resultset. This should be applied after all fitlers and sorting. 
+
+* **top(number): this**  
+Takes only the given amount of records from the resultset. This should be applied after all fitlers and sorting. 
+
+* **read(): Promise<Array>**  
+Reads and returns the records of the currently filtered, ordered and windowed resultset. 
+
 ## Usage
+Note that there is no difference in using the plugin in Angular NativeScript apps, so the usage below is valid for Angular apps as well. 
 
 ### Create a client
 ```typescript
@@ -70,17 +204,6 @@ todoItemTable.where().field("completed").eq(true).read().then(function(results) 
     console.log("There are " + results.length.toString() + "completed items");
 });
 ```
-Currently the following filters are supported:
-* **eq(value)** - Equals
-* **ne(value)** - Not Equals
-* **gt(value)** - Greater
-* **ge(value)** - Greater or Equal
-* **lt(value)** - Lower
-* **le(value)** - Lower or Equal
-* **startsWith(field, value)** - String starts with
-* **endsWith(field, value)** - String ends with
-
-If you want to filter the result by more than one condition, you can add additional filters by using `and()` and `or()` methods.
 
 ### Sorting
 ```typescript
@@ -243,3 +366,18 @@ pushPlugin.unregister(() => {
         .catch((e) => console.log(e));
 }, (e) => console.log(e), pushSettings);
 ```
+
+## Demos
+This repository includes a plain NativeScript demo. In order to run it execute the following in your shell:
+```shell
+$ git clone https://github.com/peterstaev/nativescript-azure-mobile-apps
+$ cd nativescript-azure-mobile-apps
+$ npm install
+$ npm run demo-ios
+```
+This will run the plain NativeScript demo project on iOS. If you want to run it on Android simply use the `-android` instead of the `-ios` sufix. 
+
+## Donate
+`bitcoin:14fjysmpwLvSsAskvLASw6ek5XfhTzskHC`
+
+![Donate](https://www.tangrainc.com/qr.png)

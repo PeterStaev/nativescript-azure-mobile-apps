@@ -1,30 +1,108 @@
-language: objective-c
- 
-os: osx 
-osx_image: xcode8.2
-xcode_sdk: iphonesimulator9.3
+sudo: false
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-25.0.2
+    - android-23
+    - android-25
+    - extra-android-m2repository
+
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock 
+
+cache:
+    directories:
+        - .nvm
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
 
 install:
-    - export LANG=en_US.UTF-8
-    - brew update
-    - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "808A0798-21A1-4579-B15E-DA3CC5782582"
-    - nvm install 6
-    - brew install xcproj
-    - gem install xcodeproj 
-    - gem install cocoapods
-    - pod repo update
-    - npm install -g grunt-cli
-    - npm install -g nativescript@2.5.0 --ignore-scripts
+    - echo no | npm install -g nativescript
     - tns usage-reporting disable
     - tns error-reporting disable
+    - echo no | npm install -g grunt-cli
     - npm install
+    - grunt compile
+
+matrix:
+  include:
+    - stage: test
+      language: objective-c
+      os: osx 
+      osx_image: xcode8.2
+      xcode_sdk: iphonesimulator9.3
+      before_install:
+        - export LANG=en_US.UTF-8
+        - brew update
+        - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "808A0798-21A1-4579-B15E-DA3CC5782582"
+        - nvm install 6
+        - brew install xcproj
+        - gem install xcodeproj 
+        - gem install cocoapods
+        - pod repo update
+      script: cd demo && tns test ios --justlaunch && cd ..
+      
+    - stage: lint
+      language: node_js
+      os: linux
+      node_js: "6"
+      script: grunt lint
+
+    # - stage: build
+    #   language: android
+    #   os: linux
+    #   env: 
+    #     - Android="25"
+    #   jdk: oraclejdk8
+    #   before_install: nvm install 6.10.3
+    #   script: "grunt ci:build:android"
+
+    # - stage: build
+    #   os: osx
+    #   env: 
+    #     - iOS="10.3"
+    #     - Xcode="8.3"
+    #   osx_image: xcode8.3
+    #   language: node_js 
+    #   node_js: "6"
+    #   jdk: oraclejdk8
+    #   script: "grunt ci:build:ios"
+
+    # - stage: webpack
+    #   language: android
+    #   os: linux
+    #   env:
+    #     - Android="25"
+    #     - Platform="Android"
+    #   jdk: oraclejdk8
+    #   before_install: nvm install 6.10.3
+    #   script: "grunt ci:webpack:android"
     
-script:
-    - grunt build
-    - cd demo
-    - npm install
-    - tns platform add ios@2.5.0
-    - tns info
-    - tns deploy ios --justlaunch
-    - tns test ios --justlaunch
-    - cd ..
+    # - stage: webpack
+    #   os: osx
+    #   env: 
+    #     - iOS="10.3"
+    #     - Xcode="8.3"
+    #     - Platform="iOS"
+    #   osx_image: xcode8.3
+    #   language: node_js 
+    #   node_js: "6"
+    #   jdk: oraclejdk8
+    #   script: "grunt ci:webpack:ios"
+
+    # - stage: deploy
+    #   if: branch = release
+    #   language: node_js 
+    #   node_js: "6"
+    #   before_deploy:
+    #       - cd bin/dist
+    #   deploy:
+    #     provider: npm
+    #     email: "peter@tangrasoft.com"
+    #     api_key:
+    #         secure: "bE88gjzCp5WVM6krHGLOXykFUZXtV8dWFQt4Q80GGX/ZbpZ572tDTBMeNCiZHKt801diulXy1dqZ8b709tWID1lyTfIJfGeO0mRZ2/tt7BIeIzFZpcbd8EXWDozqnxnX7wfgXHex8Zt0apjUI89ahfVb2RezwlLCafDpfeL6Y3fF4bZPei+im07yE83HCTTJ60APFB6Ok2nrtqh79PX1FNeiYev6Bg44OlGrYVFskGNEmwB2RawbCyRDeuTEXbpmBbRErxN0xokRUxGoDEQoSM0QlWm+DQbYzJm5maeU0bs4kHmGtU1WVyilCmcXElZtjDZ6nP1CyiE855MGI+yVqrwoyrVfIl2rpk/BfbWuW1wk8ysvSFUK2tv+q14iIeh3wLrMhmf3RV4EeLL5zAQU3XAH+vy7XJWbSeOa+UFBVaCb6aP3rY3X1x9NZfJb4Otkxo1Yv7wuqvQ/62zxsyMKcRK5krq0K0ykxVY52NtBTBqIDWD2gXjTY9onL7FRWwrqkCSUsC4S0vAEMdiNwa7K9YHF0mn72vjNY/7xTYbj9SIzwaQL1rXVy17qTvGdXq9BMB5s79qhfyypx6ETP83oEBZltPnTsSyVyt13DfWXp4xyINQiAAjhMUfnuQCg8kIwJAouLyIQvIB2h1QArxC9PEbAg0ImlCP6/lGuzjRrWjQ="
+    #     skip_cleanup: true
+    #     on:
+    #       branch: release

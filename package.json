@@ -1,14 +1,19 @@
 {
   "name": "nativescript-azure-mobile-apps",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A NativeScript plugin for working with Azure Mobile Apps",
   "main": "azure-mobile-apps",
   "typings": "azure-mobile-apps.d.ts",
   "nativescript": {
-    "category": "Utilities",
     "platforms": {
       "android": "1.5.0", 
       "ios": "1.5.0"
+    },
+    "plugin": {
+      "nan": "true",
+      "pan": "true",
+      "core3": "true",
+      "category": "Utilities"
     }
   },
 
@@ -16,7 +21,10 @@
     "type": "git",
     "url": "https://github.com/PeterStaev/nativescript-azure-mobile-apps"
   },
-
+  "scripts": {
+    "demo-ios": "grunt build && cd demo && tns run ios",
+    "demo-android": "grunt build && cd demo && tns run android"
+  },
   "keywords": [
     "NativeScript",
     "Azure",
@@ -34,16 +42,14 @@
 
   "devDependencies": {
     "typescript": "2.1.4",
-    "tslint": "4.2.0",
+    "tslint": "4.3.1",
     "tns-core-modules-declarations": "2.3.1",
     "tns-platform-declarations": "2.3.0",
 
-    "grunt": "0.4.5",
-    "grunt-contrib-copy": "0.8.1",
-    "grunt-contrib-clean": "0.6.0",
-    "grunt-ts": "6.0.0-beta.3", 
-    "grunt-tslint": "4.0.0",
-    "grunt-exec": "0.4.6"
+    "grunt": "1.0.1",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-contrib-clean": "1.0.0",
+    "grunt-exec": "2.0.0"
   }
 
 }
