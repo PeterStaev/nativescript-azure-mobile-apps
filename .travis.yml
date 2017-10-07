@@ -8,6 +8,7 @@ android:
     - android-23
     - android-25
     - extra-android-m2repository
+    - sys-img-armeabi-v7a-android-23
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock 
@@ -34,12 +35,9 @@ matrix:
       env: 
         - Android="25"
       jdk: oraclejdk8
-      android:
-        components:
-          - sys-img-armeabi-v7a-android-22
       before_install: nvm install 6.10.3
       before_script:
-        - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+        - echo no | android create avd --force -n test -t android-23 --abi armeabi-v7a
         - emulator -avd test -no-audio -no-window &
         - android-wait-for-emulator
       script: cd demo && tns test android --justlaunch && cd ..
