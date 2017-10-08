@@ -1,3 +1,4 @@
+import * as platform from "platform";
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { SortDir } from "nativescript-azure-mobile-apps/query";
@@ -24,7 +25,7 @@ describe("MobileServiceQuery", () => {
         let item: TodoItem;
         
         client = new MobileServiceClient("https://tangrainctest.azurewebsites.net");
-        table = client.getTable("TodoItem");
+        table = client.getTable(`TodoItem_${platform.device.os.toLowerCase()}`);
         
         item = new TodoItem();
         item.text = "item1";
