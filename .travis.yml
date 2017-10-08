@@ -89,7 +89,7 @@ matrix:
         - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a --tag google_apis
         - emulator -avd test -no-window &
         - android-wait-for-emulator
-      script: cd demo && tns deploy android --justlaunch && tns test android --justlaunch && cd ..
+      script: cd demo && tns build android && tns test android --justlaunch && cd ..
 
     - stage: test
       language: objective-c
