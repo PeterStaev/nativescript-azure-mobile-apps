@@ -9,7 +9,7 @@ android:
     - android-23
     - android-25
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-addon-google_apis-google-22
+    - sys-img-armeabi-v7a-google_apis-22
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock 
