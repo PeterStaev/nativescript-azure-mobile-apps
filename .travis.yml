@@ -5,11 +5,11 @@ android:
     - tools
     - platform-tools
     - build-tools-25.0.2
-    - android-21
+    - android-19
     - android-23
     - android-25
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-google_apis-21
+    - sys-img-armeabi-v7a-google_apis-19
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock 
@@ -86,7 +86,7 @@ matrix:
       jdk: oraclejdk8
       before_install: nvm install 6.10.3
       before_script:
-        - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a --tag google_apis
+        - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a --tag google_apis
         - emulator -avd test -no-window &
         - android-wait-for-emulator
       script: cd demo && tns deploy android --justlaunch && tns test android --justlaunch && cd ..
