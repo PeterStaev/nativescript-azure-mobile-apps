@@ -22,6 +22,8 @@
     "url": "https://github.com/PeterStaev/nativescript-azure-mobile-apps"
   },
   "scripts": {
+    "tslint": "tslint --project tsconfig.json",
+    "tsc": "tsc --project tsconfig.json",
     "demo-ios": "grunt build && cd demo && tns run ios",
     "demo-android": "grunt build && cd demo && tns run android"
   },
