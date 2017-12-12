@@ -16,7 +16,7 @@ limitations under the License.
 import * as common from "./user-common";
 import * as applicationSettings from "application-settings";
 
-global.moduleMerge(common, exports);
+export * from "./user-common";
 
 export class MobileServiceUser extends common.MobileServiceUser {   
     protected _msUser: MSUser; // Redeclaration for typing info

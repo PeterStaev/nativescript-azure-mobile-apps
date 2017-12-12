@@ -16,6 +16,19 @@ This command automatically installs the necessary files, as well as stores nativ
 ## Configuration
 For most of the functions the plugin you only need to know the name of your Azure mobile apps portal. The only thing that requires additional configuration is the social sign-in under iOS. For that please follow the steps explained [below](#ios-login-requirements)
 
+Starting with version 2.0, due to updated libraries, Mircososft now reqiures the minimum SDK for Android to be 19. So you need to adjust 2 files in your app:
+1. In the `app/App_Resources/Android/AndroidManifest.xml` you must have `android:minSdkVersion` set to 19 or above. 
+2. In the `app/App_Resources/Android/app.gradle` you must ensure that in your `defaultConfig` you have `minSdkVersion` set to the same number as the one you set in the `AndroidManifest.xml` file. So assuming you are setting it to 19, your file should look something like this:
+```groovy
+android {  
+  defaultConfig {  
+    generatedDensities = []
+    applicationId = "......"
+    minSdkVersion 19
+  }  
+} 
+```
+
 ## API
 
 ### `MobileServiceClient`

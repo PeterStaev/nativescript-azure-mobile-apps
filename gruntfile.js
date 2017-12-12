@@ -3,14 +3,13 @@ module.exports = function (grunt)
     var localConfig = {
         typeScriptSrc: [
             "**/*.ts",
-            "!MicrosoftAzureMobile.d.ts",
+            "!typings/*.d.ts",
             "!node_modules/**/*.*",
             "!demo/**/*.*",
             "!bin/**/*.*"
         ],
         typeScriptDeclarations: [
             "**/*.d.ts",
-            "!misc.d.ts",
             "!references.d.ts",
             "!node_modules/**/*.*",
             "!demo/**/*.*",
@@ -33,7 +32,7 @@ module.exports = function (grunt)
                 files: [{ expand: true, src: ["platforms/**"], dest: localConfig.outDir }]
             },
             subPackageConfig: {
-                files: [{ expand: true, src: ["*/package.json", "!sample/**"], dest: localConfig.outDir }]
+                files: [{ expand: true, src: ["*/package.json", "!demo/**"], dest: localConfig.outDir }]
             }, 
             packageConfig: {
                 src: "package.json",

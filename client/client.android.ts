@@ -20,9 +20,9 @@ import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
 import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
 
-global.moduleMerge(common, exports);
+export * from "./client-common";
 
-let nativeAuthenticationProviders = [];
+const nativeAuthenticationProviders = [];
 nativeAuthenticationProviders[AuthenticationProvider.AzureActiveDirectory] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory;
 nativeAuthenticationProviders[AuthenticationProvider.Google] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Google;
 nativeAuthenticationProviders[AuthenticationProvider.Facebook] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.Facebook;
@@ -30,6 +30,8 @@ nativeAuthenticationProviders[AuthenticationProvider.Twitter] = com.microsoft.wi
 nativeAuthenticationProviders[AuthenticationProvider.MicrosoftAccount] = com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider.MicrosoftAccount;
 
 export class MobileServiceClient extends common.MobileServiceClient {
+    protected _msClient: com.microsoft.windowsazure.mobileservices.MobileServiceClient; // Redeclaration for typing info
+    
     constructor(url: string) {
         super(url);
         this._msClient = new com.microsoft.windowsazure.mobileservices.MobileServiceClient(url, application.android.currentContext);

@@ -4,10 +4,10 @@
   "readme": "Azure Mobile Apps Service application",
   "nativescript": {
     "id": "inc.tangra.azuremobileservicessample",
-    "tns-android": {
+    "tns-ios": {
       "version": "3.2.0"
     },
-    "tns-ios": {
+    "tns-android": {
       "version": "3.2.0"
     }
   },

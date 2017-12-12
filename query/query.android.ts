@@ -17,9 +17,11 @@ import * as common from "./query-common";
 import * as utils from "../utils";
 import * as definition from "nativescript-azure-mobile-apps/query";
 
-global.moduleMerge(common, exports);
+export * from "./query-common";
 
 export class MobileServiceQuery extends common.MobileServiceQuery {
+    protected _msQuery: com.microsoft.windowsazure.mobileservices.table.query.ExecutableJsonQuery; // Redeclaration for typing info
+
     public read(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
             try {

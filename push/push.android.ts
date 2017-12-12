@@ -16,9 +16,11 @@ limitations under the License.
 import * as common from "./push-common";
 import * as utils from "../utils";
 
-global.moduleMerge(common, exports);
+export * from "./push-common";
 
 export class MobileServicePush extends common.MobileServicePush {   
+    protected _msPush: com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush;
+
     public register(registrationId: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {

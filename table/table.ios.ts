@@ -17,7 +17,7 @@ import * as common from "./table-common";
 import * as utils from "../utils";
 import { MobileServiceQuery } from "nativescript-azure-mobile-apps/query";
 
-global.moduleMerge(common, exports);
+export * from "./table-common";
 
 export class MobileServiceTable extends common.MobileServiceTable {   
     protected _msTable: MSTable; // Redeclaration for typing info

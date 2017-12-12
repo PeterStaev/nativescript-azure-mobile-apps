@@ -1,13 +1,13 @@
 {
   "name": "nativescript-azure-mobile-apps",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "A NativeScript plugin for working with Azure Mobile Apps",
   "main": "azure-mobile-apps",
   "typings": "azure-mobile-apps.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "1.5.0", 
-      "ios": "1.5.0"
+      "android": "3.0.0", 
+      "ios": "3.0.0"
     },
     "plugin": {
       "nan": "true",
@@ -41,12 +41,14 @@
     "Eddy Verbruggen (https://github.com/eddyverbruggen)"
   ],
   "license": "Apache-2.0",
-
+  "peerDependencies": {
+    "tns-core-modules": "^3.0.0 || >3.3.0-"
+  },
   "devDependencies": {
-    "typescript": "2.1.4",
-    "tslint": "4.3.1",
-    "tns-core-modules-declarations": "2.3.1",
-    "tns-platform-declarations": "2.3.0",
+    "typescript": "~2.2.0",
+    "tslint": "^4.5.1",
+    "tns-core-modules": "3.0.0",
+    "tns-platform-declarations": "3.0.0",
 
     "grunt": "1.0.1",
     "grunt-contrib-copy": "1.0.0",

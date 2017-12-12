@@ -6,5 +6,10 @@ android {
   }
 }
 dependencies {
-    compile 'com.microsoft.azure:azure-mobile-android:3.1.0'
+    // Deps taken from https://github.com/Azure/azure-mobile-apps-android-client/blob/3.4.0/e2etest/build.gradle 
+    // since they are not correctly included in the AAR
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.google.guava:guava:18.0'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.microsoft.azure:azure-mobile-android:3.4.0@aar'
 }

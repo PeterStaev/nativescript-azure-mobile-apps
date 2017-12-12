@@ -16,9 +16,11 @@ limitations under the License.
 import * as common from "./user-common";
 import * as applicationSettings from "application-settings";
 
-global.moduleMerge(common, exports);
+export * from "./user-common"
 
 export class MobileServiceUser extends common.MobileServiceUser {   
+    protected _msUser: com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser; // Redeclaration for typing info
+
     public static getFromCache(): MobileServiceUser {
         let userId  = applicationSettings.getString(common.MobileServiceUser.USER_ID_CACHE_KEY, null);
         let authenticationToken = applicationSettings.getString(common.MobileServiceUser.AUTHENTICATION_TOKEN_CACHE_KEY, null);

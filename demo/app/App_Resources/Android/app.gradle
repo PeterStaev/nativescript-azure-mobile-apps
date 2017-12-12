@@ -8,7 +8,8 @@
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "inc.tangra.azuremobileservicessample"  
+    applicationId = "inc.tangra.azuremobileservicessample"
+    minSdkVersion 19
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

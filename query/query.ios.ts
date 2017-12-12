@@ -17,7 +17,7 @@ import * as common from "./query-common";
 import * as utils from "../utils";
 import * as definition from "nativescript-azure-mobile-apps/query";
 
-global.moduleMerge(common, exports);
+export * from "./query-common";
 
 export class MobileServiceQuery extends common.MobileServiceQuery {
     protected _msQuery: MSQuery; // Redeclaration for typing info

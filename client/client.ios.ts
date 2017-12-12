@@ -21,9 +21,9 @@ import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
 import { ClientAuthAppDelegate } from "./clientauth-app-delegate";
 import * as application from "application";
 
-global.moduleMerge(common, exports);
+export * from "./client-common";
 
-let nativeAuthenticationProviders = [];
+const nativeAuthenticationProviders = [];
 nativeAuthenticationProviders[AuthenticationProvider.AzureActiveDirectory] = "windowsazureactivedirectory";
 nativeAuthenticationProviders[AuthenticationProvider.Google] = "google";
 nativeAuthenticationProviders[AuthenticationProvider.Facebook] = "facebook";
