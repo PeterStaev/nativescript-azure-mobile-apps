@@ -913,8 +913,8 @@ declare module com {
 						public pushVariables: javautilHashMap<any, any>;
 						public tags: javautilList<any>;
 						public templates: javautilHashMap<any, any>;
-						public constructor(param0: string, param1: string, param2: string, param3: javautilHashMap<any, any>, param4: javautilList<any>, param5: javautilHashMap<any, any>);
-						public constructor(param0: string, param1: string, param2: string, param3: javautilHashMap<any, any>, param4: javautilList<any>, param5: javautilHashMap<any, any>, param6: javautilDate, param7: boolean);
+						public constructor(installationId: string, platform: string, pushChannel: string, pushVariables: javautilHashMap<string, string>, tags: javautilList<string>, templates: javautilHashMap<string, com.microsoft.windowsazure.mobileservices.notifications.InstallationTemplate>);
+						public constructor(installationId: string, platform: string, pushChannel: string, pushVariables: javautilHashMap<string, string>, tags: javautilList<string>, templates: javautilHashMap<string, com.microsoft.windowsazure.mobileservices.notifications.InstallationTemplate>, expirationTime: javautilDate, expired: boolean);
 					}
 				}
 			}
@@ -932,7 +932,7 @@ declare module com {
 					export class InstallationTemplate {
 						public body: string;
 						public tags: javautilList<any>;
-						public constructor(param0: string, param1: javautilList<any>);
+						public constructor(body: string, tags: javautilList<any>);
 					}
 				}
 			}

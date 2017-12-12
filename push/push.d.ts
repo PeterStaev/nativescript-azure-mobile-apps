@@ -16,11 +16,13 @@ limitations under the License.
 declare module "nativescript-azure-mobile-apps/push" {
 
     export class MobileServicePush {
-        
-        constructor (nativeValue: any);
-                
+
+        constructor(nativeValue: any);
+
         public register(registrationId: string): Promise<any>;
         public registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any>;
+        public registerWithTags(registrationId: string, tags: string[]): Promise<any>;
+        public registerWithTagsAndTemplate(registrationId: string, tags: string[], templateName: string, templateBody: string): Promise<any>;
         public unregister(): Promise<any>;
     }
 }

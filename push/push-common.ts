@@ -23,6 +23,15 @@ export abstract class MobileServicePush implements definition.MobileServicePush 
     }     
     
     abstract register(registrationId: string): Promise<any>;
-    abstract registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any>;    
+    abstract registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any>;
     abstract unregister(): Promise<any>;
+
+    public registerWithTags(registrationId: string, tags: string[]): Promise<any> {
+        return null; // TODO
+    }
+
+    public registerWithTagsAndTemplate(registrationId: string, tags: string[], templateName: string, templateBody: string): Promise<any> {
+        return null; // TODO
+    }
+    
 }

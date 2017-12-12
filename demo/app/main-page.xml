@@ -1,16 +1,19 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
   <GridLayout>
-    <StackLayout>
-      <Button text="Add Item" tap="onAddItemTap" />
-      <Button text="Update Item" tap="onUpdateItemTap" />
-      <Button text="Get All Items" tap="onGetAllItemsTap" />
-      <Button text="Get Complete Items" tap="onGetCompletedItemsTap" />
-      <Button text="Delete Item" tap="onDeleteItemTap" />
-      <Button text="Login" tap="onLoginTap" />
-      <Button text="Push Register" tap="onPushRegisterTap" />
-      <Button text="Push Template Register" tap="onPushTemplateRegisterTap" />
-      <Button text="Push Unregister" tap="onPushUnregisterTap" />
-    </StackLayout>
+    <ScrollView>
+      <StackLayout>
+        <Button text="Add Item" tap="onAddItemTap" />
+        <Button text="Update Item" tap="onUpdateItemTap" />
+        <Button text="Get All Items" tap="onGetAllItemsTap" />
+        <Button text="Get Complete Items" tap="onGetCompletedItemsTap" />
+        <Button text="Delete Item" tap="onDeleteItemTap" />
+        <Button text="Login" tap="onLoginTap" />
+        <Button text="Push Register" tap="onPushRegisterTap" />
+        <Button text="Push Template Register" tap="onPushTemplateRegisterTap" />
+        <Button text="Push Tags Register" tap="onPushTagsRegisterTap" />
+        <Button text="Push Unregister" tap="onPushUnregisterTap" />
+      </StackLayout>
+    </ScrollView>
     <ActivityIndicator id="ai" />
   </GridLayout>
 </Page>

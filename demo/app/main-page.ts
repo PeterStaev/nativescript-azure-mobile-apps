@@ -183,6 +183,18 @@ export function onPushTemplateRegisterTap() {
     }, (e) => { console.log(e); });
 }
 
+export function onPushTagsRegisterTap() {
+    console.log("register");
+    pushPlugin.register(pushSettings, (data) => {
+        if (pushPlugin.onMessageReceived) {
+            pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+        }
+        client.push.registerWithTags(data, ["test1"])
+            .then(() => console.log("Azure Register OK!"))
+            .catch((e) => console.log(e));
+    }, (e) => { console.log(e); });
+}
+
 export function onPushUnregisterTap() {
     pushPlugin.unregister(() => {
         console.log("Device Unregister OK!");
