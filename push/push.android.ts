@@ -62,13 +62,13 @@ export class MobileServicePush extends common.MobileServicePush {
                 let tagsAsList: java.util.List<string> = null;
                 let templates: java.util.HashMap<string, com.microsoft.windowsazure.mobileservices.notifications.InstallationTemplate> = null;
 
-                if (tags !== null && tags.length > 0) {
+                if (tags && tags.length > 0) {
                     tagsAsList = java.util.Arrays.asList(tags);
                 }
 
                 if (templateName && templateBody) {
                     templates = new java.util.HashMap<string, com.microsoft.windowsazure.mobileservices.notifications.InstallationTemplate>();
-                    templates.put(templateName, new com.microsoft.windowsazure.mobileservices.notifications.InstallationTemplate(templateBody, tagsAsList));
+                    templates.put(templateName, new com.microsoft.windowsazure.mobileservices.notifications.InstallationTemplate(templateBody, null));
                 }
 
                 const installation = new com.microsoft.windowsazure.mobileservices.notifications.Installation(

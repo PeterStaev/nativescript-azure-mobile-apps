@@ -184,7 +184,6 @@ export function onPushTemplateRegisterTap() {
 }
 
 export function onPushTagsRegisterTap() {
-    console.log("register");
     pushPlugin.register(pushSettings, (data) => {
         if (pushPlugin.onMessageReceived) {
             pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);

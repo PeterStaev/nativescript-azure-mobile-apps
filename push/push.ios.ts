@@ -18,7 +18,9 @@ import * as utils from "../utils";
 
 export * from "./push-common";
 
-export class MobileServicePush extends common.MobileServicePush { 
+const PUSH_PLATFORM = "apns";
+
+export class MobileServicePush extends common.MobileServicePush {
     protected _msPush: MSPush;
 
     public register(registrationId: string): Promise<any> {
@@ -40,12 +42,50 @@ export class MobileServicePush extends common.MobileServicePush {
     }
 
     public registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any> {
+        return this.registerWithTagsAndTemplate(registrationId,
+            null,
+            templateName,
+            templateBody,
+        );
+    }
+
+    public registerWithTags(registrationId: string, tags: string[]): Promise<any> {
+        return this.registerWithTagsAndTemplate(registrationId,
+            tags,
+            null,
+            null,
+        );
+    }
+
+    public registerWithTagsAndTemplate(registrationId: string, tags: string[], templateName: string, templateBody: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
-                let jsonTemplate = {};
+                let tagsAsNSArray: NSArray<string> = null;
+                let templates: NSMutableDictionary<string, MSInstallationTemplate> = null;
+                
+                if (tags && tags.length > 0) {
+                    tagsAsNSArray = utils.getNativeObject(tags);
+                }
 
-                jsonTemplate[templateName] = { body: JSON.parse(templateBody) };
-                this._msPush.registerDeviceTokenTemplateCompletion(utils.deviceTokenToNsData(registrationId), utils.getNativeObject(jsonTemplate), (error) => {
+                if (templateName && templateBody) {
+                    const template = MSInstallationTemplate.installationTemplateWithBodyExpiryTags(
+                        templateBody, 
+                        null, 
+                        null,
+                    );
+                    templates = NSMutableDictionary.alloc<string, MSInstallationTemplate>().init();
+                    templates.setObjectForKey(template, templateName);
+                }
+
+                const installation = MSInstallation.installationWithInstallationIdPlatformPushChannelPushVariablesTagsTemplates(
+                    this._msPush.installationId,
+                    PUSH_PLATFORM,
+                    registrationId,
+                    null,
+                    tagsAsNSArray,
+                    templates,
+                );
+                this._msPush.registerInstallationCompletion(installation, (error) => {
                     if (error) {
                         reject(new Error(error.localizedDescription));
                         return;
@@ -58,8 +98,8 @@ export class MobileServicePush extends common.MobileServicePush {
                 reject(e);
             }
         });
-    }  
-    
+    }
+
     public unregister(): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
@@ -76,5 +116,5 @@ export class MobileServicePush extends common.MobileServicePush {
                 reject(e);
             }
         });
-    }    
+    }
 }
