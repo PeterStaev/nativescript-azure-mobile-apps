@@ -54,6 +54,7 @@ matrix:
       language: node_js 
       node_js: "6"
       jdk: oraclejdk8
+      before_install: "pod repo update"
       script: "grunt ci:build:ios"
 
     - stage: webpack
@@ -76,6 +77,7 @@ matrix:
       language: node_js 
       node_js: "6"
       jdk: oraclejdk8
+      before_install: "pod repo update"
       script: "grunt ci:webpack:ios"
 
     - stage: test
