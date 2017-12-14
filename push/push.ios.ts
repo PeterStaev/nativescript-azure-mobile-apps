@@ -23,6 +23,10 @@ const PUSH_PLATFORM = "apns";
 export class MobileServicePush extends common.MobileServicePush {
     protected _msPush: MSPush;
 
+    get installationId(): string {
+        return this._msPush.installationId;
+    }
+
     public register(registrationId: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {

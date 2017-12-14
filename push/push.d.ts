@@ -19,6 +19,8 @@ declare module "nativescript-azure-mobile-apps/push" {
 
         constructor(nativeValue: any);
 
+        public readonly installationId: string;
+
         public register(registrationId: string): Promise<any>;
         public registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any>;
         public registerWithTags(registrationId: string, tags: string[]): Promise<any>;

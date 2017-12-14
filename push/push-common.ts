@@ -17,6 +17,8 @@ import * as definition from "nativescript-azure-mobile-apps/push";
 
 export abstract class MobileServicePush implements definition.MobileServicePush {
     protected _msPush;
+    
+    abstract get installationId(): string;
 
     constructor(nativeValue: any) {
         this._msPush = nativeValue;

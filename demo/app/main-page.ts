@@ -167,7 +167,7 @@ export function onPushRegisterTap() {
             pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
         }
         client.push.register(data)
-            .then(() => console.log("Azure Register OK!"))
+            .then(() => console.log("Azure Register OK!", client.push.installationId))
             .catch((e) => console.log(e));
     }, (e) => { console.log(e); });
 }

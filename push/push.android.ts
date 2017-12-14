@@ -25,6 +25,10 @@ const PUSH_PLATFORM = "gcm";
 export class MobileServicePush extends common.MobileServicePush {   
     protected _msPush: com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush;
 
+    get installationId(): string {
+        return com.microsoft.windowsazure.mobileservices.MobileServiceApplication.getInstallationId(application.android.currentContext);
+    }
+    
     public register(registrationId: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
@@ -58,7 +62,6 @@ export class MobileServicePush extends common.MobileServicePush {
     public registerWithTagsAndTemplate(registrationId: string, tags: string[], templateName: string, templateBody: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
-                const installationId = com.microsoft.windowsazure.mobileservices.MobileServiceApplication.getInstallationId(application.android.currentContext);
                 let tagsAsList: java.util.List<string> = null;
                 let templates: java.util.HashMap<string, com.microsoft.windowsazure.mobileservices.notifications.InstallationTemplate> = null;
 
@@ -72,7 +75,7 @@ export class MobileServicePush extends common.MobileServicePush {
                 }
 
                 const installation = new com.microsoft.windowsazure.mobileservices.notifications.Installation(
-                    installationId,
+                    this.installationId,
                     PUSH_PLATFORM,
                     registrationId,
                     null,

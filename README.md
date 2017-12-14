@@ -66,8 +66,18 @@ Registers the given native push token for push notifications with Azure.
 * **registerWithTemplate(string, string, string): Promise**  
 Registers the given native push token, template name and template for push notifications with Azure. For more information about templates see the usage [below](#register-with-a-template). 
 
+* **registerWithTags(string, string[]): Promise**  
+Registers the given native push token for push notifications with Azure and associates the given tags with the device installation. You can read more about tags [here](https://docs.microsoft.com/en-us/azure/notification-hubs/notification-hubs-tags-segment-push-message).
+
+* **registerWithTagsAndTemplate(string, string[], string, string): Promise**  
+This combines the above 2 methods, so you can register both with a template and tags. 
+
 * **unregister(): Promise**  
 Unregisters the device from Azure push notifications. 
+
+#### Properties 
+* **installationId** - *string*
+Returns the `installationId` of the device what is registered with Azure's Notification Hubs. This is usefull, for example, in case you need custom tags and you need to call your backend to add the tags.
 
 ### `MobileServiceUser`
 
