@@ -80,7 +80,8 @@ module.exports = function (grunt)
             },
             "ci-webpack-demo": {
                 cmd: function (platform, demoSuffix) {
-                    return "cd demo" + (demoSuffix != "" ? "-" + demoSuffix : "")+ " && npm install && npm run ns-bundle --" + platform + " --build-app --uglify --snapshot";
+                    return "cd demo" + (demoSuffix != "" ? "-" + demoSuffix : "") + " && npm install && tns build " + platform
+                        + " --bundle --env.uglify --env.snapshot";
                 }
             },
             npm_publish: {

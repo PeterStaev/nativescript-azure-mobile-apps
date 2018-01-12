@@ -1,6 +1,5 @@
+@ObjCClass(UIApplicationDelegate)
 export class ClientAuthAppDelegate extends UIResponder implements UIApplicationDelegate {
-  public static ObjCProtocols = [UIApplicationDelegate];
-
   private static _msClient: MSClient;
   private static _urlScheme: string;
 

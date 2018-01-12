@@ -1,6 +1,6 @@
 {
   "name": "nativescript-azure-mobile-apps",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A NativeScript plugin for working with Azure Mobile Apps",
   "main": "azure-mobile-apps",
   "typings": "azure-mobile-apps.d.ts",
@@ -47,8 +47,8 @@
   "devDependencies": {
     "typescript": "~2.2.0",
     "tslint": "^4.5.1",
-    "tns-core-modules": "3.0.0",
-    "tns-platform-declarations": "3.0.0",
+    "tns-core-modules": "3.4.0",
+    "tns-platform-declarations": "3.4.0",
 
     "grunt": "1.0.1",
     "grunt-contrib-copy": "1.0.0",

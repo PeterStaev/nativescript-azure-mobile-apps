@@ -36,7 +36,7 @@ let pushSettings = {
 };
 
 let pushTemplates = {};
-pushTemplates[platform.platformNames.android] = "{\"data\":{\"message\":\"$(param)\"}}";
+pushTemplates[platform.platformNames.android] = "{\"notification\":{\"text\":\"$(param)\"}}";
 pushTemplates[platform.platformNames.ios] = "{\"aps\":{\"alert\":\"$(param)\"}}";
 
 export function onNavigatingTo(args: EventData) {

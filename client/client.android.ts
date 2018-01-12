@@ -34,7 +34,13 @@ export class MobileServiceClient extends common.MobileServiceClient {
     
     constructor(url: string) {
         super(url);
-        this._msClient = new com.microsoft.windowsazure.mobileservices.MobileServiceClient(url, application.android.currentContext);
+        
+        const androidApp = application.android;
+        const context = androidApp.currentContext
+            || androidApp.foregroundActivity
+            || androidApp.startActivity; // Paranoia checks as we do not what will be initialized in {N} 3.4+
+        
+        this._msClient = new com.microsoft.windowsazure.mobileservices.MobileServiceClient(url, context);
         this._msClient.setAndroidHttpClientFactory(new com.microsoft.windowsazure.mobileservices.http.OkHttpClientFactory({
             createOkHttpClient: () => {
                 let client = new com.squareup.okhttp.OkHttpClient();
