@@ -13,18 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-declare module "nativescript-azure-mobile-apps/push" {
+export class MobileServicePush {
 
-    export class MobileServicePush {
+    constructor(nativeValue: any);
 
-        constructor(nativeValue: any);
+    public readonly installationId: string;
 
-        public readonly installationId: string;
-
-        public register(registrationId: string): Promise<any>;
-        public registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any>;
-        public registerWithTags(registrationId: string, tags: string[]): Promise<any>;
-        public registerWithTagsAndTemplate(registrationId: string, tags: string[], templateName: string, templateBody: string): Promise<any>;
-        public unregister(): Promise<any>;
-    }
+    public register(registrationId: string): Promise<any>;
+    public registerWithTemplate(registrationId: string, templateName: string, templateBody: string): Promise<any>;
+    public registerWithTags(registrationId: string, tags: string[]): Promise<any>;
+    public registerWithTagsAndTemplate(registrationId: string, tags: string[], templateName: string, templateBody: string): Promise<any>;
+    public unregister(): Promise<any>;
 }

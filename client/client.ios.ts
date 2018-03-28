@@ -15,9 +15,9 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./client-common";
 import * as frame from "ui/frame";
-import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
-import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
+import { MobileServiceTable } from "../table";
+import { MobileServiceUser, AuthenticationProvider } from "../user";
+import { MobileServicePush } from "../push";
 import { ClientAuthAppDelegate } from "./clientauth-app-delegate";
 import * as application from "application";
 

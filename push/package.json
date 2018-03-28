@@ -1,4 +1,5 @@
 { 
     "name": "push",
-    "main": "push" 
+    "main": "push",
+    "types": "push.d.ts"
 }

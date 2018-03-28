@@ -1,4 +1,5 @@
 { 
     "name": "user",
-    "main": "user" 
+    "main": "user",
+    "types": "user.d.ts" 
 }

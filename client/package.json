@@ -1,4 +1,5 @@
 { 
     "name": "client",
-    "main": "client" 
+    "main": "client",
+    "types": "client.d.ts"
 }

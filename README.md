@@ -174,7 +174,6 @@ Note that there is no difference in using the plugin in Angular NativeScript app
 
 ### Create a client
 ```typescript
-/// <reference path="../node_modules/nativescript-azure-mobile-apps/azure-mobile-apps.d.ts" />
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 var client = new MobileServiceClient("https://<PORTAL_NAME>.azurewebsites.net");
 ```

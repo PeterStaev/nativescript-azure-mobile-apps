@@ -1,4 +1,5 @@
 { 
     "name": "table",
-    "main": "table" 
+    "main": "table",
+    "types": "table.d.ts" 
 }

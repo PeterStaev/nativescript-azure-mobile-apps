@@ -13,10 +13,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-import * as definition from "nativescript-azure-mobile-apps/client";
-import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
-import { MobileServiceUser, AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
-import { MobileServicePush } from "nativescript-azure-mobile-apps/push";
+import * as definition from "../client";
+import { MobileServiceTable } from "../table";
+import { MobileServiceUser, AuthenticationProvider } from "../user";
+import { MobileServicePush } from "../push";
 
 export abstract class MobileServiceClient implements definition.MobileServiceClient {
     protected _msClient;

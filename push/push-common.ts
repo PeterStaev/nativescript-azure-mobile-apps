@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-import * as definition from "nativescript-azure-mobile-apps/push";
+import * as definition from "../push";
 
 export abstract class MobileServicePush implements definition.MobileServicePush {
     protected _msPush;

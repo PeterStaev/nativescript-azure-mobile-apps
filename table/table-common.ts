@@ -13,8 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-import * as definition from "nativescript-azure-mobile-apps/table";
-import { MobileServiceQuery } from "nativescript-azure-mobile-apps/query";
+import * as definition from "../table";
+import { MobileServiceQuery } from "../query";
 
 export abstract class MobileServiceTable implements definition.MobileServiceTable {
     protected _msTable;

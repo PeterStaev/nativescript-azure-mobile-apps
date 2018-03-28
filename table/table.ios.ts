@@ -15,7 +15,7 @@ limitations under the License.
 ***************************************************************************** */
 import * as common from "./table-common";
 import * as utils from "../utils";
-import { MobileServiceQuery } from "nativescript-azure-mobile-apps/query";
+import { MobileServiceQuery } from "../query";
 
 export * from "./table-common";
 

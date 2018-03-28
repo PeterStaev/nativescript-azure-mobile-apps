@@ -1,4 +1,5 @@
 { 
     "name": "query",
-    "main": "query" 
+    "main": "query",
+    "types": "query.d.ts" 
 }

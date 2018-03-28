@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-import * as definition from "nativescript-azure-mobile-apps/user";
+import * as definition from "../user";
 import * as applicationSettings from "application-settings";
 import * as http from "http";
 
