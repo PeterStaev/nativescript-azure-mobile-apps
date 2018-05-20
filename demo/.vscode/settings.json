@@ -8,5 +8,6 @@
         "app/**/*.js": true,
         "app/**/*.js.map": true,
         "platforms": true
-    }
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

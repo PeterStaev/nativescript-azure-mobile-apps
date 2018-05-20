@@ -56,7 +56,9 @@ node_modules
 demo/platforms
 demo/lib
 !karma.conf.js
+!webpack.config.js
 report
+.tmp_backup
 
 # IDE's
 .idea

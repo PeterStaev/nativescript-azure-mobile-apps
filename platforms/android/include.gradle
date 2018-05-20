@@ -1,10 +1,3 @@
-android {
-  productFlavors {
-    "nativescript-azure-mobile-apps" {
-      dimension "nativescript-azure-mobile-apps"
-    }
-  }
-}
 dependencies {
     // Deps taken from https://github.com/Azure/azure-mobile-apps-android-client/blob/3.4.0/e2etest/build.gradle 
     // since they are not correctly included in the AAR

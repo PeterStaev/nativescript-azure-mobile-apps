@@ -1,6 +1,6 @@
 {
   "name": "nativescript-azure-mobile-apps",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A NativeScript plugin for working with Azure Mobile Apps",
   "main": "azure-mobile-apps",
   "types": "azure-mobile-apps.d.ts",
@@ -42,7 +42,7 @@
   ],
   "license": "Apache-2.0",
   "peerDependencies": {
-    "tns-core-modules": "^3.0.0 || >3.3.0-"
+    "tns-core-modules": ">=3"
   },
   "devDependencies": {
     "typescript": "~2.2.0",
