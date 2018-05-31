@@ -21,7 +21,7 @@
     "nativescript-azure-mobile-apps": "file:../bin/dist",
     "nativescript-push-notifications": "0.3.0",
     "nativescript-unit-test-runner": "0.3.4",
-    "tns-core-modules": "^4.0.1"
+    "tns-core-modules": "~4.0.1"
   },
   "devDependencies": {
     "awesome-typescript-loader": "~3.1.3",
