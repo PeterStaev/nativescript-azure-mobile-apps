@@ -33,7 +33,7 @@ matrix:
     - stage: lint
       language: node_js
       os: linux
-      node_js: "6"
+      node_js: "8"
       script: grunt lint
 
     - stage: build
@@ -42,19 +42,23 @@ matrix:
       env: 
         - Android="26"
       jdk: oraclejdk8
-      before_install: nvm install 6.10.3
+      before_install: nvm install 8.11.3
       script: "grunt ci:build:android"
 
     - stage: build
       os: osx
       env: 
         - iOS="10.3"
-        - Xcode="8.3"
-      osx_image: xcode8.3
+        - Xcode="9.4"
+      osx_image: xcode9.4
       language: node_js 
-      node_js: "6"
+      node_js: "8"
       jdk: oraclejdk8
-      before_install: "pod repo update"
+      before_install:
+        - pip install --upgrade pip
+        - pip install --user --upgrade matplotlib
+        - pip install six
+        - pod repo update
       script: "grunt ci:build:ios"
 
     - stage: webpack
@@ -64,20 +68,24 @@ matrix:
         - Android="26"
         - Platform="Android"
       jdk: oraclejdk8
-      before_install: nvm install 6.10.3
+      before_install: nvm install 8.11.3
       script: "grunt ci:webpack:android"
     
     - stage: webpack
       os: osx
       env: 
         - iOS="10.3"
-        - Xcode="8.3"
+        - Xcode="9.4"
         - Platform="iOS"
-      osx_image: xcode8.3
+      osx_image: xcode9.4
       language: node_js 
-      node_js: "6"
+      node_js: "8"
       jdk: oraclejdk8
-      before_install: "pod repo update"
+      before_install:
+        - pip install --upgrade pip
+        - pip install --user --upgrade matplotlib
+        - pip install six
+        - pod repo update
       script: "grunt ci:webpack:ios"
 
     - stage: test
@@ -86,7 +94,7 @@ matrix:
       env: 
         - Android="25"
       jdk: oraclejdk8
-      before_install: nvm install 6.10.3
+      before_install: nvm install 8.11.3
       before_script:
         - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
         - emulator -avd test -no-audio -no-window &
@@ -96,13 +104,16 @@ matrix:
     - stage: test
       language: objective-c
       os: osx 
-      osx_image: xcode8.2
+      osx_image: xcode9.4
       xcode_sdk: iphonesimulator9.3
       before_install:
+        - pip install --upgrade pip
+        - pip install --user --upgrade matplotlib
+        - pip install six
         - export LANG=en_US.UTF-8
         - brew update
-        - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "808A0798-21A1-4579-B15E-DA3CC5782582"
-        - nvm install 6
+        - open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app --args -CurrentDeviceUDID "560575EC-0A13-4BBC-98F0-7698EE99475E"
+        - nvm install 8
         - brew install xcproj
         - gem install xcodeproj 
         - gem install cocoapods
@@ -112,7 +123,7 @@ matrix:
     - stage: deploy
       if: branch = release
       language: node_js 
-      node_js: "6"
+      node_js: "8"
       before_deploy:
           - cd bin/dist
       deploy:
