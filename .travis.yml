@@ -4,10 +4,10 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-26.0.2
-    - android-22
+    - build-tools-28.0.3
+    - android-22 # needed for test vms
     - android-23
-    - android-25
+    - android-28
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-22
 
@@ -40,7 +40,7 @@ matrix:
       language: android
       os: linux
       env: 
-        - Android="26"
+        - Android="28"
       jdk: oraclejdk8
       before_install: nvm install 8.11.3
       script: "grunt ci:build:android"
@@ -65,7 +65,7 @@ matrix:
       language: android
       os: linux
       env:
-        - Android="26"
+        - Android="28"
         - Platform="Android"
       jdk: oraclejdk8
       before_install: nvm install 8.11.3
