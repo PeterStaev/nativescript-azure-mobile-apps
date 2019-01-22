@@ -161,10 +161,10 @@ Applies a logcal `OR` operator after which you can start another filter conditio
 Orders the resultset by thegive field and direction. This should be applied after specifying your filters!
 
 * **skip(number): this**  
-Skips the given number of records from the current resultset. This should be applied after all fitlers and sorting. 
+Skips the given number of records from the current resultset. This should be applied after all filters and sorting. 
 
 * **top(number): this**  
-Takes only the given amount of records from the resultset. This should be applied after all fitlers and sorting. 
+Takes only the given amount of records from the resultset. This should be applied after all filters and sorting.
 
 * **read(): Promise<Array>**  
 Reads and returns the records of the currently filtered, ordered and windowed resultset. 
