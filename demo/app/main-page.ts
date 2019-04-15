@@ -1,7 +1,7 @@
 import { MobileServiceClient } from "nativescript-azure-mobile-apps/client";
 import { MobileServiceTable } from "nativescript-azure-mobile-apps/table";
 import { AuthenticationProvider } from "nativescript-azure-mobile-apps/user";
-import dialogs = require("ui/dialogs");
+import * as  dialogs from "ui/dialogs";
 import { ActivityIndicator } from "ui/activity-indicator";
 import { Page } from "ui/page";
 import { EventData } from "data/observable";
@@ -56,7 +56,7 @@ export function onAddItemTap(args) {
         ai.busy = false;
         
         item = updatedItem;
-        dialogs.alert("Item added!")
+        dialogs.alert("Item added!");
     }, (e) => {
         ai.busy = false;
         
