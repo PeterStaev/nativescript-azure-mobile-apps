@@ -43,18 +43,24 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleTypeRole</key>
-    <string>Editor</string>
-    <key>CFBundleURLName</key>
-    <string>inc.tangra.azuremobileservicessample</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>x-msauth-tns-azure-sample</string>
-    </array>
-  </dict>
-</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>inc.tangra.azuremobileservicessample</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+			<string>x-msauth-tns-azure-sample</string>
+			</array>
+		</dict>
+	</array>
+	<key>UseExternalPushProvider</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
