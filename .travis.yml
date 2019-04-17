@@ -96,7 +96,7 @@ matrix:
       before_install: nvm install 8.11.3
       before_script:
         - echo no | android create avd --force -n test -t android-26 --abi x86
-        - emulator -avd test -no-audio -no-window -memory 1500 -no-accel -gpu swiftshader -camera-back none -camera-front none -no-boot-anim -no-snapshot-save -no-snapstorage &
+        - emulator -avd test -no-window -memory 1500 -no-accel -gpu swiftshader -camera-back none -camera-front none -no-boot-anim -no-snapshot-save -no-snapstorage &
         - android-wait-for-emulator
       script: cd demo && tns deploy android --justlaunch  && tns test android --justlaunch && cd ..
 
