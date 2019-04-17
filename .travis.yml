@@ -5,7 +5,7 @@ android:
     - tools
     - platform-tools
     - build-tools-28.0.3
-    - android-25 # needed for test vms
+    - android-24 # needed for test vms
     - android-28
     - extra-android-m2repository
     - sys-img-x86-android-26
@@ -95,7 +95,7 @@ matrix:
       jdk: oraclejdk8
       before_install: nvm install 8.11.3
       before_script:
-        - echo no | android create avd --force -n test -t android-25 --abi arm64-v8a
+        - echo no | android create avd --force -n test -t android-24 --abi arm64-v8a
         - emulator -avd test -no-window -memory 1500 -gpu swiftshader -camera-back none -camera-front none -no-boot-anim -no-snapshot-save -no-snapstorage &
         - android-wait-for-emulator
       script: cd demo && tns deploy android --justlaunch  && tns test android --justlaunch && cd ..
