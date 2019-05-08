@@ -338,26 +338,28 @@ MobileServiceUser.clearCachedAuthenticationInfo();
 ```
 
 ### Push Notifications
-**NOTE:** In order to work with push notifications you also need to install the `nativescript-push-notifications` plugin. 
+**NOTE:** In order to work with push notifications you also need to install the `nativescript-plugin-firebase` plugin. 
 You can do this by running the following command:
 ```
-tns install nativescript-push-notifications
+tns plugin add nativescript-plugin-firebase
 ```
-You can read more on how to use the push plugin [here](https://github.com/NativeScript/push-plugin/).
+When prompted  answer Yes to use the plugin in Push Only setup (in case you won't be using anything from the Firebase plugin)
+You can read more on how to use the firebase push only setup [here](https://github.com/EddyVerbruggen/nativescript-plugin-firebase/blob/master/docs/NON_FIREBASE_MESSAGING.md).
 
 #### Register
-You need to call the push register with Azure in the success callback of the push plugin by passing the registration token 
-returned by the push plugin. 
+You need to call the push register with Azure in the `onPushTokenReceivedCallback` by passing the registration token 
+returned by the plugin. 
 
 ```typescript
-pushPlugin.register(pushSettings, (data) => {
-    if (pushPlugin.onMessageReceived) {
-        pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
+import { messaging } from "nativescript-plugin-firebase/messaging";
+
+messaging.registerForPushNotifications({
+    onPushTokenReceivedCallback: (token) => {
+        client.push.register(token)
+            .then(() => { console.log("Azure Register OK!", client.push.installationId); })
+            .catch((e) => { console.error(e); });
     }
-    client.push.register(data)
-        .then(() => console.log("Azure Register OK!"))
-        .catch((e) => console.log(e));
-}, (e) => { console.log(e); });
+});
 ```
 
 #### Register with a template
@@ -365,28 +367,36 @@ If you want to use a custom template for the notifications, you can use the `reg
 your template name and body.
 
 ```typescript
+import { messaging } from "nativescript-plugin-firebase/messaging";
+
 let pushTemplates = {};
 pushTemplates[platform.platformNames.android] = "{\"data\":{\"message\":\"$(param)\"}}";
 pushTemplates[platform.platformNames.ios] = "{\"aps\":{\"alert\":\"$(param)\"}}";
 
-pushPlugin.register(pushSettings, (data) => {
-    if (pushPlugin.onMessageReceived) {
-        pushPlugin.onMessageReceived(pushSettings.notificationCallbackAndroid);
-    }
-    client.push.registerWithTemplate(data, "MyTemplate", pushTemplates[platform.device.os])
-        .then(() => console.log("Azure Register OK!"))
-        .catch((e) => console.log(e));
-}, (e) => { console.log(e); });
+messaging.registerForPushNotifications({
+    onMessageReceivedCallback: (message) => {
+        console.log(message);
+    },
+    onPushTokenReceivedCallback: (token) => {
+        client.push.registerWithTemplate(token, "MyTemplate", pushTemplates[platform.device.os])
+            .then(() => { console.log("Azure Register OK!", client.push.installationId); })
+            .catch((e) => { console.error(e); });
+    },
+});
 ```
 
 #### Unregister
 ```typescript
-pushPlugin.unregister(() => {
-    console.log("Device Unregister OK!");
-    client.push.unregister()
-        .then(() => console.log("Azure Unregister OK!"))
-        .catch((e) => console.log(e));
-}, (e) => console.log(e), pushSettings);
+import { messaging } from "nativescript-plugin-firebase/messaging";
+
+messaging.unregisterForPushNotifications()
+    .then(() => {
+        console.log("Device Unregister OK!");
+        client.push.unregister()
+            .then(() => console.log("Azure Unregister OK!"))
+            .catch((e) => console.log(e));
+    })
+    .catch((e) => { console.error(e); });
 ```
 
 ## Demos

@@ -5,10 +5,10 @@
   "nativescript": {
     "id": "inc.tangra.azuremobileservicessample",
     "tns-ios": {
-      "version": "4.0.1"
+      "version": "5.2.0"
     },
     "tns-android": {
-      "version": "4.0.1"
+      "version": "5.2.1"
     }
   },
   "scripts": {
@@ -19,20 +19,15 @@
   },
   "dependencies": {
     "nativescript-azure-mobile-apps": "file:../bin/dist",
-    "nativescript-push-notifications": "0.3.0",
-    "nativescript-unit-test-runner": "0.3.4",
-    "tns-core-modules": "~4.0.1"
+    "nativescript-plugin-firebase": "^8.3.1",
+    "nativescript-unit-test-runner": "^0.6.2",
+    "tns-core-modules": "~5.2.2"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "~3.1.3",
     "babel-traverse": "6.8.0",
     "babel-types": "6.8.1",
     "babylon": "6.8.0",
     "chai": "3.5.0",
-    "clean-webpack-plugin": "~0.1.19",
-    "copy-webpack-plugin": "~4.3.0",
-    "css-loader": "~0.28.7",
-    "extract-text-webpack-plugin": "~3.0.2",
     "filewalker": "0.1.2",
     "karma": "1.3.0",
     "karma-chai": "0.1.0",
@@ -42,15 +37,8 @@
     "lazy": "1.0.11",
     "mocha": "3.2.0",
     "nativescript-css-loader": "~0.26.0",
-    "nativescript-dev-typescript": "^0.7.1",
-    "nativescript-dev-webpack": "^0.11.0",
-    "nativescript-worker-loader": "~0.8.1",
-    "raw-loader": "~0.5.1",
-    "resolve-url-loader": "~2.2.1",
-    "typescript": "2.2.2",
-    "uglifyjs-webpack-plugin": "~1.1.6",
-    "webpack": "~3.10.0",
-    "webpack-bundle-analyzer": "^2.9.1",
-    "webpack-sources": "~1.1.0"
+    "nativescript-dev-typescript": "^0.9.0",
+    "nativescript-dev-webpack": "^0.21.0",
+    "typescript": "~3.1.6"
   }
 }
