@@ -22,13 +22,14 @@ export * from "./push-common";
 
 const PUSH_PLATFORM = "gcm";
 
-export class MobileServicePush extends common.MobileServicePush {   
+export class MobileServicePush extends common.MobileServicePush {
     protected _msPush: com.microsoft.windowsazure.mobileservices.notifications.MobileServicePush;
 
     get installationId(): string {
-        return com.microsoft.windowsazure.mobileservices.MobileServiceApplication.getInstallationId(application.android.currentContext);
+        const context = application.android.currentContext || application.android.foregroundActivity;
+        return com.microsoft.windowsazure.mobileservices.MobileServiceApplication.getInstallationId(context);
     }
-    
+
     public register(registrationId: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
@@ -49,7 +50,7 @@ export class MobileServicePush extends common.MobileServicePush {
             templateBody,
         );
     }
-    
+
     public registerWithTags(registrationId: string, tags: string[]): Promise<any> {
         return this.registerWithTagsAndTemplate(
             registrationId,
@@ -58,7 +59,7 @@ export class MobileServicePush extends common.MobileServicePush {
             null,
         );
     }
-    
+
     public registerWithTagsAndTemplate(registrationId: string, tags: string[], templateName: string, templateBody: string): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
@@ -90,7 +91,7 @@ export class MobileServicePush extends common.MobileServicePush {
             }
         });
     }
-    
+
     public unregister(): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
@@ -101,5 +102,5 @@ export class MobileServicePush extends common.MobileServicePush {
                 reject(e);
             }
         });
-    }    
+    }
 }
