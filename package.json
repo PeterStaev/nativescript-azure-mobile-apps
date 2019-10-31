@@ -1,6 +1,6 @@
 {
   "name": "nativescript-azure-mobile-apps",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A NativeScript plugin for working with Azure Mobile Apps",
   "main": "azure-mobile-apps",
   "types": "azure-mobile-apps.d.ts",
